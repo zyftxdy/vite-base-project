@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .search-vw{
+    @apply flex items-center flex-wrap;
+    .item-vw{
+      @apply flex mr-6 mb-6;
+    }
+  }
+  .arrow-vw{
+    .arrow-vw-right{
+      @apply h-9 flex items-center font-14px ml-1 leading-9 cursor-pointer;
+    }
+  }
+
+  .pictureList{
+    .pictureItem{
+      @apply inline-block w-26 h-26 mr-2.5 mb-2.5 rounded relative overflow-hidden;
+    }
+    .image-slot{
+      @apply w-full h-full flex justify-center items-center;
+    }
+    .mask{
+      @apply opacity-0 w-full h-full absolute inset-0 text-center leading-26 z-1001;
+    }
+    .picture-li{
+      @apply inline-block w-26 h-26 mr-2.5 mb-2.5;
+    }
+  }
+  .upload-span{
+    @apply inline-block bg-gray-200 text-center rounded-sm relative;
+  }
+
+  .description-item-container{
+    @apply flex items-center pb-4;
+  }
+}

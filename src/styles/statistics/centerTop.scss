@@ -1,0 +1,60 @@
+.center-top{
+  display: flex;
+  padding: 10px;
+  .left, .area_list{
+    flex: 1;
+    font-size: 12px;
+    background: linear-gradient(180deg, rgba(81,152,255,0.18) 0%, rgba(99,117,124,0.02) 52%, rgba(81,152,255,0.18) 100%);
+    color: #9FB5D9;
+    border: none;
+    &::before{
+      background:transparent;
+    }
+    :deep(th){
+      border: 0;
+      background: rgba(28, 52, 81, 0.5);
+    }
+    :deep(tr){
+      &:nth-child(odd){
+        background: transparent;
+      }
+      &:nth-child(even){
+        background: rgba(28, 52, 81, 0.5);
+      }
+      &:hover>td{
+        background: transparent;
+      }
+    }
+    :deep(td){
+      border: none;
+    }
+    :deep(.el-table__inner-wrapper::before) {
+      background: none;
+    }
+    :deep(.el-empty__image) {
+      width: 88px;
+    }
+  }
+  .right{
+    width: 56%;
+    margin-left: 10px;
+    .oper_info{
+      display: flex;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #9FB5D9;
+      .num{
+        font-family: UnidreamLED;
+        font-size: 24px;
+      }
+      .oper{
+        flex: 1;
+        text-align: right;
+      }
+    }
+  }
+  .btn{
+    color: #B4DBFF;
+  }
+}

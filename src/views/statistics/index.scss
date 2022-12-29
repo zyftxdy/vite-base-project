@@ -1,0 +1,108 @@
+.statistics{
+  background: #000000;
+  padding: 0 30px;
+  min-height: 100%;
+  overflow-x: hidden;
+  .s_top{
+    color: #9FB5D9;
+    .s_t_l, .s_t_r{
+      flex: 1;
+      font-size: 18px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+    }
+    .s_t_c{
+      font-size: 24px;
+      font-family: PingFangSC-Medium;
+      font-weight: 500;
+      padding: 18px 70px;
+      background: linear-gradient(180deg, rgba(81, 152, 255, 0.25) 0%, rgba(99, 117, 124, 0.02) 52%, rgba(81, 152, 255, 0.12) 100%);
+      border: 1px solid rgba(81, 152, 255, 0.25);
+      border-top-color: transparent;
+      position: relative;
+      &::after{
+        content: '';
+        width: 0;
+        height: 0;
+        display: inline-block;
+        border: 36px solid #000000;
+        border-color:transparent  #000000 #000000 transparent;
+        position: absolute;
+        bottom: -1px;
+        right: -1px;
+      }
+      &::before{
+        content: '';
+        width: 0;
+        height: 0;
+        display: inline-block;
+        border: 36px solid #000000;
+        border-color:transparent transparent #000000 #000000;
+        position: absolute;
+        bottom: -1px;
+        left: -1px;
+      }
+      .line{
+        width: 100px;
+        height: 1px;
+        display: block;
+        background: rgba(81, 152, 255, 0.25);
+        position: absolute;
+        top: 28px;
+      }
+      .line_l{
+        left: -15px;
+        transform: rotate(45deg);
+      }
+      .line_r{
+        transform: rotate(-45deg);
+        right: -15px;
+      }
+    }
+    .s_t_r{
+      .el-select{
+        width: 200px;
+      }
+      :deep(.el-input__wrapper) {
+        border-color: #9fb5d94f;
+        background: #9fb5d94f;
+        box-shadow: none;
+        margin-left: 5px;
+      }
+      :deep(.el-input__inner) {
+        color: $color-fff;
+      }
+      .s_t_oper{
+        margin-left: 20px;
+        .iconfont{
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .s_content{
+    .s_left, .s_right{
+      width: 25%;
+    }
+    .s_center{
+      flex: 1;
+      margin: 0 5px;
+    }
+    .area_line{
+      background: linear-gradient(to left, #46ACDA , #46ACDA ) left top no-repeat,
+                linear-gradient(to bottom, #46ACDA , #46ACDA ) left top no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) left bottom no-repeat,
+                linear-gradient(to bottom, #46ACDA , #46ACDA ) left bottom no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat;
+      background-size: 3px 18px, 18px 3px, 3px 18px, 18px 3px;
+      position: relative;
+      .area_line_c{
+        border: 1px solid #005AAD;
+        border-color: transparent #005AAD #005AAD #005AAD;
+        background: linear-gradient(180deg, rgba(81, 152, 255, 0.18) 0%, rgba(99, 117, 124, 0.02) 52%, rgba(81, 152, 255, 0.18) 100%);
+      }
+    }
+  }
+}

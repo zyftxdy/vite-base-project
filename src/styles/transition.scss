@@ -1,0 +1,29 @@
+//globl transition css
+
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from{
+  opacity: 1;
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: opacity .26s;
+}
+
+.move-enter-from,
+.move-leave-to{
+  transform: translateY(-104px);
+  opacity: 0
+}
+.move-enter-to,
+.move-leave-from{
+  transform: translateY(0);
+  opacity: 1
+}
+.move-enter-active,
+.move-leave-active{
+  transition: all .3s;
+}

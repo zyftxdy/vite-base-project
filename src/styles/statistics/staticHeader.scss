@@ -1,0 +1,75 @@
+.static_header{
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background: linear-gradient(rgba(81, 152, 255, 0.18) 0%, rgba(99, 117, 124, 0.02) 52%, rgba(81, 152, 255, 0.18) 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid #005AAD;
+  .static_h_in{
+    background: linear-gradient(to left, #46ACDA , #46ACDA ) left top no-repeat,
+                linear-gradient(to bottom, #46ACDA , #46ACDA ) left top no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) left bottom no-repeat,
+                linear-gradient(to bottom, #46ACDA , #46ACDA ) left bottom no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat,
+                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat;
+    background-size: 3px 18px, 18px 3px, 3px 18px, 18px 3px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+  &::before{
+    content: '';
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border: 16px solid #000000;
+    border-color: #000000 #000000 transparent transparent;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+  }
+  &::after{
+    content: '';
+    display: inline-block;
+    width: 45px;
+    height: 1px;
+    background: #005AAD;
+    position: absolute;
+    top: 15px;
+    right: -7px;
+    transform: rotate(45deg);
+  }
+  .s_item{
+    flex: 1;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .i_icon{
+      margin-right: 30px;
+      img{
+        width: 36px;
+        height: 36px;
+      }
+    }
+    .i_data{
+      display: flex;
+      flex-flow: column;
+      color: #9FB5D9;
+      span{
+        &:nth-child(1) {
+          font-family: Gotham-Medium, Gotham;
+          font-weight: 500;
+          font-size: 24px;
+        }
+        &:nth-child(2) {
+          font-size: 14px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
