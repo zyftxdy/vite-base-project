@@ -42,6 +42,7 @@
     "@types/node": "^18.11.18",
     "@types/nprogress": "^0.2.0",
     "@types/qrcode": "^1.5.0",
+    "@types/qs": "^6.9.7",
     "@types/sortablejs": "^1.15.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
