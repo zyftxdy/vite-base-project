@@ -17,7 +17,7 @@
           <description :schema="basicSchema" :data="schoolInfo"/>
           <description v-if="showOper" :schema="bankSchema" :data="schoolInfo">
             <template #bankEarnestMoney>
-              <span><span class="text-2xl text-red-600 pr-1">{{ schoolInfo.bankEarnestMoney }}</span>元</span>
+              <span><span class="text-2xl text-red-600 pr-1">{{ schoolInfo.bankEarnestMoney ?? '--' }}</span>元</span>
               <el-button v-auth:hide="'09444fd98fc1f87004'" link type="primary" class="ml-1" style="vertical-align: inherit" @click="handleSetting">设置</el-button>
             </template>
           </description>

@@ -129,7 +129,16 @@ const { run: submitFun } = useRequest(() => reqApi.complain.appealSubmit(modelRe
 const nodeList = ref<Recordable[]>([])
 const { result: data, loading, run: getDetail } = useRequest<Recordable>(id => reqApi.complain.appealDetail({ appealId: id }), {
   defaultValue: {},
+  immediate: true,
   formatResult: res => res.details,
+  onBefore: () => {
+    modelRef.appealId = useRouteQuery('id', '').value
+    if (!modelRef.appealId) {
+      router.go(-1)
+      return false
+    }
+    return modelRef.appealId
+  },
   onSuccess: res => {
     nodeList.value = res.nodeList
     handleData()
@@ -145,12 +154,6 @@ const handleData = () => {
     })
   }
 }
-
-modelRef.appealId = useRouteQuery('id', '').value
-if (!modelRef.appealId) {
-  router.go(-1)
-}
-getDetail(modelRef.appealId)
 
 const goDetail = (id: string) => {
   router.push({

@@ -113,10 +113,15 @@ const { run: submitFun } = useRequest(() => reqApi.complain.complaintHandle(mode
 
 const complainId = useRouteQuery('id', '').value
 const { result: info, loading, run: getDetail } = useRequest<Recordable>(() => reqApi.complain.complaintInfo({ complaintId:complainId }), {
-  defaultValue: {}
+  defaultValue: {},
+  immediate: true,
+  onBefore: () => {
+    if (!complainId) {
+      router.go(-1)
+      return false
+    }
+  }
 })
-if (!complainId) router.go(-1)
-getDetail()
 </script>
 
 <style lang="scss" scoped src="./index.scss"/>

@@ -52,7 +52,7 @@ export const bankSchema: DescItem[] = [
     field: 'bankSuperviseMoney',
     label: '监管账户余额',
     render: (val, _) => (
-      <span><span class='text-2xl text-red-600 pr-1'>{ val }</span>元</span>
+      <span><span class='text-2xl text-red-600 pr-1'>{ val ?? '--' }</span>元</span>
     )
   },
   {

@@ -78,6 +78,7 @@ const rulesRef = reactive<FormRules>({
 })
 const imgUrls = computed(() => operState.imgs.map(item => item.imageNo))
 
+const schoolId = useRouteQuery('id', '').value
 const { result, loading, run: getDetail } = useRequest<Recordable>(data =>
   operState.transferSummaryId ? reqApi.transfer.transInfo(data)
     : reqApi.school.transferHandDetail(data),
@@ -86,7 +87,7 @@ const { result, loading, run: getDetail } = useRequest<Recordable>(data =>
   immediate: true,
   onBefore: () =>
     operState.transferSummaryId ? { transferSummaryId: operState.transferSummaryId }
-      : { schoolId: useRouteQuery('id', '').value }
+      : { schoolId: schoolId }
 })
 
 operState.trdAmt = useRouteParams('trdAmt', '').value
@@ -114,7 +115,7 @@ const { loading: operLoading, run: handleOk } = useRequest(() => reqApi.school.t
   trdAmt: operState.trdAmt,
   imgUrls: unref(imgUrls),
   remark: operState.remark,
-  schoolId: useRouteQuery('id', '').value,
+  schoolId: schoolId,
   transferSummaryId: operState.transferSummaryId
 }), {
   onSuccess: () => {
