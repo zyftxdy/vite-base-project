@@ -29,11 +29,11 @@
 
 <script setup lang="ts">
 import { useCommon, useRequest } from '@/hooks'
+import { useRouteParamsStore } from '@/store'
 import { listQuery, searchOptions, columns, schema } from './data'
 import type { QueryState, ListState } from '#/base'
 
 const { reqApi, router } = useCommon()
-
 const queryState = reactive<QueryState>({
   listQuery: listQuery(),
   searchOptions: searchOptions()
@@ -63,16 +63,18 @@ const { result, run: handleInfo } = useRequest<Recordable[]>(id => reqApi.transf
     showInfo.value = true
   }
 })
+
+const routeParams = useRouteParamsStore()
 const handleTransfer = (data: Recordable) => {
+  routeParams.setParams({
+    trdAmt: data.transferTotalAmount,
+    transferSummaryId: data.transferSummaryId
+  })
   router.push({
     name: 'instionDetail',
     query: {
       id: data.schoolId,
       type: 'transferHand'
-    },
-    params: {
-      trdAmt: data.transferTotalAmount,
-      transferSummaryId: data.transferSummaryId
     }
   })
 }

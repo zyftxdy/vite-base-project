@@ -31,7 +31,7 @@
         </el-form>
         <div class="text-center">
           <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit">确认提交</el-button>
-          <el-button class="btn-small btn-usual" @click="$emit('back')">返回列表</el-button>
+          <el-button v-if="isEmpty(params)" class="btn-small btn-usual" @click="$emit('back')">返回列表</el-button>
         </div>
       </div>
       <el-dialog
@@ -52,22 +52,25 @@
 </template>
 
 <script setup lang="ts">
-import { schema, schemaDialog } from '../data'
+import TransferInfo from './transfer_info.vue'
+import { isEmpty } from 'lodash-es'
 import { useCommon, useRequest } from '@/hooks'
-import { useRouteQuery, useRouteParams } from '@vueuse/router'
+import { useRouteParamsStore } from '@/store'
+import { useRouteQuery } from '@vueuse/router'
 import { vaildFloat } from '@/utils/vaildate'
 import { publicUploadFile } from '@/utils/constant'
-import TransferInfo from './transfer_info.vue'
+import { schema, schemaDialog } from '../data'
 import type { FileList } from '#/base'
 import type { FormInstance, FormRules } from 'element-plus'
 
 defineEmits(['back'])
 
+const { params } = useRouteParamsStore()
 const { reqApi, message, router } = useCommon()
 const formRef = ref<FormInstance>()
 const operState = reactive({
-  transferSummaryId: '',
-  trdAmt: '',
+  transferSummaryId: params.transferSummaryId || '',
+  trdAmt: params.trdAmt || '',
   imgs: [] as FileList[],
   remark: '',
   show: false
@@ -89,9 +92,6 @@ const { result, loading, run: getDetail } = useRequest<Recordable>(data =>
     operState.transferSummaryId ? { transferSummaryId: operState.transferSummaryId }
       : { schoolId: schoolId }
 })
-
-operState.trdAmt = useRouteParams('trdAmt', '').value
-operState.transferSummaryId = useRouteParams('transferSummaryId', '').value
 
 const handleSubmit = () => {
   unref(formRef)?.validate((valid, fields) => {
