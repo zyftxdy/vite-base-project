@@ -34,8 +34,8 @@ export default function useProvinces(options: Partial<UseProps> = {}) {
       areaList.value = res.data
       options.onSuccess?.(res)
     } catch (err: any) {
-      if (err.message !== '取消请求') {
-        message.error(err)
+      if (err.message !== CANCAL_REQUEST) {
+        message.error(err.messgae)
         options.onError?.(err)
       }
     } finally {

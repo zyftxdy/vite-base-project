@@ -119,5 +119,5 @@ export interface Options<T> extends FnOptions {
   pollingMaxCount: number
   retry: boolean
   retryMaxCount: number
-  formatResult: Fn
+  formatResult: Fn<T>
 }

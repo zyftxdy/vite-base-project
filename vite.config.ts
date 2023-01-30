@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, type PluginOption } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -9,11 +9,66 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const isBuild = command === 'build'
+  const isBuild = (command === 'build')
+
+  const plugins: PluginOption[] = [
+    vue(),
+    vueJsx(),
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          prefix: 'Icon'
+        })
+      ]
+    }),
+    Components({
+      //组件的有效文件扩展名
+      extensions: ['tsx', 'vue'],
+      include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          enabledCollections: ['ep']
+        })
+      ]
+    }),
+    Icons({
+      autoInstall: true
+    }),
+    createHtmlPlugin({
+      minify: isBuild,
+      entry: 'src/main.ts',
+      inject: {
+        data: {
+          title: env.VITE_TITLE
+        }
+      }
+    }),
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+      svgoOptions: isBuild,
+      symbolId: 'icon-[dir]-[name]'
+    })
+  ]
+
+  if (isBuild) {
+    plugins.push(
+      visualizer({
+        emitFile: true,
+        filename: 'analysis.html',
+        open: true, //在默认用户代理中打开生成的文件
+        gzipSize: true, //从源代码中收集 gzip 大小并将其显示在图表中
+        brotliSize: true //从源代码中收集 brotli 大小并将其显示在图表中
+      })
+    )
+  }
 
   return {
     build: {
@@ -35,7 +90,7 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       host: true,
-      port: 9529,
+      port: 9527,
       open: true
     },
     css: {
@@ -45,46 +100,6 @@ export default defineConfig(({ command, mode }) => {
         }
       }
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      AutoImport({
-        imports: ['vue', 'vue-router'],
-        resolvers: [
-          ElementPlusResolver(),
-          IconsResolver({
-            prefix: 'Icon'
-          })
-        ]
-      }),
-      Components({
-        //组件的有效文件扩展名
-        extensions: ['tsx', 'vue'],
-        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
-        resolvers: [
-          ElementPlusResolver(),
-          IconsResolver({
-            enabledCollections: ['ep']
-          })
-        ]
-      }),
-      Icons({
-        autoInstall: true
-      }),
-      createHtmlPlugin({
-        minify: isBuild,
-        entry: 'src/main.ts',
-        inject: {
-          data: {
-            title: env.VITE_TITLE
-          }
-        }
-      }),
-      createSvgIconsPlugin({
-        iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
-        svgoOptions: isBuild,
-        symbolId: 'icon-[dir]-[name]'
-      })
-    ]
+    plugins: plugins
   }
 })

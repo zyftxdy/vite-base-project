@@ -37,4 +37,6 @@ declare global {
   interface Math {
     easeInOutQuad: (...args) => number
   }
+
+  declare const CANCAL_REQUEST = 'cancel request'
 }

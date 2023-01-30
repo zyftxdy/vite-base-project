@@ -15,18 +15,17 @@ export default function useDepart(
 ) {
   const { reqApi, message } = useCommon()
   const deptList = ref<Recordable[]>([])
-  const method = computed(() =>
+  const method = 
     options.FnType === 'depart'
       ? reqApi.common.deptList
       : options.FnType === 'departTree'
       ? reqApi.depart.deptTree
       : reqApi.dashboard.deptTree
-  )
 
   const getDepart = async () => {
     try {
       options.onBefore?.()
-      const res = await unref(method)()
+      const res = await method()
       if (res.data) {
         deptList.value = isArray(res.data) ? res.data : [res.data]
         options.onSuccess?.(res.data)
@@ -34,8 +33,8 @@ export default function useDepart(
         message.error('部门树为空，请稍后重试')
       }
     } catch (err: any) {
-      if (err.message !== '取消请求') {
-        message.error(err)
+      if (err.message !== CANCAL_REQUEST) {
+        message.error(err.message)
         options.onError?.(err)
       }
     } finally {

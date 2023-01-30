@@ -64,7 +64,7 @@ const interceptors: AxiosInterceptors<ResponseType> = {
   },
   responseInterceptorsCatch: (error: any) => {
     if (axios.isCancel(error)) {
-      return Promise.reject(new Error('cancel request'))
+      return Promise.reject(new Error(CANCAL_REQUEST))
     }
     return checkStatus(error)
   }

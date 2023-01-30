@@ -60,7 +60,7 @@ export function useRequest<T = any>(onRequest: Method, options: Partial<Options<
         throw new Error('请求出错啦，请稍后重试！')
       }
     } catch (err: any) {
-      if (err.message !== 'cancel request') {
+      if (err.message !== CANCAL_REQUEST) {
         message({
           message: err.message,
           grouping: true,

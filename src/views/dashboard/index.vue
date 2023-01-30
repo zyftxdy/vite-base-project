@@ -1,9 +1,9 @@
 <template>
   <div class="dashboard">
-    <image-view
+    <!-- <image-view
       src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mnx8dGVjaHxlbnwwfHx8fDE2NjIwMjc1MzI&ixlib=rb-1.2.1&q=80&w=500"
       class="w-[200px]"
-    />
+    /> -->
     <div class="content-box mb-4">
       <div class="flex items-center mb-2">
         <page-title title="运营概况" class="flex-1 !mb-0" />
@@ -104,9 +104,10 @@ const { result: dList } = useRequest<Recordable[]>(
     immediate: true,
     refreshDeps: [() => unref(deptIds)],
     formatResult: res => {
+      const list: Recordable[] = unref(dList)
       return res
-        ? unref(dList).map(item => {
-            item.num = formatNum(res[item.type]) ?? 0
+        ? list.map(item => {
+            item.num = formatNum(res[item.type]) ?? '0'
             return item
           })
         : dataList()
@@ -120,12 +121,13 @@ const { result: tList } = useRequest<Recordable[]>(
     immediate: true,
     refreshDeps: [() => unref(deptIds)],
     formatResult: res => {
+      const list: Recordable[] = unref(tList)
       return res
-        ? unref(tList).map(item => {
+        ? list.map(item => {
             item.num = res[item.type] ?? 0
             return item
           })
-        : todoList()
+        : dataList()
     }
   }
 )
