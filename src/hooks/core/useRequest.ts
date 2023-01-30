@@ -1,5 +1,6 @@
 import { useDebounceFn, useThrottleFn } from '@vueuse/core'
 import { useCommon } from './useCommon'
+import { RepResultEnum } from '@/enums/http'
 import { isBoolean, isNullOrUnDef } from '@/utils/is'
 import { useCancelStore } from '@/store'
 import type { Options, Method } from '#/base'
@@ -60,7 +61,7 @@ export function useRequest<T = any>(onRequest: Method, options: Partial<Options<
         throw new Error('请求出错啦，请稍后重试！')
       }
     } catch (err: any) {
-      if (err.message !== CANCAL_REQUEST) {
+      if (err.message !== RepResultEnum.CANCAL_REQUEST) {
         message({
           message: err.message,
           grouping: true,

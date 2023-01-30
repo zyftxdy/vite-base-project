@@ -1,5 +1,6 @@
 import { useCommon } from '../core/useCommon'
 import { isArray } from '@/utils/is'
+import { RepResultEnum } from '@/enums/http'
 import type { FnOptions } from '#/base'
 
 type DepartProps = {
@@ -33,7 +34,7 @@ export default function useDepart(
         message.error('部门树为空，请稍后重试')
       }
     } catch (err: any) {
-      if (err.message !== CANCAL_REQUEST) {
+      if (err.message !== RepResultEnum.CANCAL_REQUEST) {
         message.error(err.message)
         options.onError?.(err)
       }

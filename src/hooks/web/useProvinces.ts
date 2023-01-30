@@ -1,5 +1,6 @@
 import { useCommon } from '../core/useCommon'
 import { setItemList } from '@/utils/mUtils'
+import { RepResultEnum } from '@/enums/http'
 import type { FnOptions } from '#/base'
 
 type UseProps = {
@@ -34,8 +35,8 @@ export default function useProvinces(options: Partial<UseProps> = {}) {
       areaList.value = res.data
       options.onSuccess?.(res)
     } catch (err: any) {
-      if (err.message !== CANCAL_REQUEST) {
-        message.error(err.messgae)
+      if (err.message !== RepResultEnum.CANCAL_REQUEST) {
+        message.error(err.message)
         options.onError?.(err)
       }
     } finally {

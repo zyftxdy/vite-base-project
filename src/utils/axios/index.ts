@@ -3,7 +3,7 @@ import axios from 'axios'
 import ZAixos from './service'
 import config from './config'
 import checkStatus from './checkStatus'
-import { RequestEnum } from '@/enums/http'
+import { RepResultEnum, RequestEnum } from '@/enums/http'
 import cookieCache from '@/utils/cache/auth'
 import { useUserStoreWithOut, useCancelStoreWithOut } from '@/store'
 import type { AxiosInterceptors, ResponseType } from './types'
@@ -64,7 +64,7 @@ const interceptors: AxiosInterceptors<ResponseType> = {
   },
   responseInterceptorsCatch: (error: any) => {
     if (axios.isCancel(error)) {
-      return Promise.reject(new Error(CANCAL_REQUEST))
+      return Promise.reject(new Error(RepResultEnum.CANCAL_REQUEST))
     }
     return checkStatus(error)
   }
