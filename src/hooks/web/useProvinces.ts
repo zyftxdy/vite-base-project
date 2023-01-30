@@ -47,7 +47,7 @@ export default function useProvinces(options: Partial<UseProps> = {}) {
     const keys = Object.keys(target)
     if (!keys.includes('listQuery') || !keys.includes('searchOptions')) {
       message.error('Target format error， Target miss listQuery or searchOptions attribute')
-      return false
+      return
     }
     if (type === 'province') {
       target.listQuery.cityCode = ''
