@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 职位列表
 export const roleList = params => {
@@ -25,7 +25,6 @@ export const roleAdd = params => {
   })
 }
 
-
 // 修改职位
 export const roleUpdate = params => {
   return ZHttp.post({
@@ -33,7 +32,6 @@ export const roleUpdate = params => {
     data: params
   })
 }
-
 
 // 删除职位
 export const roleDel = params => {

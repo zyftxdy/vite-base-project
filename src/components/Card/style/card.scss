@@ -1,13 +1,13 @@
-.card{
-  background: #FFFFFF;
-  .card-head{
+.card {
+  background: #ffffff;
+  .card-head {
     min-height: 48px;
     padding: 0 24px;
     border-bottom: 1px solid #f0f0f0;
-    .card-head-wrapper{
+    .card-head-wrapper {
       display: flex;
       align-items: center;
-      .card-head-title{
+      .card-head-title {
         display: inline-block;
         flex: 1;
         color: #000000d9;
@@ -19,53 +19,59 @@
         text-overflow: ellipsis;
       }
     }
-    .card-head-tab{
+    .card-head-tab {
       display: flex;
       align-items: center;
-      .el-tabs{
+      .el-tabs {
         margin-bottom: -16px;
         flex: 1;
       }
-      .el-tabs__item{
+      .el-tabs__item {
         height: 48px;
         line-height: 48px;
       }
-      .el-tabs__nav-wrap::after{
+      .el-tabs__nav-wrap::after {
         background-color: transparent !important;
       }
     }
   }
-  .card-body{
+  .card-body {
     padding: 24px;
   }
 }
-.card-bordered{
+.card-bordered {
   border: 1px solid #f0f0f0;
 }
-.card-contain-tabs{
-  .card-head-title{
+.card-contain-tabs {
+  .card-head-title {
     padding-bottom: 0;
   }
 }
-.card-hoverable{
+.card-hoverable {
   cursor: pointer;
-  transition: box-shadow .3s,border-color .3s;
-  &:hover{
+  transition: box-shadow 0.3s, border-color 0.3s;
+  &:hover {
     border-color: transparent;
     box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017;
   }
 }
-.card-loading-block{
+.card-loading-block {
   height: 14px;
   margin: 4px 0;
-  background: linear-gradient(90deg,rgba(207,216,220,.2),rgba(207,216,220,.4),rgba(207,216,220,.2));
+  background: linear-gradient(
+    90deg,
+    rgba(207, 216, 220, 0.2),
+    rgba(207, 216, 220, 0.4),
+    rgba(207, 216, 220, 0.2)
+  );
   background-size: 600% 600%;
   border-radius: 2px;
   animation: card-loading 1.4s ease infinite;
 }
 @keyframes card-loading {
-  0%, 100% {
-  background-position: 0 50%;
+  0%,
+  100% {
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;

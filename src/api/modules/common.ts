@@ -1,6 +1,6 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
-import type { UploadFileParams } from "@/utils/axios/types"
+import ZHttp from '@/utils/axios'
+import type { UploadFileParams } from '@/utils/axios/types'
 
 // 通道信息
 export const channelInfo = () => {

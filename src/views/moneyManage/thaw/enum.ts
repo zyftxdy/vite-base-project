@@ -15,7 +15,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '主体名称',
@@ -83,7 +83,7 @@ export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[]
       placeholder: '请选择区县'
     }
   ]
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '主体名称', prop: 'companyName', width: 200 },
@@ -92,7 +92,7 @@ export const columns: TableColumn[] = [
   { label: '校区名称', prop: 'schoolName', width: 200 },
   { label: '划拨笔数', prop: 'transferTotalNum' },
   { label: '解冻划拨总金额（元）', prop: 'transferTotalAmount', width: 180 },
-  { label: '课消解冻金额（元）', prop: 'classConsumeTotalAmount', width: 160  },
-  { label: '学杂费解冻金额（元）', prop: 'sundryTotalAmount', width: 180  },
-  { label: '退款解冻金额（元）', prop: 'refundTotalAmount', width: 160  }
+  { label: '课消解冻金额（元）', prop: 'classConsumeTotalAmount', width: 160 },
+  { label: '学杂费解冻金额（元）', prop: 'sundryTotalAmount', width: 180 },
+  { label: '退款解冻金额（元）', prop: 'refundTotalAmount', width: 160 }
 ]

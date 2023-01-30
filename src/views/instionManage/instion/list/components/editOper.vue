@@ -1,22 +1,30 @@
 <template>
   <template v-if="state.type === 'SCORE'">
     <span class="label">选择评级:</span>
-    <el-select size="large" v-model="state.level" placeholder="请选择评级">
+    <el-select v-model="state.level" size="large" placeholder="请选择评级">
       <el-option
         v-for="item in state.levelList"
         :key="item.value"
         :label="item.label"
-        :value="item.value"/>
+        :value="item.value"
+      />
     </el-select>
   </template>
   <template v-else>
     <span class="label">选择行政部门:</span>
-    <el-select size="large" v-model="state.deptId" filterable clearable placeholder="请选择行政部门">
+    <el-select
+      v-model="state.deptId"
+      size="large"
+      filterable
+      clearable
+      placeholder="请选择行政部门"
+    >
       <el-option
         v-for="item in deptList"
         :key="item.deptId"
         :label="item.name"
-        :value="item.deptId"/>
+        :value="item.deptId"
+      />
     </el-select>
   </template>
 </template>
@@ -43,35 +51,41 @@ const state = reactive({
   type: ''
 })
 
-watch(() => props.data, val => {
-  val.type === 'DEPART' ? getDepart() : state.levelList = cerditLvStatus.filter(item => item.value)
-  val.type === 'DEPART' ? state.deptId = val.deptId : state.level = val.creditLevel
-  state.schoolId = val.schoolId
-  state.type = val.type
-}, {
-  immediate: true,
-  deep: true
-})
+watch(
+  () => props.data,
+  val => {
+    val.type === 'DEPART'
+      ? getDepart()
+      : (state.levelList = cerditLvStatus.filter(item => item.value))
+    val.type === 'DEPART' ? (state.deptId = val.deptId) : (state.level = val.creditLevel)
+    state.schoolId = val.schoolId
+    state.type = val.type
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 emitter.on('submit', () => {
   state.type === 'DEPART' ? updateDept() : updateLevel()
 })
 const { run: updateDept } = useRequest(
-  () => state.deptId ? reqApi.school.setDept({ schoolId: state.schoolId, deptId: state.deptId }) : reqApi.school.delDept({ schoolId: state.schoolId }),
+  () =>
+    state.deptId
+      ? reqApi.school.setDept({ schoolId: state.schoolId, deptId: state.deptId })
+      : reqApi.school.delDept({ schoolId: state.schoolId }),
   {
     onSuccess: () => closeOper()
   }
 )
-const { run: updateLevel } = useRequest(
-  data => reqApi.school.setLevel(data),
-  {
-    onBefore: () => ({
-      schoolId: state.schoolId,
-      level: state.level
-    }),
-    onSuccess: () => closeOper()
-  }
-)
+const { run: updateLevel } = useRequest(data => reqApi.school.setLevel(data), {
+  onBefore: () => ({
+    schoolId: state.schoolId,
+    level: state.level
+  }),
+  onSuccess: () => closeOper()
+})
 const closeOper = () => {
   emitter.emit('success')
   message.success('修改成功')
@@ -80,12 +94,12 @@ const closeOper = () => {
 </script>
 
 <style lang="scss" scoped>
-.dialog_list{
-  .label{
+.dialog_list {
+  .label {
     display: block;
     margin-bottom: 10px;
   }
-  .el-select{
+  .el-select {
     width: 100%;
   }
 }

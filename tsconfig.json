@@ -26,26 +26,14 @@
     // 文件路径解析时的基本url
     "baseUrl": ".",
     // 指定具体要解析使用的类型
-    "types": [
-      "vite/client",
-      "element-plus/global"
-    ],
+    "types": ["vite/client", "element-plus/global"],
     // 路径解析
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "#/*": [
-        "types/*"
-      ]
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
     },
     // 指定在项目中可以使用哪些库的类型
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   // 哪些代码要进行ts解析
   "include": [
@@ -60,7 +48,5 @@
     "vite.config.ts"
   ],
   // 排除ts解析
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

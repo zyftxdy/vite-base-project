@@ -7,11 +7,7 @@ let zIndex = 2022
 
 // @popperjs/core写法 参考element-plus
 let removePopper: any
-function createTablePopper(
-  parent: HTMLElement,
-  target: HTMLElement,
-  popperContent: string
-) {
+function createTablePopper(parent: HTMLElement, target: HTMLElement, popperContent: string) {
   const renderContent = () => {
     const content = document.createElement('div')
     content.innerHTML = popperContent
@@ -112,14 +108,15 @@ function createTablePopper(
 // }
 
 export function useEvents() {
-  const handleCellMouseEnter = (
-    event: MouseEvent,
-    row: Recordable,
-    parent: HTMLElement) => {
-    if (!parent) return
+  const handleCellMouseEnter = (event: MouseEvent, row: Recordable, parent: HTMLElement) => {
+    if (!parent) {
+      return
+    }
     const cell = event.target as HTMLElement
     const cellParent = cell.parentElement
-    if (!(hasClass(cell, 'cell-tooltip') && cell.childNodes.length && cellParent)) return
+    if (!(hasClass(cell, 'cell-tooltip') && cell.childNodes.length && cellParent)) {
+      return
+    }
     const range = document.createRange()
     range.setStart(cell, 0)
     range.setEnd(cell, cell.childNodes.length)
@@ -131,11 +128,7 @@ export function useEvents() {
       rangeWidth + padding > cellParent.offsetWidth ||
       cell.scrollWidth > cellParent.offsetWidth
     ) {
-      createTablePopper(
-        parent,
-        cell,
-        cell.innerHTML || cell.innerText
-      )
+      createTablePopper(parent, cell, cell.innerHTML || cell.innerText)
     }
   }
   const handleCellMouseLeave = () => {

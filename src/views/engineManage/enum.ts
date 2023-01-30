@@ -33,64 +33,66 @@ export const listQuery = () => ({
 })
 
 export const searchOptions = (dateChange: Fn): SearchOptions[] => {
-  return [{
-    type: 'input',
-    label: '品牌名称',
-    prop: 'brandName',
-    placeholder: '请输入品牌名称'
-  },
-  {
-    type: 'input',
-    label: '校区名称',
-    prop: 'schoolName',
-    placeholder: '请输入校区名称'
-  },
-  {
-    type: 'input',
-    label: '品牌所属人',
-    prop: 'ownerName',
-    placeholder: '请输入手机号'
-  },
-  {
-    type: 'input',
-    label: '授课课程',
-    prop: 'courseName',
-    placeholder: '请输入授课课程'
-  },
-  {
-    type: 'date',
-    label: '创建时间',
-    prop: 'dates',
-    method: dateChange,
-    disabledDate: time => {
-      return time.getTime() > Date.now()
+  return [
+    {
+      type: 'input',
+      label: '品牌名称',
+      prop: 'brandName',
+      placeholder: '请输入品牌名称'
+    },
+    {
+      type: 'input',
+      label: '校区名称',
+      prop: 'schoolName',
+      placeholder: '请输入校区名称'
+    },
+    {
+      type: 'input',
+      label: '品牌所属人',
+      prop: 'ownerName',
+      placeholder: '请输入手机号'
+    },
+    {
+      type: 'input',
+      label: '授课课程',
+      prop: 'courseName',
+      placeholder: '请输入授课课程'
+    },
+    {
+      type: 'date',
+      label: '创建时间',
+      prop: 'dates',
+      method: dateChange,
+      disabledDate: time => {
+        return time.getTime() > Date.now()
+      }
+    },
+    {
+      type: 'select',
+      label: '主营类目',
+      prop: 'tag',
+      optionsList: [],
+      optionKey: 'name',
+      optionLabel: 'name',
+      clearable: true
+    },
+    {
+      type: 'select',
+      label: '信用等级',
+      prop: 'cerditLv',
+      optionsList: cerditLvStatus
+    },
+    {
+      type: 'select',
+      label: '风险等级',
+      prop: 'risk',
+      optionsList: riskStatus
+    },
+    {
+      type: 'select',
+      label: '年检状态',
+      prop: 'engine',
+      optionsList: engineStatus
     }
-  },
-  {
-    type: 'select',
-    label: '主营类目',
-    prop: 'tag',
-    optionsList: [],
-    optionKey: 'name',
-    optionLabel: 'name',
-    clearable: true
-  },
-  {
-    type: 'select',
-    label: '信用等级',
-    prop: 'cerditLv',
-    optionsList: cerditLvStatus
-  },
-  {
-    type: 'select',
-    label: '风险等级',
-    prop: 'risk',
-    optionsList: riskStatus
-  },
-  {
-    type: 'select',
-    label: '年检状态',
-    prop: 'engine',
-    optionsList: engineStatus
-  }]
+  ]
 }

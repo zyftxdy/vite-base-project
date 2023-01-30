@@ -3,17 +3,19 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
 
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="schoolId"
       :loading="listState.loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
         <el-button link type="primary" @click="handleClick()">下载</el-button>
       </template>
@@ -31,13 +33,15 @@ const queryState = reactive({
 })
 
 const listState = reactive({
-  list: [{
-    a: '中小学生校外培训服务合同',
-    b: '10',
-    c: '2021-1-1 10：00：00',
-    d: 'admin',
-    status: '已发布'
-  }],
+  list: [
+    {
+      a: '中小学生校外培训服务合同',
+      b: '10',
+      c: '2021-1-1 10：00：00',
+      d: 'admin',
+      status: '已发布'
+    }
+  ],
   columns: columns,
   total: 0,
   loading: false

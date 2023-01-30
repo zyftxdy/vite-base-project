@@ -14,15 +14,18 @@ export default defineComponent({
     const { setOptions, getInstance } = useEcharts(elRef as Ref<HTMLDivElement>)
     let chart: echarts.ECharts
 
-    const { run: getData } = useRequest(() => reqApi.statistics.statisCourse({ deptIds: props.deptIds }), {
-      refreshDeps: [() => props.deptIds],
-      onSuccess: res => {
-        // @ts-ignore
-        res.map(item => item.value = item.count)
-        setOptions(rBOptions(res))
-        chart.on('legendselectchanged', (e: any) => legendselectchanged(chart, e))
+    const { run: getData } = useRequest(
+      () => reqApi.statistics.statisCourse({ deptIds: props.deptIds }),
+      {
+        refreshDeps: [() => props.deptIds],
+        onSuccess: res => {
+          // @ts-ignore
+          res.map(item => (item.value = item.count))
+          setOptions(rBOptions(res))
+          chart.on('legendselectchanged', (e: any) => legendselectchanged(chart, e))
+        }
       }
-    })
+    )
 
     onMounted(() => {
       chart = getInstance()
@@ -34,7 +37,7 @@ export default defineComponent({
 
     return () => (
       <div class="right_bottom">
-        <div ref={(e: any) => elRef.value = e} style={{width: '100%', height: '160px'}}/>
+        <div ref={(e: any) => (elRef.value = e)} style={{ width: '100%', height: '160px' }} />
       </div>
     )
   }
@@ -42,7 +45,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.right_bottom{
+.right_bottom {
   padding: 10px;
 }
 </style>

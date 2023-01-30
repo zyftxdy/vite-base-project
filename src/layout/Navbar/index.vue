@@ -1,7 +1,7 @@
 <template>
   <div class="nav_bar fixed left-0 bottom-0 top-0 w-50">
     <div class="logo_bar flex items-center justify-center h-12 leading-12 relative w-full">
-      <img :src="appStore.appLogo"/>
+      <img :src="appStore.appLogo" />
     </div>
     <el-menu
       class="!absolute top-12 bottom-0 text-left overflow-y-auto w-full !border-r-0"
@@ -11,8 +11,9 @@
       text-color="#FFFFFF"
       @open="handleOpen"
       @close="handleClose"
-      @select="handleSelect">
-      <menu-tree v-for="item in menuStore.navTree" :key="item.resourceId" :menu="item"/>
+      @select="handleSelect"
+    >
+      <menu-tree v-for="item in menuStore.navTree" :key="item.resourceId" :menu="item" />
     </el-menu>
   </div>
 </template>
@@ -39,7 +40,7 @@ const handleRoute = (route: RouteLocationNormalizedLoaded) => {
       name: route.name as RouteRecordName,
       title: route.meta.title,
       icon: route.meta.icon,
-      query:route.query
+      query: route.query
     }
     mainTabs.value = mainTabs.value.concat(tab)
   }
@@ -56,13 +57,17 @@ const handleRoute = (route: RouteLocationNormalizedLoaded) => {
 // 是不是收集了mainTabs，mainTabsActiveName，route的依赖导致的？？？
 // watchEffect(() => handleRoute(route))
 
-watch(() => route, val => {
-  activeMenu.value = val.meta.activeMenu ?? val.path
-  handleRoute(val)
-}, {
-  immediate: true,
-  deep: true
-})
+watch(
+  () => route,
+  val => {
+    activeMenu.value = val.meta.activeMenu ?? val.path
+    handleRoute(val)
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 const handleOpen = () => {
   console.log('handleOpen')
@@ -76,21 +81,22 @@ const handleSelect = () => {
 </script>
 
 <style lang="scss" scoped>
-.nav_bar{
+.nav_bar {
   z-index: 1020;
-  .logo_bar{
+  .logo_bar {
     background: v-bind('background');
     cursor: pointer;
     padding: 5px 10px;
     box-sizing: border-box;
-    img{
+    img {
       width: 150px;
       height: auto;
       border-radius: 0;
     }
   }
-  .is-active, :deep(.el-menu-item.is-active){
-    background-color: #467DD8 !important;
+  .is-active,
+  :deep(.el-menu-item.is-active) {
+    background-color: #467dd8 !important;
     color: #ffffff !important;
   }
 }

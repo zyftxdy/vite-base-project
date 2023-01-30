@@ -38,22 +38,22 @@
     </div>
 
     <!-- 数据统计 -->
-    <static-header :dept-ids="deptIds"/>
+    <static-header :dept-ids="deptIds" />
 
     <div class="s_content flex">
       <div class="s_left">
         <!-- 监管资金统计 -->
         <div class="area_line margin-bottom30 margin-right30">
-          <area-header title="监管资金统计"/>
+          <area-header title="监管资金统计" />
           <div class="area_line_c">
-            <left-top :dept-ids="deptIds"/>
+            <left-top :dept-ids="deptIds" />
           </div>
         </div>
         <!-- 解冻资金统计 -->
         <div class="area_line margin-bottom30 margin-right30">
-          <area-header title="解冻资金统计"/>
+          <area-header title="解冻资金统计" />
           <div class="area_line_c">
-            <left-bottom :dept-ids="deptIds"/>
+            <left-bottom :dept-ids="deptIds" />
           </div>
         </div>
       </div>
@@ -61,36 +61,36 @@
       <div class="s_center">
         <!-- 教培机构区域分布情况 -->
         <div class="area_line margin-bottom30 margin-right30">
-          <area-header title="教培机构区域分布情况"/>
-          <center-top class="area_line_c"/>
+          <area-header title="教培机构区域分布情况" />
+          <center-top class="area_line_c" />
         </div>
 
         <!-- 教培机构日常经营管理 -->
         <div class="area_line margin-bottom30 margin-right30">
-          <area-header title="教培机构日常经营管理"/>
-          <center-bottom :dept-ids="deptIds" class="area_line_c"/>
+          <area-header title="教培机构日常经营管理" />
+          <center-bottom :dept-ids="deptIds" class="area_line_c" />
         </div>
       </div>
 
       <div class="s_right">
         <!-- 智能风险监控 -->
         <div class="area_line margin-bottom30">
-          <area-header title="智能风险监控"/>
-          <right-top :dept-ids="deptIds" class="area_line_c"/>
+          <area-header title="智能风险监控" />
+          <right-top :dept-ids="deptIds" class="area_line_c" />
         </div>
 
         <!-- 机构投诉统计 -->
         <div class="area_line margin-bottom30">
-          <area-header title="机构投诉统计"/>
+          <area-header title="机构投诉统计" />
           <div class="area_line_c">
-            <right-center :dept-ids="deptIds"/>
+            <right-center :dept-ids="deptIds" />
           </div>
         </div>
 
         <!-- 备案课程统计 -->
         <div class="area_line margin-bottom30">
-          <area-header title="备案课程统计"/>
-          <right-bottom :dept-ids="deptIds" class="area_line_c"/>
+          <area-header title="备案课程统计" />
+          <right-bottom :dept-ids="deptIds" class="area_line_c" />
         </div>
       </div>
     </div>
@@ -117,7 +117,9 @@ const { router } = useCommon()
 const { deptList } = useDepart({
   FnType: 'departLimit',
   immediate: true,
-  onSuccess: () => deptList.value = unref(deptList)[0]?.pid === 0 ? unref(deptList)[0].childList : unref(deptList)
+  onSuccess: () =>
+    (deptList.value =
+      unref(deptList)[0]?.pid === 0 ? unref(deptList)[0].childList : unref(deptList))
 })
 const { isFullscreen, toggle } = useFullscreen(null, { autoExit: true })
 const deptIds = ref<string[]>([])
@@ -126,7 +128,10 @@ const goBack = () => {
   unref(isFullscreen) && toggle()
   const routers = menuStore.routerData
   router.push({
-    path: (routers[0].path === 'statistics' && routers.length > 1) ? `/${routers[1].path}` : `/${routers[0].path}`
+    path:
+      routers[0].path === 'statistics' && routers.length > 1
+        ? `/${routers[1].path}`
+        : `/${routers[0].path}`
   })
 }
 
@@ -141,4 +146,4 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="scss" scoped src="./index.scss"/>
+<style lang="scss" scoped src="./index.scss" />

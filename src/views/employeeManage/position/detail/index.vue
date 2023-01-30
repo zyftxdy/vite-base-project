@@ -9,7 +9,12 @@
     <div class="flex">
       <div class="flex-1 mr-8">
         <el-form-item label="职位名称：" prop="name">
-          <el-input v-model="modelRef.name" placeholder="请填写职位名称" maxlength="10" show-word-limit/>
+          <el-input
+            v-model="modelRef.name"
+            placeholder="请填写职位名称"
+            maxlength="10"
+            show-word-limit
+          />
         </el-form-item>
       </div>
       <div class="flex-1 mr-8">
@@ -20,12 +25,12 @@
           </el-radio-group>
         </el-form-item>
       </div>
-      <div class="flex-1 mr-8"/>
+      <div class="flex-1 mr-8" />
     </div>
     <el-form-item label="备注：">
       <el-input
-        type="textarea"
         v-model="modelRef.remarks"
+        type="textarea"
         :rows="4"
         placeholder="请输入备注"
         maxlength="50"
@@ -48,7 +53,9 @@
       />
     </el-form-item>
     <el-form-item>
-      <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit">保存</el-button>
+      <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit"
+        >保存</el-button
+      >
     </el-form-item>
   </el-form>
 </template>
@@ -77,10 +84,12 @@ const rulesRef = reactive({
 const roleId = useRouteQuery('id', '')
 const treeRef = ref<TreeStore>()
 const checkIds = computed(() => {
-  let checkIds: string[] = []
-  unref(treeRef)?.getCheckedNodes().map(item => {
-    checkIds.push(item.resourceId)
-  })
+  const checkIds: string[] = []
+  unref(treeRef)
+    ?.getCheckedNodes()
+    .map(item => {
+      checkIds.push(item.resourceId)
+    })
   return checkIds
 })
 const { run: getDetail } = useRequest(() => reqApi.role.roleInfo({ roleId: unref(roleId) }), {
@@ -101,8 +110,7 @@ const handleSubmit = () => {
   unref(formRef)?.validate((valid, fields) => {
     if (valid) {
       const message = `确定要${unref(roleId) ? '修改' : '添加'}该职位吗？`
-      messageConfirm({ message: message })
-      .then(() => {
+      messageConfirm({ message: message }).then(() => {
         submitForm()
       })
     } else {
@@ -110,23 +118,26 @@ const handleSubmit = () => {
     }
   })
 }
-const { run: submitForm } = useRequest(() => unref(roleId) ? reqApi.role.roleUpdate(modelRef) : reqApi.role.roleAdd(modelRef), {
-  onBefore: () => {
-    modelRef.resourceIds = checkIds.value
-    modelRef.roleId = unref(roleId) ?? ''
-  },
-  onSuccess: () => {
-    message.success(unref(roleId) ? '修改成功' : '添加成功')
-    window.location.reload()
+const { run: submitForm } = useRequest(
+  () => (unref(roleId) ? reqApi.role.roleUpdate(modelRef) : reqApi.role.roleAdd(modelRef)),
+  {
+    onBefore: () => {
+      modelRef.resourceIds = checkIds.value
+      modelRef.roleId = unref(roleId) ?? ''
+    },
+    onSuccess: () => {
+      message.success(unref(roleId) ? '修改成功' : '添加成功')
+      window.location.reload()
+    }
   }
-})
+)
 
 // 菜单树操作
 const nodeCheckClick = (data: Recordable, checkedList: CheckedList) => {
   const checked = checkedList.checkedKeys.includes(data.resourceId)
   const node = unref(treeRef)?.getNode(data) as Node
   nodePChange(node, checked)
-  if (node.childNodes != null) {
+  if (node.childNodes !== null) {
     nodeCChange(node, checked)
   }
 }
@@ -134,15 +145,19 @@ const nodeCheckClick = (data: Recordable, checkedList: CheckedList) => {
 const nodePChange = (node: Node, boolean: boolean) => {
   if (node && node.parent) {
     const parent = node.parent
-    if (parent.childNodes.some(item => item.checked) && !boolean) return
-    if (node.level >= 3 && !boolean) return
+    if (parent.childNodes.some(item => item.checked) && !boolean) {
+      return
+    }
+    if (node.level >= 3 && !boolean) {
+      return
+    }
     unref(treeRef)?.setChecked(node.parent.key, boolean, false)
     node && nodePChange(node.parent, boolean)
   }
 }
 // 节点改变 - 子
 const nodeCChange = (node: Node, boolean: boolean) => {
-    if (node && node.childNodes) {
+  if (node && node.childNodes) {
     node.childNodes.forEach(item => {
       unref(treeRef)?.setChecked(item.key, boolean, false)
       nodeCChange(item, boolean)
@@ -152,12 +167,12 @@ const nodeCChange = (node: Node, boolean: boolean) => {
 </script>
 
 <style lang="scss" scoped>
-.position_detail{
+.position_detail {
   :deep(.el-input),
-  :deep(.el-textarea){
+  :deep(.el-textarea) {
     width: 320px;
   }
-  :deep(.el-tree){
+  :deep(.el-tree) {
     margin-top: 20px;
   }
 }

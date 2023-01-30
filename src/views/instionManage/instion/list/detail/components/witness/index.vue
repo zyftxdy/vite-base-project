@@ -2,10 +2,10 @@
   <el-skeleton :rows="5" :loading="state.loading" animated>
     <template #default>
       <template v-if="state.formData.checkStatus === 'CHECKED'">
-        <verify/>
+        <verify />
       </template>
       <template v-else>
-        <no-verify :form-data="state.formData" @getDetail="getDetail"/>
+        <no-verify :form-data="state.formData" @getDetail="getDetail" />
       </template>
     </template>
   </el-skeleton>

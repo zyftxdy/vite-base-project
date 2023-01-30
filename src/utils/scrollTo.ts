@@ -1,17 +1,24 @@
 import { isFunction, isUnDef } from './is'
 
-Math.easeInOutQuad = function(t: number, b: number, c: number, d: number) {
+Math.easeInOutQuad = function (t: number, b: number, c: number, d: number) {
   t /= d / 2
   if (t < 1) {
-    return c / 2 * t * t + b
+    return (c / 2) * t * t + b
   }
   t--
-  return -c / 2 * (t * (t - 2) - 1) + b
+  return (-c / 2) * (t * (t - 2) - 1) + b
 }
 
 // requestAnimationFrame for Smart Animating http://goo.gl/sx5sts
-const requestAnimFrame = (function() {
-  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) { window.setTimeout(callback, 1000 / 60) }
+const requestAnimFrame = (function () {
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function (callback) {
+      window.setTimeout(callback, 1000 / 60)
+    }
+  )
 })()
 
 // because it's so fucking difficult to detect the scrolling element, just move them all
@@ -30,7 +37,7 @@ export function scrollTo(to: number, duration?: number, callback?: () => void) {
   const increment = 20
   let currentTime = 0
   duration = isUnDef(duration) ? 500 : duration
-  const animateScroll = function() {
+  const animateScroll = function () {
     // increment the time
     currentTime += increment
     // find the value with the quadratic in-out easing function
@@ -40,11 +47,9 @@ export function scrollTo(to: number, duration?: number, callback?: () => void) {
     // do the animation unless its over
     if (duration && currentTime < duration) {
       requestAnimFrame(animateScroll)
-    } else {
-      if (callback && isFunction(callback)) {
-        // the animation is done so lets callback
-        callback()
-      }
+    } else if (callback && isFunction(callback)) {
+      // the animation is done so lets callback
+      callback()
     }
   }
   animateScroll()

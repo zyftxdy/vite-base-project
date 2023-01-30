@@ -6,14 +6,18 @@ export function useColumns(columns: TableColumn[], callBack?: Fn) {
   const columnsRef = ref<TableColumn[]>([])
   let cacheCloumns: TableColumn[]
 
-  watch(() => columns, columns => {
-    columnsRef.value = columns
-    cacheCloumns = columns
-    callBack?.(columns)
-  }, {
-    deep: true,
-    immediate: true
-  })
+  watch(
+    () => columns,
+    columns => {
+      columnsRef.value = columns
+      cacheCloumns = columns
+      callBack?.(columns)
+    },
+    {
+      deep: true,
+      immediate: true
+    }
+  )
 
   const setColumns = (newColumns: TableColumn[]) => {
     columnsRef.value = newColumns

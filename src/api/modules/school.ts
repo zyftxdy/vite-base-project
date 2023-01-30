@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 校区列表
 export const schoolList = params => {

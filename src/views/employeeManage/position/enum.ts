@@ -17,7 +17,11 @@ export interface CheckedList {
 export const columns: TableColumn[] = [
   { label: '职位名称', prop: 'name' },
   { label: '员工数量', prop: 'num' },
-  { label: '状态', prop: 'status', formatter: (row, column, cellValue) => enableOptions[cellValue] },
+  {
+    label: '状态',
+    prop: 'status',
+    formatter: (row, column, cellValue) => enableOptions[cellValue]
+  },
   { label: '职位备注', prop: 'remarks' },
-  { label: '操作', prop: 'action', overflow: false,  width: 140, fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, width: 140, fixed: 'right' }
 ]

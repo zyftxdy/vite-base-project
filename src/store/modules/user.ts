@@ -6,7 +6,7 @@ import store from '../index'
 import type { LoginRef } from '#/base'
 
 interface userState {
-  name: string,
+  name: string
   token: string | undefined
 }
 
@@ -24,21 +24,23 @@ export const useUserStore = defineStore('user', {
     },
     Login(info: LoginRef) {
       return new Promise<any>((resolve, reject) => {
-        login(info).then(res => {
-          const data = res.data // token
-          this.SET_TOKEN(data.token)
-          this.SET_NAME(data.name)
-          const userInfo = {
-            name: data.name,
-            mobile: data.mobile,
-            userId: data.userId
-          }
-          localCache.set('userInfo', userInfo)
-          cookieCache.set(data.token ?? '')
-          resolve(res)
-        }).catch(error => {
-          reject(error)
-        })
+        login(info)
+          .then(res => {
+            const data = res.data // token
+            this.SET_TOKEN(data.token)
+            this.SET_NAME(data.name)
+            const userInfo = {
+              name: data.name,
+              mobile: data.mobile,
+              userId: data.userId
+            }
+            localCache.set('userInfo', userInfo)
+            cookieCache.set(data.token ?? '')
+            resolve(res)
+          })
+          .catch(error => {
+            reject(error)
+          })
       })
     },
     // 前端 登出

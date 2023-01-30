@@ -2,7 +2,7 @@ export enum RequestEnum {
   GET = 'get',
   POST = 'post',
   PUT = 'put',
-  DELETE = 'delete',
+  DELETE = 'delete'
 }
 
 export enum ContentTypeEnum {

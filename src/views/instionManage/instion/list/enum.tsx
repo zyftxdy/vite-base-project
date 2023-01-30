@@ -16,7 +16,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (handleChange: Fn): SearchOptions[] => ([
+export const searchOptions = (handleChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '主体名称',
@@ -83,17 +83,30 @@ export const searchOptions = (handleChange: Fn): SearchOptions[] => ([
   //   prop: 'status',
   //   optionsList: schoolStatus
   // }
-])
+]
 
-export const columns = (fns: Recordable<Fn>): TableColumn[] => ([
+export const columns = (fns: Recordable<Fn>): TableColumn[] => [
   { label: '主体名称', prop: 'companyName', width: 200 },
   { label: '品牌名称', prop: 'brandName', width: 200 },
-  { label: '校区名称', prop: 'alias', width: 200  },
-  { label: '所在地区', prop: 'provinceName', width: 180, formatter: row => row.provinceName + row.cityName + row.districtName },
+  { label: '校区名称', prop: 'alias', width: 200 },
+  {
+    label: '所在地区',
+    prop: 'provinceName',
+    width: 180,
+    formatter: row => row.provinceName + row.cityName + row.districtName
+  },
   { label: '负责人电话', prop: 'ownerName' },
-  { label: '支付签约', prop: 'status', formatter: (row, column, cellValue) => schoolOptions[cellValue] },
+  {
+    label: '支付签约',
+    prop: 'status',
+    formatter: (row, column, cellValue) => schoolOptions[cellValue]
+  },
   { label: '主管部门', prop: 'deptName' },
-  { label: '信用评级', prop: 'creditLevel', formatter: (row, column, cellValue) => cerditLvOptions[cellValue] || '--' },
+  {
+    label: '信用评级',
+    prop: 'creditLevel',
+    formatter: (row, column, cellValue) => cerditLvOptions[cellValue] || '--'
+  },
   {
     label: '操作',
     prop: 'action',
@@ -101,10 +114,21 @@ export const columns = (fns: Recordable<Fn>): TableColumn[] => ([
     width: 240,
     render: (_, data) => (
       <>
-        <el-button v-auth:disabled={'09444fd98fc1f87003'} link type="primary" onClick={() => fns.goDetail(data.schoolId)}>查看</el-button>
-        <el-button link type="primary" onClick={() => fns.handleClick(data, 'DEPART')}>修改主管部门</el-button>
-        <el-button link type="primary" onClick={() => fns.handleClick(data, 'SCORE')}>修改评级</el-button>
+        <el-button
+          v-auth:disabled={'09444fd98fc1f87003'}
+          link
+          type="primary"
+          onClick={() => fns.goDetail(data.schoolId)}
+        >
+          查看
+        </el-button>
+        <el-button link type="primary" onClick={() => fns.handleClick(data, 'DEPART')}>
+          修改主管部门
+        </el-button>
+        <el-button link type="primary" onClick={() => fns.handleClick(data, 'SCORE')}>
+          修改评级
+        </el-button>
       </>
     )
   }
-])
+]

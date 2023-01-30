@@ -8,7 +8,8 @@
       :layout="layout"
       :total="total"
       @sizeChange="() => $emit('pagination')"
-      @currentChange="() => $emit('pagination')"/>
+      @currentChange="() => $emit('pagination')"
+    />
   </div>
 </template>
 

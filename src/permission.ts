@@ -1,34 +1,33 @@
 import router from './router'
 import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css'// progress bar style
+import 'nprogress/nprogress.css' // progress bar style
 import { ElMessage } from 'element-plus'
 import cookieCache from '@/utils/cache/auth'
 import { useAppStore, useMenuStore, useUserStore } from '@/store'
 import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 import type { RouteMenu } from '#/menu'
 
-NProgress.configure({ showSpinner: false })// NProgress Configuration
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // no redirect whitelist
 const whiteList = ['/login']
 
-router.beforeEach((to) => {
+router.beforeEach(to => {
   const token = cookieCache.get()
   NProgress.start()
   if (token) {
     if (to.path === '/login') {
       return '/'
-    } else {
-      // 加载动态菜单和路由
-      return addDynamicMenuAndRoutes(to)
     }
+    // 加载动态菜单和路由
+    return addDynamicMenuAndRoutes(to)
+  }
+  if (whiteList.indexOf(to.path) !== -1) {
+    // 在免登录白名单，直接进入
+    NProgress.done()
   } else {
-    if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-      NProgress.done()
-    } else {
-      NProgress.done()
-      return 'login'
-    }
+    NProgress.done()
+    return 'login'
   }
 })
 
@@ -37,14 +36,14 @@ router.afterEach(() => {
 })
 
 /**
-* 加载动态菜单和路由
-*/
+ * 加载动态菜单和路由
+ */
 async function addDynamicMenuAndRoutes(to: RouteLocationNormalized) {
   const appStore = useAppStore()
   const menuStore = useMenuStore()
   const data = menuStore.routerData
   // 动态路由已存在或者没有动态改变权限的操作
-  if(appStore.menuRouteLoaded) {
+  if (appStore.menuRouteLoaded) {
     console.log('动态菜单和路由已经存在.')
     return to.path === '/' ? `/${data[0].path}` : true
   }
@@ -65,16 +64,16 @@ async function addDynamicMenuAndRoutes(to: RouteLocationNormalized) {
     data.forEach(route => {
       router.addRoute('layout', route as RouteRecordRaw)
     })
-    router.addRoute({path: '/:pathMatch(.*)',redirect:'/404'})
+    router.addRoute({ path: '/:pathMatch(.*)', redirect: '/404' })
     // next({ ...to, replace: true }) 确保addRoute()时动态添加的路由已经被完全加载上去
     return to.path === '/' ? `/${data[0].path}` : { ...to, replace: true }
-  } catch (err){
+  } catch (err) {
     return loginOut()
   }
 }
 
 function deepNavTree(navTree: RouteMenu) {
-  if(navTree) {
+  if (navTree) {
     navTree.children = navTree.children.filter(c => !c.hidden)
     navTree.children.forEach(c => deepNavTree(c))
   }

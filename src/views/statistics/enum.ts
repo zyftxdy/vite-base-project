@@ -6,7 +6,7 @@ import icon5 from '@/assets/statisitic/icon5.png'
 import type { EchartTrigger } from '#/base'
 import type { ECOption } from '@/utils/echarts'
 
-const tipFn = (trigger: EchartTrigger) =>({
+const tipFn = (trigger: EchartTrigger) => ({
   trigger: trigger,
   backgroundColor: 'rgba(21, 111, 184, .5)',
   borderWidth: 0,
@@ -152,7 +152,7 @@ export const lTOptions = (xData: any[], data: any[]): ECOption => ({
       type: 'line',
       showSymbol: false,
       yAxisIndex: 0,
-      smooth:true,
+      smooth: true,
       lineStyle: {
         shadowColor: '#F86C69',
         shadowBlur: 10
@@ -169,11 +169,11 @@ export const cTOptions = (name: string, data: Recordable[]): ECOption => ({
     textStyle: {
       color: '#333',
       fontSize: '12',
-      fontFamily: 'Microsoft YaHei',
+      fontFamily: 'Microsoft YaHei'
     },
     padding: [8, 16, 8, 16],
     extraCssText: 'box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);',
-    formatter: function(params: Recordable){
+    formatter: function (params: Recordable) {
       return params.name
     }
   },
@@ -199,7 +199,7 @@ export const cTOptions = (name: string, data: Recordable[]): ECOption => ({
     emphasis: {
       label: {
         show: false,
-        color: '#fff',
+        color: '#fff'
       },
       itemStyle: {
         borderColor: '#fff',
@@ -208,12 +208,12 @@ export const cTOptions = (name: string, data: Recordable[]): ECOption => ({
         shadowBlur: 8,
         shadowOffsetY: 2,
         shadowColor: 'rgba(0,0,0,.3)'
-      },
+      }
     },
     select: {
       label: {
         show: false,
-        color: '#fff',
+        color: '#fff'
       },
       itemStyle: {
         borderColor: '#fff',
@@ -286,7 +286,7 @@ export const rCOptions = (xData: string[], data: string[], newData: string[]): E
     axisTick: {
       show: false
     },
-    axisLine:{
+    axisLine: {
       show: false
     },
     data: xData
@@ -307,7 +307,7 @@ export const rCOptions = (xData: string[], data: string[], newData: string[]): E
     axisTick: {
       show: false
     },
-    axisLine:{
+    axisLine: {
       show: false
     }
   },
@@ -316,7 +316,7 @@ export const rCOptions = (xData: string[], data: string[], newData: string[]): E
       name: '新增投诉',
       type: 'line',
       showSymbol: false,
-      smooth:true,
+      smooth: true,
       lineStyle: {
         shadowColor: '#F86C69',
         shadowBlur: 10
@@ -327,7 +327,7 @@ export const rCOptions = (xData: string[], data: string[], newData: string[]): E
       name: '已处理投诉',
       type: 'line',
       showSymbol: false,
-      smooth:true,
+      smooth: true,
       lineStyle: {
         shadowColor: '#3EAFFE',
         shadowBlur: 10
@@ -337,7 +337,7 @@ export const rCOptions = (xData: string[], data: string[], newData: string[]): E
   ]
 })
 
-export const rBOptions = (data: any[]): ECOption  => ({
+export const rBOptions = (data: any[]): ECOption => ({
   tooltip: {
     trigger: 'item',
     formatter: '{b} : {c} ({d}%)',

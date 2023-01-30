@@ -2,9 +2,9 @@ import { defineComponent } from 'vue'
 import type { LocationQuery, RouteMeta, RouteRecordName, RouteRecordRaw } from 'vue-router'
 
 export type Component<T = any> =
-| ReturnType<typeof defineComponent>
-| (() => Promise<typeof import('*.vue')>)
-| (() => Promise<T>)
+  | ReturnType<typeof defineComponent>
+  | (() => Promise<typeof import('*.vue')>)
+  | (() => Promise<T>)
 
 export interface RouteTab {
   name: RouteRecordName

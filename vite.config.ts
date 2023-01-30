@@ -23,9 +23,7 @@ export default defineConfig(({ command, mode }) => {
       assetsInlineLimit: 10240,
       rollupOptions: {
         output: {
-          manualChunks: {
-  
-          }
+          manualChunks: {}
         }
       }
     },
@@ -37,7 +35,7 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       host: true,
-      port: 9527,
+      port: 9529,
       open: true
     },
     css: {
@@ -55,7 +53,7 @@ export default defineConfig(({ command, mode }) => {
         resolvers: [
           ElementPlusResolver(),
           IconsResolver({
-            prefix: 'Icon',
+            prefix: 'Icon'
           })
         ]
       }),
@@ -68,7 +66,7 @@ export default defineConfig(({ command, mode }) => {
           IconsResolver({
             enabledCollections: ['ep']
           })
-        ],
+        ]
       }),
       Icons({
         autoInstall: true

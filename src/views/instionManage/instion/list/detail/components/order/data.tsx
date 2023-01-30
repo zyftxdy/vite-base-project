@@ -13,7 +13,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '会员搜索',
@@ -25,7 +25,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
     label: '下单时间',
     prop: 'dates',
     method: dateChange,
-    disabledDate: (time) => {
+    disabledDate: time => {
       return time.getTime() > Date.now()
     }
   },
@@ -35,7 +35,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
     prop: 'orderStatus',
     optionsList: orderStatus
   }
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '下单时间', prop: 'createdAt', width: 140 },
@@ -44,36 +44,57 @@ export const columns: TableColumn[] = [
   { label: '联系电话', prop: 'contactMobile', width: 140 },
   { label: '收款金额（元）', prop: 'orderAmount', width: 140 },
   { label: '退款金额（元）', prop: 'refundAmount', width: 140 },
-  { label: '订单状态', prop: 'orderStatus', width: 140, formatter: (row, column, cellValue) => orderOptions[cellValue] },
-  { label: '操作', prop: 'action', overflow: false,  width: 140, fixed: 'right' }
+  {
+    label: '订单状态',
+    prop: 'orderStatus',
+    width: 140,
+    formatter: (row, column, cellValue) => orderOptions[cellValue]
+  },
+  { label: '操作', prop: 'action', overflow: false, width: 140, fixed: 'right' }
 ]
 
 export const payColumns: TableColumn[] = [
-  { label: '收款项目', prop: 'name', formatter: (row, column, cellValue) =>  `[${cardOptions[row.cardType] ?? '学杂费'}] ${cellValue}`},
+  {
+    label: '收款项目',
+    prop: 'name',
+    formatter: (row, column, cellValue) => `[${cardOptions[row.cardType] ?? '学杂费'}] ${cellValue}`
+  },
   { label: '单价', prop: 'price', formatter: row => `${row.price}元/1${row.unitName}` },
   { label: '数量', prop: 'totalCount' },
-  { label: '优惠', prop: 'discountType', formatter: (row, column, cellValue) => {
-    switch (cellValue) {
-      case 'DISCOUNT':
-        return `折扣${row.buyDiscount}%,折上再减${row.buyReduceMoney}元`
-      case 'GIVE':
-        return '赠送'
-      case 'CARRY_OVER':
-        return '结转'
-      case 'NONE':
-        return '无优惠'
-    }}
+  {
+    label: '优惠',
+    prop: 'discountType',
+    formatter: (row, column, cellValue) => {
+      switch (cellValue) {
+        case 'DISCOUNT':
+          return `折扣${row.buyDiscount}%,折上再减${row.buyReduceMoney}元`
+        case 'GIVE':
+          return '赠送'
+        case 'CARRY_OVER':
+          return '结转'
+        case 'NONE':
+          return '无优惠'
+      }
+    }
   },
-  { label: '小计', prop: 'realAmount', render: (cellValue, data) => (
-    <>
-      <span class="line-through">{ data.originAmount }</span>
-      <span class="text-rose-600 pl-1 font-bold">{ cellValue }</span>
-    </>
-  ) }
+  {
+    label: '小计',
+    prop: 'realAmount',
+    render: (cellValue, data) => (
+      <>
+        <span class="line-through">{data.originAmount}</span>
+        <span class="text-rose-600 pl-1 font-bold">{cellValue}</span>
+      </>
+    )
+  }
 ]
 
 export const refundColumns: TableColumn[] = [
-  { label: '退款项目', prop: 'name', formatter: (row, column, cellValue) => `[${cardOptions[row.cardType] ?? '学杂费'}] ${cellValue}` },
+  {
+    label: '退款项目',
+    prop: 'name',
+    formatter: (row, column, cellValue) => `[${cardOptions[row.cardType] ?? '学杂费'}] ${cellValue}`
+  },
   { label: '单价', prop: 'price', formatter: row => `${row.price}元/1${row.unitName}` },
   { label: '退款数量', prop: 'refundCount' }
 ]
@@ -110,14 +131,7 @@ export const paySchema: DescItem[] = [
     field: 'paymentVoucherUrl',
     label: '付款凭证',
     render: (val, _) => (
-      <>
-        {
-          val ? <el-image
-          class="image"
-          src={val}
-          preview-src-list={[val]}/> : <span>--</span>
-        }
-      </>
+      <>{val ? <el-image class="image" src={val} preview-src-list={[val]} /> : <span>--</span>}</>
     )
   }
 ]

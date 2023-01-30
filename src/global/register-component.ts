@@ -30,7 +30,7 @@ const components = {
   UsualUpload
 }
 
-export default function(app: App) {
+export default function (app: App) {
   for (const component in components) {
     app.component(component, (components as Recordable)[component])
   }

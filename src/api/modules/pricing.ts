@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 课程备案列表
 export const list = param => {

@@ -1,24 +1,25 @@
 <template>
-  <el-form
-    ref="formRef"
-    :model="modelRef"
-    :rules="rulesRef"
-    label-width="100px"
-  >
+  <el-form ref="formRef" :model="modelRef" :rules="rulesRef" label-width="100px">
     <el-form-item label="员工姓名：" prop="name">
-      <el-input v-model="modelRef.name" placeholder="请填写员工姓名" show-word-limit maxlength="10"/>
+      <el-input
+        v-model="modelRef.name"
+        placeholder="请填写员工姓名"
+        show-word-limit
+        maxlength="10"
+      />
     </el-form-item>
     <el-form-item label="手机号码：" prop="mobile">
-      <el-input v-model="modelRef.mobile" placeholder="请填写手机号码"/>
+      <el-input v-model="modelRef.mobile" placeholder="请填写手机号码" />
     </el-form-item>
     <el-form-item label="员工职位：" prop="roleId">
       <el-select v-model="modelRef.roleId" placeholder="请选择职位">
         <el-option
           v-for="item in roleList"
-          :disabled="item.adminFlag"
           :key="item.roleId"
+          :disabled="item.adminFlag"
           :label="item.name"
-          :value="item.roleId"/>
+          :value="item.roleId"
+        />
       </el-select>
     </el-form-item>
     <el-form-item label="员工状态：" class="is-required">
@@ -39,7 +40,8 @@
           checkStrictly: true
         }"
         placeholder="请选择所在部门"
-        @change="handleChange"/>
+        @change="handleChange"
+      />
     </el-form-item>
   </el-form>
 </template>
@@ -63,7 +65,9 @@ const { message, reqApi, emitter } = useCommon()
 const { deptList } = useDepart({
   FnType: 'departTree',
   immediate: true,
-  onSuccess: () => deptList.value = unref(deptList)[0]?.pid === 0 ? unref(deptList)[0].childList : unref(deptList)
+  onSuccess: () =>
+    (deptList.value =
+      unref(deptList)[0]?.pid === 0 ? unref(deptList)[0].childList : unref(deptList))
 })
 const formRef = ref<FormInstance>()
 const modelRef = reactive<ModelRef>({
@@ -78,16 +82,21 @@ const rulesRef = reactive(rules)
 const handleChange = (e: any) => {
   modelRef.deptId = e[e.length - 1]
 }
-const { run: submitForm } = useRequest(() => props.userId ? reqApi.user.userUpdate(modelRef) : reqApi.user.userAdd(modelRef), {
-  onBefore: () => {
-    if (props.userId) modelRef.userId = props.userId
-  },
-  onSuccess: () => {
-    emitter.emit('success')
-    message.success(props.userId ? '修改成功' : '添加成功')
-    props.userId ? emits('updateFn') : emits('addFn')
+const { run: submitForm } = useRequest(
+  () => (props.userId ? reqApi.user.userUpdate(modelRef) : reqApi.user.userAdd(modelRef)),
+  {
+    onBefore: () => {
+      if (props.userId) {
+        modelRef.userId = props.userId
+      }
+    },
+    onSuccess: () => {
+      emitter.emit('success')
+      message.success(props.userId ? '修改成功' : '添加成功')
+      props.userId ? emits('updateFn') : emits('addFn')
+    }
   }
-})
+)
 emitter.on('submit', () => {
   unref(formRef)?.validate((valid, fields) => {
     if (valid) {
@@ -102,11 +111,15 @@ const { run: getDetail } = useRequest(id => reqApi.user.userInfo({ userId: id })
     Object.assign(modelRef, res)
   }
 })
-watch(() => props.userId, val => {
-  val && getDetail(val)
-}, {
-  immediate: true
-})
+watch(
+  () => props.userId,
+  val => {
+    val && getDetail(val)
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>

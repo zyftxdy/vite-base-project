@@ -7,8 +7,8 @@ interface AnimationOpts {
 }
 type TarList = (string | TarItem)[]
 interface Target {
-  parent: null | Target,
-  dom: HTMLElement,
+  parent: null | Target
+  dom: HTMLElement
   val: TarList
 }
 type TarItem = {
@@ -46,7 +46,7 @@ class AnimationText {
       if (child.nodeType === 3) {
         tarArr = (tarArr as string[]).concat(child.nodeValue!.split(''))
       } else if (child.nodeType === 1) {
-        (tarArr as TarItem[]).push({
+        ;(tarArr as TarItem[]).push({
           dom: child as HTMLElement,
           val: this.convart(child as HTMLElement, [])
         })

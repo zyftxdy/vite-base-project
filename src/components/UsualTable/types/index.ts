@@ -1,5 +1,5 @@
-import type { TableColumn } from "#/base"
-import type { CheckboxValueType } from "element-plus"
+import type { TableColumn } from '#/base'
+import type { CheckboxValueType } from 'element-plus'
 
 export interface TableAction {
   setColumns: (columns: TableColumn[]) => void

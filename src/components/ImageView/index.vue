@@ -3,18 +3,10 @@
     <img
       ref="originEl"
       :src="src"
-      :class="[
-        'w-full h-full',
-        { 'cursor-pointer': preview },
-        { 'opacity-0': showMask }
-      ]"
-      @click="openMask">
-    <div
-      v-if="showMask"
-      ref="maskEl"
-      class="image-mask"
-      @click="closeMask">
-    </div>
+      :class="['w-full h-full', { 'cursor-pointer': preview }, { 'opacity-0': showMask }]"
+      @click="openMask"
+    />
+    <div v-if="showMask" ref="maskEl" class="image-mask" @click="closeMask"></div>
   </div>
 </template>
 
@@ -26,7 +18,7 @@ import { useEventListener } from '@vueuse/core'
 
 let cloneEl: HTMLElement
 
-const props = defineProps(baseProps)
+defineProps(baseProps)
 const originEl = ref<HTMLElement>()
 const maskEl = ref<HTMLElement>()
 const showMask = ref(false)
@@ -99,7 +91,9 @@ const openMask = () => {
   })
 }
 const closeMask = () => {
-  if (unref(transform).isMove || unref(transform).isAnimation) return
+  if (unref(transform).isMove || unref(transform).isAnimation) {
+    return
+  }
   initEl()
   document.body.style.overflow = ''
   useTimeoutFn(() => {
@@ -111,7 +105,9 @@ const closeMask = () => {
 
 const handleMouseDown = () => {
   useEventListener(cloneEl, 'mousedown', (e: MouseEvent) => {
-    if (unref(transform).isAnimation) return
+    if (unref(transform).isAnimation) {
+      return
+    }
     console.log('按下')
     const { offsetX, offsetY } = transform.value
     const startX = e.pageX
@@ -126,11 +122,13 @@ const handleMouseDown = () => {
       }
       changeStyle(cloneEl, {
         transition: 'none',
-        transform: `translate(${unref(transform).offsetX}px,${unref(transform).offsetY}px) scale(${unref(transform).scale})`
+        transform: `translate(${unref(transform).offsetX}px,${unref(transform).offsetY}px) scale(${
+          unref(transform).scale
+        })`
       })
     })
     useEventListener(cloneEl, 'mouseup', () => {
-      console.log("抬起")
+      console.log('抬起')
       removeMousemove()
       useTimeoutFn(() => {
         transform.value.isMove = false
@@ -142,7 +140,9 @@ const handleMouseDown = () => {
 }
 const handleZoom = () => {
   useEventListener(unref(maskEl)!, 'wheel', (e: WheelEvent) => {
-    if (unref(transform).isMove || unref(transform).isAnimation) return
+    if (unref(transform).isMove || unref(transform).isAnimation) {
+      return
+    }
     transform.value.isWheeling = true
     if (e.deltaY < 0) {
       transform.value.scale += 0.1
@@ -151,14 +151,16 @@ const handleZoom = () => {
     }
     changeStyle(cloneEl, {
       transition: 'all .15s',
-      transform: `translate(${unref(transform).offsetX}px, ${unref(transform).offsetY}px) scale(${unref(transform).scale})`
+      transform: `translate(${unref(transform).offsetX}px, ${unref(transform).offsetY}px) scale(${
+        unref(transform).scale
+      })`
     })
   })
 }
 </script>
 
 <style lang="scss" scoped>
-.image-mask{
+.image-mask {
   position: fixed;
   top: 0;
   right: 0;
@@ -166,8 +168,8 @@ const handleZoom = () => {
   left: 0;
   z-index: 2022;
   user-select: none;
-  background: rgba(0, 0, 0, .5);
-  img{
+  background: rgba(0, 0, 0, 0.5);
+  img {
     position: absolute;
     top: 0;
     left: 0;

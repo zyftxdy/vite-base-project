@@ -49,7 +49,7 @@ const props = defineProps({
   circled: { type: Boolean, default: false },
   crossorigin: {
     type: String as PropType<'' | 'anonymous' | 'use-credentials' | undefined>,
-    default: undefined,
+    default: undefined
   },
   imageStyle: { type: Object as PropType<CSSProperties>, default: () => ({}) },
   options: { type: Object as PropType<Options>, default: () => ({}) }
@@ -60,20 +60,25 @@ const imgRef = ref<HTMLImageElement>()
 const cropper = ref<Cropper>()
 const isReady = ref(false)
 
-const getClass = computed(() => props.circled ? 'cropper-circled' : '')
-const getImageStyle = computed((): CSSProperties => ({
-  height: props.height,
-  maxWidth: '100%',
-  ...props.imageStyle
-}))
-const getWrapperStyle = computed((): CSSProperties => ({
-  height: `${props.height}`.replace(/px/, '') + 'px'
-}))
-
+const getClass = computed(() => (props.circled ? 'cropper-circled' : ''))
+const getImageStyle = computed(
+  (): CSSProperties => ({
+    height: props.height,
+    maxWidth: '100%',
+    ...props.imageStyle
+  })
+)
+const getWrapperStyle = computed(
+  (): CSSProperties => ({
+    height: `${props.height}`.replace(/px/, '') + 'px'
+  })
+)
 
 const init = () => {
   const imgEl = unref(imgRef)!
-  if (!imgEl) return
+  if (!imgEl) {
+    return
+  }
   cropper.value = new Cropper(imgEl, {
     ...defaultOptions,
     ready: () => {
@@ -96,7 +101,9 @@ const init = () => {
 const debounceCroppered = useDebounceFn(() => croppered(), 100)
 
 const croppered = () => {
-  if (!unref(cropper)) return
+  if (!unref(cropper)) {
+    return
+  }
   const canvas = unref(cropper)?.getCroppedCanvas()!
   const url = props.circled ? getRoundedCanvas(canvas).toDataURL() : canvas.toDataURL()
   const blob = dataURLtoBlob(url)
@@ -130,7 +137,7 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.cropper-circled{
+.cropper-circled {
   :deep(.cropper-view-box),
   :deep(.cropper-face) {
     border-radius: 50%;

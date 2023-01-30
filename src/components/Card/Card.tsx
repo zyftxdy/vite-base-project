@@ -15,60 +15,55 @@ export default defineComponent({
     })
 
     return () => {
-      const {
-        loading,
-        tabsList,
-        bordered,
-        hoverable,
-        headStyle,
-        bodyStyle
-      } = props
+      const { loading, tabsList, bordered, hoverable, headStyle, bodyStyle } = props
       const classString = {
         card: true,
         'card-contain-tabs': tabsList && tabsList.length,
         'card-bordered': bordered,
-        'card-hoverable' : hoverable
+        'card-hoverable': hoverable
       }
       const title = getPropsSlot(slots, props, 'title')
       const children = slots.default?.()
       const extra = slots.extra?.()
       const tabsExtra = slots.tabsExtra?.()
 
-      const tabsDom = tabsList && tabsList.length ? (
-        <el-tabs v-model={activeKey.value} onTabChange={(e: TabPaneName)  => emit('tabChange', e)}>
-          {
-            tabsList.map(item => {
-              const label = slots.customTab ? slots.customTab(item) : (<span>{ item.label }</span>)
-              return <el-tab-pane
-                name={ item.name }
-                v-slots={{
-                  label: () => label
-                }}/>
-            })
-          }
-        </el-tabs>
-      ) : null
-      const titleDom = title || tabsDom ? (
-        <div class='card-head' style={ headStyle }>
-          {
-            title &&
-            <div class='card-head-wrapper'>
-              {title && <div class='card-head-title'>{title}</div>}
-              {extra && <div class='card-extra'>{extra}</div>}
-            </div>
-          }
-          {
-            tabsDom && <div class='card-head-tab'>
-              { tabsDom }
-              { tabsExtra }
-            </div>
-          }
-        </div>
-      ) : null
+      const tabsDom =
+        tabsList && tabsList.length ? (
+          <el-tabs v-model={activeKey.value} onTabChange={(e: TabPaneName) => emit('tabChange', e)}>
+            {tabsList.map(item => {
+              const label = slots.customTab ? slots.customTab(item) : <span>{item.label}</span>
+              return (
+                <el-tab-pane
+                  name={item.name}
+                  v-slots={{
+                    label: () => label
+                  }}
+                />
+              )
+            })}
+          </el-tabs>
+        ) : null
+      const titleDom =
+        title || tabsDom ? (
+          <div class="card-head" style={headStyle}>
+            {title && (
+              <div class="card-head-wrapper">
+                {title && <div class="card-head-title">{title}</div>}
+                {extra && <div class="card-extra">{extra}</div>}
+              </div>
+            )}
+            {tabsDom && (
+              <div class="card-head-tab">
+                {tabsDom}
+                {tabsExtra}
+              </div>
+            )}
+          </div>
+        ) : null
 
-      const block = <div class='card-loading-block' />
+      const block = <div class="card-loading-block" />
       const loadingBlock = (
-        <div class='card-loading-content'>
+        <div class="card-loading-content">
           <el-row gutter={8}>
             <el-col span={24}>{block}</el-col>
           </el-row>
@@ -92,15 +87,15 @@ export default defineComponent({
         </div>
       )
       const contentDom = (
-        <div class='card-body' style={ bodyStyle }>{
-          loading ? loadingBlock : children
-        }</div>
+        <div class="card-body" style={bodyStyle}>
+          {loading ? loadingBlock : children}
+        </div>
       )
 
       return (
         <div class={classString}>
-          { titleDom }
-          { children && children.length ? contentDom : null }
+          {titleDom}
+          {children && children.length ? contentDom : null}
         </div>
       )
     }

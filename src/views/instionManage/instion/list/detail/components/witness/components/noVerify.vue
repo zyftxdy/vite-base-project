@@ -1,11 +1,6 @@
 <template>
-  <el-form
-    ref="formRef"
-    :model="modelRef"
-    :rules="rulesRef"
-    class="no-verify"
-  >
-    <page-title title="办学资质核查"/>
+  <el-form ref="formRef" :model="modelRef" :rules="rulesRef" class="no-verify">
+    <page-title title="办学资质核查" />
     <div class="form-line main">
       <div class="item-line">
         <el-form-item label="主体资质：" class="is-required no-margin">
@@ -21,9 +16,10 @@
             :image-url="imgUrls.licenseCreditPhotoUrl"
             :image-size="2"
             image-desc="营业执照(民办非企资质证书)"
-            :showWH="false">
+            :show-w-h="false"
+          >
             <el-form-item prop="licenseCreditPhoto">
-              <el-input v-show="false" v-model="modelRef.licenseCreditPhoto"/>
+              <el-input v-show="false" v-model="modelRef.licenseCreditPhoto" />
             </el-form-item>
           </usual-upload>
         </el-form-item>
@@ -33,7 +29,8 @@
             :image-url="imgUrls.fireCertPhotoUrl"
             :image-size="2"
             image-desc="消防资质"
-            :showWH="false"/>
+            :show-w-h="false"
+          />
         </el-form-item>
       </div>
       <div class="item-line">
@@ -43,7 +40,8 @@
             :image-url="imgUrls.licenseSchoolPermitPhotoUrl"
             :image-size="2"
             image-desc="办学许可证"
-            :showWH="false"/>
+            :show-w-h="false"
+          />
         </el-form-item>
         <el-form-item label="体育经营许可证：" class="noflex">
           <usual-upload
@@ -51,35 +49,40 @@
             :image-url="imgUrls.sportsCertPhotoUrl"
             :image-size="2"
             image-desc="体育经营许可证"
-            :showWH="false"/>
+            :show-w-h="false"
+          />
         </el-form-item>
       </div>
     </div>
-    <page-title title="校区环境核查"/>
+    <page-title title="校区环境核查" />
     <el-form-item label="校区面积：" class="area">
-      <el-input v-model="modelRef.area" placeholder="请填写校区面积（平米）"/>
+      <el-input v-model="modelRef.area" placeholder="请填写校区面积（平米）" />
     </el-form-item>
     <el-form-item label="最大容纳人数：" class="person">
-      <el-input v-model="modelRef.holdCount" placeholder="请输入最大容纳人数（人）"/>
-      <span class="tips">生均面积：{{areaAverage}}平米/人</span>
+      <el-input v-model="modelRef.holdCount" placeholder="请输入最大容纳人数（人）" />
+      <span class="tips">生均面积：{{ areaAverage }}平米/人</span>
     </el-form-item>
     <el-form-item label="安全保障：" class="safe">
-      <el-input v-model="modelRef.security" placeholder="请输入校区安全保障信息，如30万人身安全保障+10万财产安全保障"/>
+      <el-input
+        v-model="modelRef.security"
+        placeholder="请输入校区安全保障信息，如30万人身安全保障+10万财产安全保障"
+      />
     </el-form-item>
     <el-form-item label="校区环境：" class="noflex">
       <usual-upload
-        type="list"
         v-model:fileList="state.envPhotos"
+        type="list"
         :max-length="9"
         :image-size="2"
-        :showWH="false"/>
+        :show-w-h="false"
+      />
     </el-form-item>
-    <page-title title="安全责任保险"/>
+    <page-title title="安全责任保险" />
     <el-form-item label="保险公司：" class="area">
-      <el-input v-model="modelRef.insureCompany" placeholder="请填写保险公司名称"/>
+      <el-input v-model="modelRef.insureCompany" placeholder="请填写保险公司名称" />
     </el-form-item>
     <el-form-item label="保险产品名称：" class="area">
-      <el-input v-model="modelRef.insureGoodName" placeholder="请填写保险公司产品"/>
+      <el-input v-model="modelRef.insureGoodName" placeholder="请填写保险公司产品" />
     </el-form-item>
     <el-form-item label="保障期限：">
       <el-row :gutter="24">
@@ -87,8 +90,8 @@
           <el-date-picker
             v-model="modelRef.insureStartTime"
             type="date"
-            valueFormat='YYYY-MM-DD'
-            format='YYYY-MM-DD'
+            value-format="YYYY-MM-DD"
+            format="YYYY-MM-DD"
             placeholder="开始日期"
           />
         </el-col>
@@ -97,8 +100,8 @@
           <el-date-picker
             v-model="modelRef.insureEndTime"
             type="date"
-            valueFormat='YYYY-MM-DD'
-            format='YYYY-MM-DD'
+            value-format="YYYY-MM-DD"
+            format="YYYY-MM-DD"
             placeholder="结束日期"
           />
         </el-col>
@@ -106,37 +109,40 @@
     </el-form-item>
     <el-form-item label="保单照片：" class="noflex">
       <usual-upload
-        type="list"
         v-model:fileList="state.inPhotos"
+        type="list"
         :max-length="15"
         :image-size="2"
-        :showWH="false"/>
+        :show-w-h="false"
+      />
     </el-form-item>
-    <page-title title="师资力量核查"/>
+    <page-title title="师资力量核查" />
     <div class="tips">专职教师人数不少于3人，不少于教师总数的1/4，不得聘用中小学在职教师。</div>
     <div class="form-line teacher">
       <div class="item-line">
         <el-form-item label="专职教师人数：">
-          <el-input v-model="modelRef.fullTimeEmployeeCount" placeholder="请填写专职教师人数"/>
+          <el-input v-model="modelRef.fullTimeEmployeeCount" placeholder="请填写专职教师人数" />
         </el-form-item>
         <el-form-item label="校长姓名：">
           <el-input
             v-model="modelRef.headmaster"
             placeholder="请填写校长姓名"
             show-word-limit
-            maxlength="10"/>
+            maxlength="10"
+          />
         </el-form-item>
         <el-form-item label="校长职称/学历：">
           <el-input
             v-model="modelRef.headmasterEducation"
             show-word-limit
             maxlength="10"
-            placeholder="请填写请输入学历或职称，如本科、专科、教授"/>
+            placeholder="请填写请输入学历或职称，如本科、专科、教授"
+          />
         </el-form-item>
       </div>
       <div class="item-line">
         <el-form-item label="兼职教师人数：">
-          <el-input v-model="modelRef.partTimeEmployeeCount" placeholder="请填写兼职教师人数"/>
+          <el-input v-model="modelRef.partTimeEmployeeCount" placeholder="请填写兼职教师人数" />
         </el-form-item>
         <el-form-item label="校长出生日期：">
           <el-date-picker
@@ -145,10 +151,14 @@
             :disabled-date="pickerOptions"
             value-format="yyyy-MM-dd"
             format="yyyy-MM-dd"
-            placeholder="请选择日期"/>
+            placeholder="请选择日期"
+          />
         </el-form-item>
         <el-form-item label="教育教学经验：">
-          <el-input v-model="modelRef.headmasterExperience" placeholder="请输入校长教育教学/管理经验年限（年）"/>
+          <el-input
+            v-model="modelRef.headmasterExperience"
+            placeholder="请输入校长教育教学/管理经验年限（年）"
+          />
         </el-form-item>
       </div>
       <div class="item-line">
@@ -161,12 +171,12 @@
             :image-url="imgUrls.headmasterPhotoUrl"
             :image-size="2"
             image-desc="校长照片"
-            :showWH="false"
+            :show-w-h="false"
           />
         </el-form-item>
       </div>
     </div>
-    <page-title title="日常经营核查"/>
+    <page-title title="日常经营核查" />
     <el-form-item label="建校时间：">
       <el-date-picker
         v-model="modelRef.buildTime"
@@ -174,7 +184,8 @@
         :disabled-date="pickerOptions"
         value-format="yyyy-MM-dd"
         format="yyyy-MM-dd"
-        placeholder="请选择日期"/>
+        placeholder="请选择日期"
+      />
     </el-form-item>
     <el-form-item label="营业时间：" class="is-required">
       <el-row :gutter="24">
@@ -203,10 +214,7 @@
     </el-form-item>
     <el-form-item label="请勾选符合该校区经营状况的项目" class="noflex">
       <el-checkbox-group v-model="modelRef.businessInfo">
-      <el-checkbox
-        v-for="item in infoList"
-        :label="item"
-        :key="item"/>
+        <el-checkbox v-for="item in infoList" :key="item" :label="item" />
       </el-checkbox-group>
     </el-form-item>
     <el-form-item label="校验时间：" class="is-required">
@@ -219,7 +227,8 @@
               :disabled-date="pickerOptions"
               value-format="yyyy-MM-dd"
               format="yyyy-MM-dd"
-              placeholder="请选择日期"/>
+              placeholder="请选择日期"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="2"><span>至</span></el-col>
@@ -230,12 +239,15 @@
               type="date"
               value-format="yyyy-MM-dd"
               format="yyyy-MM-dd"
-              placeholder="请选择日期"/>
+              placeholder="请选择日期"
+            />
           </el-form-item>
         </el-col>
       </el-row>
     </el-form-item>
-    <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit">提交</el-button>
+    <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit"
+      >提交</el-button
+    >
   </el-form>
 </template>
 
@@ -268,15 +280,21 @@ const state = reactive<{
   inPhotos: []
 })
 
-watch(() => props.formData, val => {
-  console.log(val)
-}, {
-  immediate: true,
-  deep: true
-})
+watch(
+  () => props.formData,
+  val => {
+    console.log(val)
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 
 const areaAverage = computed(() => {
-  return !modelRef.area || !modelRef.holdCount ? 0 : (parseFloat(modelRef.area)/parseFloat(modelRef.holdCount)).toFixed(2)
+  return !modelRef.area || !modelRef.holdCount
+    ? 0
+    : (parseFloat(modelRef.area) / parseFloat(modelRef.holdCount)).toFixed(2)
 })
 
 const handleSubmit = () => {
@@ -289,23 +307,26 @@ const handleSubmit = () => {
   })
 }
 const checkFun = () => {
-  if ((modelRef.fullTimeEmployeeCount ||
-      modelRef.partTimeEmployeeCount) &&
-    (!modelRef.fullTimeEmployeeCount ||
-      !modelRef.partTimeEmployeeCount)) {
+  if (
+    (modelRef.fullTimeEmployeeCount || modelRef.partTimeEmployeeCount) &&
+    (!modelRef.fullTimeEmployeeCount || !modelRef.partTimeEmployeeCount)
+  ) {
     return message.error('专职教师和兼职教师人数，要么都填，要么都留空。')
   }
-  if ((modelRef.insureCompany ||
+  if (
+    (modelRef.insureCompany ||
       modelRef.insureGoodName ||
       modelRef.insureStartTime ||
       modelRef.insureEndTime) &&
     (!modelRef.insureCompany ||
       !modelRef.insureGoodName ||
       !modelRef.insureStartTime ||
-      !modelRef.insureEndTime)) {
+      !modelRef.insureEndTime)
+  ) {
     return message.error('保险公司、保险名称、保障期限要么都填，要么都留空。')
   }
-  if ((modelRef.headmaster ||
+  if (
+    (modelRef.headmaster ||
       modelRef.headmasterBirthday ||
       modelRef.headmasterExperience ||
       modelRef.headmasterEducation ||
@@ -314,7 +335,8 @@ const checkFun = () => {
       !modelRef.headmasterBirthday ||
       !modelRef.headmasterExperience ||
       !modelRef.headmasterEducation ||
-      !modelRef.headmasterPhoto)) {
+      !modelRef.headmasterPhoto)
+  ) {
     return message.error('填写一个校长信息后，其他信息也必填')
   }
   submitFun()
@@ -337,34 +359,35 @@ const submitFun = async () => {
 </script>
 
 <style lang="scss" scoped>
-.no-verify{
-  .noflex{
+.no-verify {
+  .noflex {
     display: block !important;
   }
-  .line-block{
+  .line-block {
     line-height: 20px;
   }
-  .no-margin{
+  .no-margin {
     margin-bottom: 0;
   }
-  .area, .person{
+  .area,
+  .person {
     :deep(.el-input) {
       width: 240px;
     }
-    .tips{
+    .tips {
       font-size: 12px;
       padding-left: 5px;
     }
   }
-  .tips{
+  .tips {
     font-size: 14px;
   }
-  .safe{
+  .safe {
     :deep(.el-input) {
       width: 600px;
     }
   }
-  .teacher{
+  .teacher {
     :deep(.el-form-item) {
       display: block;
       margin-bottom: 12px;

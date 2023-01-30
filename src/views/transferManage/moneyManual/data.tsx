@@ -12,7 +12,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (): SearchOptions[] => ([
+export const searchOptions = (): SearchOptions[] => [
   {
     type: 'input',
     label: '主体名称',
@@ -34,7 +34,7 @@ export const searchOptions = (): SearchOptions[] => ([
     prop: 'transferStatus',
     optionsList: transferStatus
   }
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '申请划拨时间', prop: 'applyTransferTime', width: 200 },
@@ -44,7 +44,11 @@ export const columns: TableColumn[] = [
   { label: '校区名称', prop: 'alias', width: 200 },
   { label: '本次申请金额', prop: 'transferAmount' },
   { label: '监管账户余额', prop: 'balanceAccount', width: 200 },
-  { label: '划拨状态', prop: 'transferStatus', formatter: (row, column, cellValue) => transferSOptions[cellValue] },
+  {
+    label: '划拨状态',
+    prop: 'transferStatus',
+    formatter: (row, column, cellValue) => transferSOptions[cellValue]
+  },
   { label: '主管部门', prop: 'deptName', width: 200 },
   { label: '操作人', prop: 'username' },
   { label: '操作', prop: 'action', fixed: 'right', width: 260 }
@@ -77,13 +81,18 @@ export const schema: DescItem[] = [
     monopolize: true,
     render: (val, _) => (
       <>
-        {
-          val ? val.map((item: string) => (
-            <div key={ item } class='inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content'>
-              <el-image src={item} class='w-22 h-22'/>
+        {val ? (
+          val.map((item: string) => (
+            <div
+              key={item}
+              class="inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content"
+            >
+              <el-image src={item} class="w-22 h-22" />
             </div>
-          )) : <span>--</span>
-        }
+          ))
+        ) : (
+          <span>--</span>
+        )}
       </>
     )
   },
@@ -91,9 +100,7 @@ export const schema: DescItem[] = [
     field: 'riskControlReason',
     label: '触发风控',
     monopolize: true,
-    render: (val, _) => (
-      <span class={ val ? 'text-rose-600' : ''}>{ val || '--' }</span>
-    )
+    render: (val, _) => <span class={val ? 'text-rose-600' : ''}>{val || '--'}</span>
   }
 ]
 
@@ -109,13 +116,18 @@ export const rejectSchema: DescItem[] = [
     monopolize: true,
     render: (val, _) => (
       <>
-        {
-          val ? val.map((item: string) => (
-            <div key={ item } class='inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content'>
-              <el-image src={item} class='w-22 h-22'/>
+        {val ? (
+          val.map((item: string) => (
+            <div
+              key={item}
+              class="inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content"
+            >
+              <el-image src={item} class="w-22 h-22" />
             </div>
-          )) : <span>--</span>
-        }
+          ))
+        ) : (
+          <span>--</span>
+        )}
       </>
     )
   }

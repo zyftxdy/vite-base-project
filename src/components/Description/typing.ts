@@ -16,6 +16,6 @@ export interface DescItem {
 }
 
 export interface CellConfig {
-  component: 'th' | 'td' | ['th', 'td'],
+  component: 'th' | 'td' | ['th', 'td']
   type?: 'label' | 'content'
 }

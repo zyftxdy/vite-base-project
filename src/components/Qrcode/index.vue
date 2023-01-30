@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" ref="wrapRef"/>
+  <component :is="tag" ref="wrapRef" />
 </template>
 
 <script setup lang="ts">
@@ -23,9 +23,9 @@ const props = defineProps({
   },
   options: {
     type: Object as PropType<QRCodeRenderersOptions>,
-    default: {
+    default: () => ({
       margin: 2
-    }
+    })
   },
   tag: {
     type: String as PropType<'canvas' | 'img'>,
@@ -43,7 +43,9 @@ const createCode = async () => {
   try {
     const { tag, codeUrl, width, options, logo } = props
     const wrapEl = unref(wrapRef)
-    if (!wrapEl) return
+    if (!wrapEl) {
+      return
+    }
 
     options.errorCorrectionLevel = options.errorCorrectionLevel || getErrorCorrectionLevel(codeUrl)
 
@@ -65,8 +67,8 @@ const createCode = async () => {
       const url = await toDataURL(codeUrl, {
         width,
         ...options
-      });
-      (unref(wrapRef) as HTMLImageElement).src = url
+      })
+      ;(unref(wrapRef) as HTMLImageElement).src = url
       downUrl.value = url
       emit('done', url)
     }
@@ -77,7 +79,9 @@ const createCode = async () => {
 
 const downLoad = (fileName?: string) => {
   const url = unref(downUrl)
-  if (!url) return
+  if (!url) {
+    return
+  }
   downloadUrl({
     url,
     fileName

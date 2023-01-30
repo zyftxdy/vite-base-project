@@ -3,15 +3,17 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList"/>
+      @pagination="getList"
+    />
   </div>
 </template>
 
@@ -40,7 +42,10 @@ const { areaType, areaList, codeChange } = useProvinces({
 
 queryState.listQuery.transferStartTime = useRouteQuery('start', '').value
 queryState.listQuery.transferEndTime = useRouteQuery('end', '').value
-queryState.listQuery.dates = [queryState.listQuery.transferStartTime, queryState.listQuery.transferEndTime]
+queryState.listQuery.dates = [
+  queryState.listQuery.transferStartTime,
+  queryState.listQuery.transferEndTime
+]
 
 const dateChange = (e: any) => {
   queryState.listQuery.transferStartTime = e ? e[0] : ''

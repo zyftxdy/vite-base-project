@@ -8,7 +8,7 @@ import { dataURLtoBlob, urlToBase64 } from './file'
  * @param bom
  */
 export function downloadByOnlineUrl(url: string, filename: string, mime?: string, bom?: BlobPart) {
-  urlToBase64(url).then((base64) => {
+  urlToBase64(url).then(base64 => {
     downloadByBase64(base64, filename, mime, bom)
   })
 }
@@ -55,8 +55,8 @@ export function downloadUrl({
   fileName,
   target = '_blank'
 }: {
-  url: string,
-  target?: string,
+  url: string
+  target?: string
   fileName?: string
 }) {
   const link = document.createElement('a')

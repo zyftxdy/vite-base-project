@@ -1,4 +1,3 @@
-// import './icons'
 import './permission'
 import router from './router'
 import store from './store'
@@ -13,8 +12,4 @@ import 'virtual:svg-icons-register'
 
 const app = createApp(App)
 
-app
-  .use(directives)
-  .use(router)
-  .use(store)
-  .mount('#app')
+app.use(directives).use(router).use(store).mount('#app')

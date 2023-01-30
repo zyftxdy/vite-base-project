@@ -6,7 +6,6 @@
 export const plugins =
   'advlist anchor autolink autosave charmap code codesample directionality emoticons fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars save searchreplace table visualblocks visualchars wordcount'
 
-
 export const toolbar = [
   'searchreplace bold italic underline strikethrough alignleft aligncenter alignright outdent indent  blockquote undo redo removeformat subscript superscript code codesample',
   'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table emoticons forecolor backcolor fullscreen'

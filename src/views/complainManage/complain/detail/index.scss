@@ -1,51 +1,51 @@
-.complain_detail{
+.complain_detail {
   background: #ffffff;
-  .school{
-    .btn_open{
+  .school {
+    .btn_open {
       margin-left: 5px;
     }
   }
-  .complain{
+  .complain {
     font-size: 14px;
-    border-bottom: 1px dashed #D1D3D9;
+    border-bottom: 1px dashed #d1d3d9;
     padding-bottom: 16px;
-    &:last-child{
+    &:last-child {
       border: none;
     }
-    .result_title{
+    .result_title {
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
-      color: #373E4F;
+      color: #373e4f;
     }
-    .result_t{
+    .result_t {
       font-size: 12px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
-      color: #767C90;
-      span{
+      color: #767c90;
+      span {
         padding-right: 20px;
       }
     }
-    .result_r{
+    .result_r {
       color: $color-333;
       padding: 10px 0;
     }
   }
-  :deep(.el-step__title){
+  :deep(.el-step__title) {
     color: $color-333 !important;
     font-weight: 700;
   }
-  :deep(.el-step.is-vertical .el-step__line){
+  :deep(.el-step.is-vertical .el-step__line) {
     width: 0;
     bottom: 3px;
-    border: 1px dashed #D1D3D9;
+    border: 1px dashed #d1d3d9;
     background: transparent;
   }
-  :deep(.el-step__icon.is-text){
+  :deep(.el-step__icon.is-text) {
     border: none;
   }
-  .svgIcon{
+  .svgIcon {
     width: 20px;
     height: 20px;
   }

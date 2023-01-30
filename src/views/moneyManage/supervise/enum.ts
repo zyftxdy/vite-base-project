@@ -1,4 +1,4 @@
-import type { SearchOptions, TableColumn } from "#/base"
+import type { SearchOptions, TableColumn } from '#/base'
 
 export const listQuery = () => ({
   companyName: '',
@@ -15,7 +15,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '主体名称',
@@ -83,7 +83,7 @@ export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[]
       placeholder: '请选择区县'
     }
   ]
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '主体名称', prop: 'companyName', width: 200 },
@@ -96,5 +96,5 @@ export const columns: TableColumn[] = [
   { label: '监管入账总额（元）', prop: 'superviseTotalAmount', width: 160 },
   { label: '解冻划拨金额（元）', prop: 'transferTotalAmount', width: 160 },
   { label: '剩余监管金额（元）', prop: 'surplusSupeTotalAmount', width: 160 },
-  { label: '操作', prop: 'action', overflow: false,  width: 140, fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, width: 140, fixed: 'right' }
 ]

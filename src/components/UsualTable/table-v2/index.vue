@@ -16,9 +16,8 @@ export default defineComponent({
       sortState,
       tableHeight,
       expandedRowKeys,
-      expandedChange,
+      expandedChange
     } = useRender(props, slots, emit)
-
 
     /* 生成page分页 */
     const currentPage = computed({
@@ -42,8 +41,7 @@ export default defineComponent({
       layout
     }) => (
       <>
-        {
-          total > 0 &&
+        {total > 0 && (
           <div class="pagination-con">
             <el-pagination
               v-model:currentPage={currentPage.value}
@@ -52,10 +50,11 @@ export default defineComponent({
               background={background}
               layout={layout}
               total={total}
-              onSizeChange={ () => emit('pagination') }
-              onCurrentChange={ () => emit('pagination') }/>
+              onSizeChange={() => emit('pagination')}
+              onCurrentChange={() => emit('pagination')}
+            />
           </div>
-        }
+        )}
       </>
     )
     /* 生成page分页 */
@@ -63,49 +62,56 @@ export default defineComponent({
     /* slots处理 */
     const slotsWare = () => {
       const { loading, text } = props
-      return loading ? {
-        empty: () => <el-empty description={text}/>,
-        overlay: () => <div class="el-loading-mask flex items-center justify-center"><i-ep-loading class="el-icon is-loading !text-blue-500 !text-2xl"/></div>
-      } : {
-        empty: () => <el-empty description={text}/>
-      }
+      return loading
+        ? {
+            empty: () => <el-empty description={text} />,
+            overlay: () => (
+              <div class="el-loading-mask flex items-center justify-center">
+                <i-ep-loading class="el-icon is-loading !text-blue-500 !text-2xl" />
+              </div>
+            )
+          }
+        : {
+            empty: () => <el-empty description={text} />
+          }
     }
     /* slots处理 */
 
-    const sortChange = ({key, order}: SortBy) => {
+    const sortChange = ({ key, order }: SortBy) => {
       sortState.value[key] = order
-      emit('sort', {prop: key, order})
+      emit('sort', { prop: key, order })
     }
 
     return () => {
       const { expandColumnKey, total, pageSizes, background, layout } = props
       return (
         <div class="el-table-con-v2">
-          <div ref={ (e: any) => wrapRef.value = e } style={{ height: tableHeight.value + 'px' }}>
+          <div ref={(e: any) => (wrapRef.value = e)} style={{ height: tableHeight.value + 'px' }}>
             <el-auto-resizer
               class="table-v2-custom"
               v-slots={{
                 default: ({ height, width }: any) => (
                   <el-table-v2
-                    columns={ columnsRef.value }
-                    data={ dataRef.value }
-                    v-model:expanded-row-keys={ expandedRowKeys.value }
-                    expandColumnKey={ expandColumnKey }
-                    v-model:sort-state={ sortState.value }
-                    width={ width }
-                    height={ height }
-                    header-class='table-v2-custom-header'
-                    header-height={ 44 }
-                    row-height={ 40 }
+                    columns={columnsRef.value}
+                    data={dataRef.value}
+                    v-model:expanded-row-keys={expandedRowKeys.value}
+                    expandColumnKey={expandColumnKey}
+                    v-model:sort-state={sortState.value}
+                    width={width}
+                    height={height}
+                    header-class="table-v2-custom-header"
+                    header-height={44}
+                    row-height={40}
                     fixed
-                    v-slots={ slotsWare() }
+                    v-slots={slotsWare()}
                     onRowExpand={(e: RowExpandParams) => expandedChange(e)}
-                    onColumnSort={ (e: SortBy) => sortChange(e) }
+                    onColumnSort={(e: SortBy) => sortChange(e)}
                   />
                 )
-              }}/>
+              }}
+            />
           </div>
-          <PageWare total={total} pageSizes={pageSizes} background={background} layout={layout}/>
+          <PageWare total={total} pageSizes={pageSizes} background={background} layout={layout} />
         </div>
       )
     }
@@ -118,29 +124,29 @@ export default defineComponent({
   @apply border border-solid border-gray-200;
 }
 :deep(.el-table-v2__header-row) {
-  background-color: #F7F8FA;
+  background-color: #f7f8fa;
 }
 :deep(.el-table-v2__header-cell) {
-  background-color: #F7F8FA;
+  background-color: #f7f8fa;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
-  color: #373E4F;
+  color: #373e4f;
   position: relative;
   &:not(:last-child)::after {
     content: '';
     position: absolute;
     width: 1px;
     height: 18px;
-    background: #D1D3D9;
+    background: #d1d3d9;
     right: 0;
     top: 14px;
   }
-  .el-table-v2__sort-icon{
+  .el-table-v2__sort-icon {
     margin-top: -2px;
   }
 }
 :deep(.el-table-v2__body) {
-  .el-table-v2__row:last-child{
+  .el-table-v2__row:last-child {
     border-bottom: 0;
   }
 }

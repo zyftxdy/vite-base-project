@@ -12,7 +12,9 @@ import { useFavicon, useTitle } from '@vueuse/core'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
 const { reqApi } = useCommon()
-const icon = useFavicon('https://quanqizhixiao-public-1251355418.file.myqcloud.com/channel/favicon.ico')
+const icon = useFavicon(
+  'https://quanqizhixiao-public-1251355418.file.myqcloud.com/channel/favicon.ico'
+)
 const title = useTitle('校外教培机构综合监管平台')
 
 provide('emitter', mitt())
@@ -45,6 +47,6 @@ useRequest(() => reqApi.common.channelInfo(), {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background: #F5F6F8;
+  background: #f5f6f8;
 }
 </style>

@@ -1,9 +1,12 @@
-
-.area_header{
+.area_header {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  background: linear-gradient(rgba(81, 152, 255, 0.18) 0%, rgba(99, 117, 124, 0.02) 52%, rgba(81, 152, 255, 0.18) 100%);
+  background: linear-gradient(
+    rgba(81, 152, 255, 0.18) 0%,
+    rgba(99, 117, 124, 0.02) 52%,
+    rgba(81, 152, 255, 0.18) 100%
+  );
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 0 25px;
@@ -12,11 +15,11 @@
   font-size: 18px;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
-  color: #9FB5D9;
-  border: 1px solid #005AAD;
+  color: #9fb5d9;
+  border: 1px solid #005aad;
   display: flex;
   align-items: center;
-  &::before{
+  &::before {
     content: '';
     width: 0;
     height: 0;
@@ -27,64 +30,64 @@
     top: -1px;
     right: -1px;
   }
-  &::after{
+  &::after {
     content: '';
     display: inline-block;
     width: 45px;
     height: 1px;
-    background: #005AAD;
+    background: #005aad;
     position: absolute;
     top: 15px;
     right: -7px;
     transform: rotate(45deg);
   }
-  .area_h_l{
+  .area_h_l {
     flex: 1;
     display: flex;
     align-items: center;
-    .icon{
+    .icon {
       display: inline-block;
       width: 18px;
       height: 18px;
-      background: linear-gradient(to left, #46ACDA , #46ACDA ) left top no-repeat,
-                linear-gradient(to bottom, #46ACDA , #46ACDA ) left top no-repeat,
-                linear-gradient(to left, #46ACDA , #46ACDA ) right top no-repeat,
-                linear-gradient(to bottom, #46ACDA , #46ACDA ) right top no-repeat,
-                linear-gradient(to left, #46ACDA , #46ACDA ) left bottom no-repeat,
-                linear-gradient(to bottom, #46ACDA , #46ACDA ) left bottom no-repeat,
-                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat,
-                linear-gradient(to left, #46ACDA , #46ACDA ) right bottom no-repeat;
+      background: linear-gradient(to left, #46acda, #46acda) left top no-repeat,
+        linear-gradient(to bottom, #46acda, #46acda) left top no-repeat,
+        linear-gradient(to left, #46acda, #46acda) right top no-repeat,
+        linear-gradient(to bottom, #46acda, #46acda) right top no-repeat,
+        linear-gradient(to left, #46acda, #46acda) left bottom no-repeat,
+        linear-gradient(to bottom, #46acda, #46acda) left bottom no-repeat,
+        linear-gradient(to left, #46acda, #46acda) right bottom no-repeat,
+        linear-gradient(to left, #46acda, #46acda) right bottom no-repeat;
       background-size: 1px 10px, 8px 1px, 1px 10px, 8px 1px;
       margin-right: 15px;
       position: relative;
       padding: 1px;
-      &::before{
+      &::before {
         content: '';
         width: 8px;
         height: 8px;
         display: inline-block;
-        background: #46ACDA;
-        position:absolute;
+        background: #46acda;
+        position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) rotate(45deg) skew(10deg,10deg);
+        transform: translate(-50%, -50%) rotate(45deg) skew(10deg, 10deg);
       }
-      &::after{
+      &::after {
         content: '';
         width: 18px;
         height: 2px;
         display: inline-block;
-        background: #46ACDA;
+        background: #46acda;
         position: absolute;
         bottom: -14px;
       }
     }
   }
-  .area_h_r{
+  .area_h_r {
     flex: 1;
     text-align: right;
     position: relative;
-    span{
+    span {
       display: inline-block;
       width: 20px;
       height: 2px;
@@ -92,12 +95,12 @@
       transform: rotate(45deg);
       transform-origin: center right;
     }
-    &::after{
+    &::after {
       content: '';
       width: 30px;
       height: 2px;
       display: inline-block;
-      background: #46ACDA;
+      background: #46acda;
       position: absolute;
       bottom: 0px;
       right: 0px;

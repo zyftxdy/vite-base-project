@@ -3,7 +3,8 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
 
     <el-empty description="暂无数据" />
   </div>

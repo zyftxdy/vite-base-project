@@ -12,7 +12,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (): SearchOptions[] => ([
+export const searchOptions = (): SearchOptions[] => [
   {
     type: 'input',
     label: '主体名称',
@@ -34,9 +34,9 @@ export const searchOptions = (): SearchOptions[] => ([
     prop: 'scaleTransferStatus',
     optionsList: transferMStatus
   }
-])
+]
 
-export const columns = (fns: Recordable<Fn>): TableColumn[] => ([
+export const columns = (fns: Recordable<Fn>): TableColumn[] => [
   { label: '主体名称', prop: 'companyName', width: 200 },
   { label: '品牌名称', prop: 'brandName', width: 200 },
   { label: '校区名称', prop: 'aliasName', width: 200 },
@@ -45,7 +45,11 @@ export const columns = (fns: Recordable<Fn>): TableColumn[] => ([
   { label: '一般账户', prop: 'bankTransferAccount', width: 200 },
   { label: '应划拨日期', prop: 'transferDate', width: 200 },
   { label: '实际划拨时间', prop: 'transferTime', width: 200 },
-  { label: '划拨状态', prop: 'transferStatus', formatter: (row, column, cellValue) => transferMOptions[cellValue] },
+  {
+    label: '划拨状态',
+    prop: 'transferStatus',
+    formatter: (row, column, cellValue) => transferMOptions[cellValue]
+  },
   { label: '主管部门', prop: 'deptName' },
   {
     label: '操作',
@@ -54,12 +58,16 @@ export const columns = (fns: Recordable<Fn>): TableColumn[] => ([
     width: 200,
     render: (val, data) => (
       <>
-        <el-button link type="primary" onClick={() => fns.handleInfo(data.transferSummaryId)}>明细</el-button>
-        <el-button link type="primary" onClick={() => fns.handleTransfer(data)}>划拨</el-button>
+        <el-button link type="primary" onClick={() => fns.handleInfo(data.transferSummaryId)}>
+          明细
+        </el-button>
+        <el-button link type="primary" onClick={() => fns.handleTransfer(data)}>
+          划拨
+        </el-button>
       </>
     )
   }
-])
+]
 
 export const schema: DescItem[] = [
   {

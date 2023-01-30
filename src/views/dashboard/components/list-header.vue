@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center mb-3">
-    <page-title :title="title" :desc="desc" class="flex-1 !m-0"/>
+    <page-title :title="title" :desc="desc" class="flex-1 !m-0" />
     <div class="w-52">
       <el-date-picker
         v-model="dates"
@@ -11,7 +11,8 @@
         end-placeholder="结束时间"
         :disabled-date="(time: Date) => time.getTime() > Date.now() - 8.64e7"
         class="!w-full"
-        @change="handleChange"/>
+        @change="handleChange"
+      />
     </div>
   </div>
 </template>

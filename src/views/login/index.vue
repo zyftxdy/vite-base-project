@@ -1,11 +1,10 @@
 <template>
-  <div class="login flex items-center justify-center" :style="`background-image: url(${loginBgImg});`">
-    <el-form
-      ref="formRef"
-      :model="modelRef"
-      :rules="rulesRef"
-      class="login-container">
-      <div class="logo text-center"><img :src="loginLogo"/></div>
+  <div
+    class="login flex items-center justify-center"
+    :style="`background-image: url(${loginBgImg});`"
+  >
+    <el-form ref="formRef" :model="modelRef" :rules="rulesRef" class="login-container">
+      <div class="logo text-center"><img :src="loginLogo" /></div>
       <h2 class="title">{{ loginText }}</h2>
       <el-form-item prop="mobile">
         <el-input v-model="modelRef.mobile" size="large" placeholder="请填写手机号">
@@ -15,7 +14,7 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" v-model="modelRef.password" size="large" placeholder="请填写密码">
+        <el-input v-model="modelRef.password" type="password" size="large" placeholder="请填写密码">
           <template #prepend>
             <el-icon><i-ep-lock /></el-icon>
           </template>
@@ -26,9 +25,11 @@
           :loading="loading"
           class="btn-border-color btn-login"
           type="primary"
-          @click="handleSubmit">登录</el-button>
+          @click="handleSubmit"
+          >登录</el-button
+        >
       </el-form-item>
-      <div class="line"/>
+      <div class="line" />
       <div class="operate">
         <span>忘记密码</span>
       </div>
@@ -56,8 +57,8 @@ const modelRef = reactive({
   password: ''
 })
 const rulesRef = reactive({
-  mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+  mobile: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
 const handleSubmit = () => {
@@ -81,4 +82,4 @@ const { loading, run: loginFun } = useRequest(data => userStore.Login(data), {
 })
 </script>
 
-<style lang="scss" scoped src="./index.scss"/>
+<style lang="scss" scoped src="./index.scss" />

@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: 'login' */ '@/views/login/index.vue')
   },
   {
-    path: '/404',//404页面
+    path: '/404', //404页面
     name: 'notFound',
     component: () => import(/* webpackChunkName: 'error' */ '@/views/error/404.vue')
   }

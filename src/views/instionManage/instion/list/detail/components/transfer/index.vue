@@ -2,26 +2,32 @@
   <usual-search
     v-model:list-query="queryState.listQuery"
     :search-options="queryState.searchOptions"
-    @handleSelect="handleSelect"/>
+    @select="handleSelect"
+  />
   <usual-table
+    v-model:page-num="queryState.listQuery.current"
+    v-model:page-size="queryState.listQuery.size"
     :loading="loading"
     :columns="listState.columns"
     :list="listState.list"
     :total="listState.total"
-    v-model:page-num="queryState.listQuery.current"
-    v-model:page-size="queryState.listQuery.size"
-    @pagination="getList">
+    @pagination="getList"
+  >
     <template #action="{ row }">
       <el-button
         :disabled="row.transferStatus !== 'APPLY_FAILED' && row.transferStatus !== 'TRANS_FAILED'"
         link
         type="primary"
-        @click="handleTransfer(row.transferId)">重新申请</el-button>
+        @click="handleTransfer(row.transferId)"
+        >重新申请</el-button
+      >
       <el-button
         :disabled="!row.orderId"
         link
         type="primary"
-        @click="$emit('goDetail', row.orderId)">订单详情</el-button>
+        @click="$emit('goDetail', row.orderId)"
+        >订单详情</el-button
+      >
     </template>
   </usual-table>
 </template>
@@ -62,10 +68,9 @@ const { loading, run: getList } = useRequest(data => reqApi.school.transferList(
   }
 })
 const handleTransfer = (id: string) => {
-  messageConfirm({ message: '确定要重新申请吗？' })
-    .then(() => {
-      transfer(id)
-    })
+  messageConfirm({ message: '确定要重新申请吗？' }).then(() => {
+    transfer(id)
+  })
 }
 const { run: transfer } = useRequest(id => reqApi.school.transfer({ transferId: id }), {
   onSuccess: () => {

@@ -5,10 +5,7 @@ export interface AxiosOptions extends AxiosRequestConfig {
 }
 
 export interface AxiosInterceptors<T = any> {
-  requestInterceptors?: (
-    config: AxiosRequestConfig,
-    options?: AxiosOptions,
-  ) => AxiosRequestConfig
+  requestInterceptors?: (config: AxiosRequestConfig, options?: AxiosOptions) => AxiosRequestConfig
   requestInterceptorsCatch?: (error: Error) => void
   responseInterceptors?: (res: AxiosResponse<T>) => T | Promise<any>
   responseInterceptorsCatch?: (error: Error) => void

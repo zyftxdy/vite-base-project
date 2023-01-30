@@ -1,17 +1,22 @@
 <template>
   <div class="position content-box">
-    <el-button class="margin-bottom15 btn-big btn-border-color" type="primary" @click="handleEdit(null)">
-      <template #icon><i-ep-plus/></template>添加职位
+    <el-button
+      class="margin-bottom15 btn-big btn-border-color"
+      type="primary"
+      @click="handleEdit(null)"
+    >
+      <template #icon><i-ep-plus /></template>添加职位
     </el-button>
     <usual-table
+      v-model:page-num="state.current"
+      v-model:page-size="state.size"
       row-key="roleId"
       :loading="loading"
       :columns="state.columns"
       :list="state.list"
       :total="state.total"
-      v-model:page-num="state.current"
-      v-model:page-size="state.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
         <span v-if="row.adminFlag">--</span>
         <template v-else>
@@ -38,16 +43,20 @@ const state = reactive({
   total: 0
 })
 
-const { loading, run: getList } = useRequest(() => reqApi.role.roleList({
-  current: state.current,
-  size: state.size
-}), {
-  immediate: true,
-  onSuccess: res => {
-    state.list = res.records
-    state.total = res.total
+const { loading, run: getList } = useRequest(
+  () =>
+    reqApi.role.roleList({
+      current: state.current,
+      size: state.size
+    }),
+  {
+    immediate: true,
+    onSuccess: res => {
+      state.list = res.records
+      state.total = res.total
+    }
   }
-})
+)
 const handleEdit = (id: Nullable<string>) => {
   router.push({
     name: 'positionDetail',
@@ -57,8 +66,7 @@ const handleEdit = (id: Nullable<string>) => {
   })
 }
 const handleDel = (id: string) => {
-  messageConfirm({ message: '确认要删除该职位吗？' })
-  .then(() => {
+  messageConfirm({ message: '确认要删除该职位吗？' }).then(() => {
     delPosition(id)
   })
 }

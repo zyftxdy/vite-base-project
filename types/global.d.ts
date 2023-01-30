@@ -9,10 +9,10 @@ declare global {
 
   type unionType = string | null | undefined
 
-  type NonUndefined<T> = T extends undefined ? never : T;
+  type NonUndefined<T> = T extends undefined ? never : T
 
   type NoReadonly<T> = {
-    -readonly[P in keyof T]: T[P]
+    -readonly [P in keyof T]: T[P]
   }
 
   type Recordable<T = any> = Record<string, T>

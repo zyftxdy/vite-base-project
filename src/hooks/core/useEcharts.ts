@@ -7,14 +7,18 @@ export default function useEcharts(elRef: Ref<HTMLDivElement>) {
 
   const initEcharts = () => {
     const el = unref(elRef)
-    if (!el) return
+    if (!el) {
+      return
+    }
     chartInstance.value = echarts.init(el)
   }
 
   const setOptions = (options: ECOption, clear = true) => {
     if (!unref(chartInstance)) {
       initEcharts()
-      if (!unref(chartInstance)) return
+      if (!unref(chartInstance)) {
+        return
+      }
     }
     clear && unref(chartInstance)?.clear()
     unref(chartInstance)?.setOption(options)
@@ -29,7 +33,9 @@ export default function useEcharts(elRef: Ref<HTMLDivElement>) {
   })
 
   onBeforeUnmount(() => {
-    if (!unref(chartInstance)) return
+    if (!unref(chartInstance)) {
+      return
+    }
     unref(chartInstance)?.dispose()
     chartInstance.value = null
   })

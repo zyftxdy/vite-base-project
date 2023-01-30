@@ -12,10 +12,14 @@ const interceptors: AxiosInterceptors<ResponseType> = {
   requestInterceptors: config => {
     const token = cookieCache.get()
     const cancelStore = useCancelStoreWithOut()
-    if (token) (config as Recordable).headers.token = token
+    if (token) {
+      ;(config as Recordable).headers.token = token
+    }
     if (config.method === RequestEnum.POST) {
-      // @ts-ignore
-      config.data = config.data?.split('=').filter(item => !item.includes('cascaders') && !item.includes('dates')).join('=')
+      config.data = (config.data as string)
+        ?.split('=')
+        .filter(item => !item.includes('cascaders') && !item.includes('dates'))
+        .join('=')
     }
     config.cancelToken = new axios.CancelToken(c => {
       cancelStore.addMap(config.url!, c)
@@ -31,7 +35,12 @@ const interceptors: AxiosInterceptors<ResponseType> = {
     cancelStore.removeMap(response.config.url!)
     // 根据返回的code值来做不同的处理
     if (data.code !== 200) {
-      const needReloginErrCode = ['token.not.exists','token.not.opt.expire', 'token.verify.error', 'user.status.invalid']
+      const needReloginErrCode = [
+        'token.not.exists',
+        'token.not.opt.expire',
+        'token.verify.error',
+        'user.status.invalid'
+      ]
       if (needReloginErrCode.includes(data.errCode ?? '')) {
         ElMessageBox.close()
         ElMessageBox.confirm(`${data.errMessage}，请重新登录`, '提示', {
@@ -40,19 +49,23 @@ const interceptors: AxiosInterceptors<ResponseType> = {
           showCancelButton: false,
           showClose: false,
           type: 'warning'
-        }).then(() => {
-          const userStore = useUserStoreWithOut()
-          userStore.FedLogOut().then(() => {
-            location.replace(location.href.split('#')[0])
+        })
+          .then(() => {
+            const userStore = useUserStoreWithOut()
+            userStore.FedLogOut().then(() => {
+              location.replace(location.href.split('#')[0])
+            })
           })
-        }).catch()
+          .catch()
       }
       return Promise.reject({ code: data.errCode, message: data.errMessage })
     }
     return data
   },
   responseInterceptorsCatch: (error: any) => {
-    if (axios.isCancel(error))  return Promise.reject(new Error('cancel request'))
+    if (axios.isCancel(error)) {
+      return Promise.reject(new Error('cancel request'))
+    }
     return checkStatus(error)
   }
 }

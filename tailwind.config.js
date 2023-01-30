@@ -10,7 +10,7 @@ module.exports = {
       width: {
         '22': '5.5rem',
         '26': '6.5rem',
-        '50': '12.5rem',
+        '50': '12.5rem'
       },
       minWidth: {
         '70': '4.375rem',
@@ -46,7 +46,7 @@ module.exports = {
         'ffb53c': '#ffb53c',
         '4fccb0': '#4fccb0'
       }
-    },
+    }
   },
   plugins: []
 }

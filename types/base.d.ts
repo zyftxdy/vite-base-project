@@ -13,43 +13,43 @@ export type SearchType = 'input' | 'select' | 'date' | 'cascader' | 'slot'
 export type Method = (...args: any[]) => Promise<ResponseType>
 
 export type LabelValueOptions = {
-  label: string,
+  label: string
   value: string
 }
 
 export interface LoginRef {
-  username: string,
+  username: string
   password: string
 }
 
 export interface PageParam {
-  current: number,
+  current: number
   size: number
 }
 
 export interface SearchOption {
-  width?: number,
-  type: SearchType,
-  label: string,
-  prop: string,
-  placeholder?: string,
-  method?: Fn,
-  icon?: boolean,
+  width?: number
+  type: SearchType
+  label: string
+  prop: string
+  placeholder?: string
+  method?: Fn
+  icon?: boolean
   // select
-  optionsList?: Recordable[],
-  optionKey?: string,
-  optionLabel?: string,
-  multiple?: boolean,
-  filterable?: boolean,
-  remote?: boolean,
-  clearable?: boolean,
-  selectType?: string,
-  remoteMethod?: Fn,
-  clearMethod?: Fn,
+  optionsList?: Recordable[]
+  optionKey?: string
+  optionLabel?: string
+  multiple?: boolean
+  filterable?: boolean
+  remote?: boolean
+  clearable?: boolean
+  selectType?: string
+  remoteMethod?: Fn
+  clearMethod?: Fn
   // cascader
-  props?: CascaderProps,
-  options?: CascaderOption[],
-  showAllLevels?: boolean,
+  props?: CascaderProps
+  options?: CascaderOption[]
+  showAllLevels?: boolean
   // date
   disabledDate?: (val: Date) => boolean
 }
@@ -66,8 +66,14 @@ export interface TableColumn {
   merge?: boolean
   fixed?: true | 'left' | 'right'
   formatter?: (row?: any, column?: any, cellValue?: any, index?: number) => any
-  renderHeader?: (cellValue: any, data?: any) => VNode | undefined | JSX.Element | Element | string | number
-  render?: (cellValue: any, data?: any) => VNode | undefined | JSX.Element | Element | string | number
+  renderHeader?: (
+    cellValue: any,
+    data?: any
+  ) => VNode | undefined | JSX.Element | Element | string | number
+  render?: (
+    cellValue: any,
+    data?: any
+  ) => VNode | undefined | JSX.Element | Element | string | number
 }
 
 export interface FileList {
@@ -81,7 +87,7 @@ export interface CropperResult {
 }
 
 export interface QueryState {
-  listQuery: Recordable,
+  listQuery: Recordable
   searchOptions: SearchOptions[]
   [x: string]: any
 }
@@ -105,8 +111,8 @@ export interface Options<T> extends FnOptions {
   immediate: boolean
   debounce: boolean
   delayTime: number
-  throttle: boolean,
-  throttleTime: number,
+  throttle: boolean
+  throttleTime: number
   refreshDeps: WatchSource[]
   polling: boolean
   pollingInterval: number

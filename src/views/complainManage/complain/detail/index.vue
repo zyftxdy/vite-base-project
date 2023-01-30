@@ -4,15 +4,15 @@
     <div class="content-box">
       <el-skeleton :rows="5" :loading="loading" animated>
         <div class="complain margin-bottom15">
-          <page-title :title="'投诉编号：' + info.complaintVo?.complaintId"/>
-          <description class="content" :schema="schema" :data="{}"/>
+          <page-title :title="'投诉编号：' + info.complaintVo?.complaintId" />
+          <description class="content" :schema="schema" :data="{}" />
         </div>
         <div v-if="info.complaintVo" class="complain margin-bottom15">
-          <page-title title="处理记录"/>
+          <page-title title="处理记录" />
           <el-steps direction="vertical">
             <el-step v-for="(item, index) in info.complaintVo.complaintId" :key="index">
               <template #icon>
-                <svg-icon icon-class="complain" class="svgIcon"/>
+                <svg-icon icon-class="complain" class="svgIcon" />
               </template>
               <template #title>
                 <div class="title">{{ item.title }}</div>
@@ -28,35 +28,30 @@
           </el-steps>
         </div>
         <div class="complain margin-bottom15">
-          <page-title title="平台回复"/>
+          <page-title title="平台回复" />
           <div class="content">
-            <el-form
-              ref="formRef"
-              :model="modelRef"
-              :rules="rulesRef"
-              label-width="100px"
-            >
+            <el-form ref="formRef" :model="modelRef" :rules="rulesRef" label-width="100px">
               <el-form-item label="回复内容：" prop="result">
                 <el-input
                   v-model="modelRef.result"
                   type="textarea"
                   :rows="6"
                   maxlength="200"
-                  style="width:360px;"
+                  style="width: 360px"
                   show-word-limit
-                  placeholder="请填写回复内容"></el-input>
+                  placeholder="请填写回复内容"
+                ></el-input>
               </el-form-item>
               <el-form-item label="上传图片:">
-                <usual-upload
-                  uploadType="list"
-                  v-model:file-list="fileList"
-                  :max-length="9"/>
+                <usual-upload v-model:file-list="fileList" upload-type="list" :max-length="9" />
               </el-form-item>
               <!-- <el-form-item>
                 <el-checkbox v-model="modelRef.checked">同时标记为已解决</el-checkbox>
               </el-form-item> -->
               <el-form-item>
-                <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit">提交</el-button>
+                <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit"
+                  >提交</el-button
+                >
               </el-form-item>
             </el-form>
           </div>
@@ -112,7 +107,11 @@ const { run: submitFun } = useRequest(() => reqApi.complain.complaintHandle(mode
 })
 
 const complainId = useRouteQuery('id', '').value
-const { result: info, loading, run: getDetail } = useRequest<Recordable>(() => reqApi.complain.complaintInfo({ complaintId:complainId }), {
+const {
+  result: info,
+  loading,
+  run: getDetail
+} = useRequest<Recordable>(() => reqApi.complain.complaintInfo({ complaintId: complainId }), {
   defaultValue: {},
   immediate: true,
   onBefore: () => {
@@ -124,4 +123,4 @@ const { result: info, loading, run: getDetail } = useRequest<Recordable>(() => r
 })
 </script>
 
-<style lang="scss" scoped src="./index.scss"/>
+<style lang="scss" scoped src="./index.scss" />

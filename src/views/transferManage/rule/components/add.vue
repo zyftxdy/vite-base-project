@@ -1,21 +1,18 @@
 <template>
-  <el-form
-    ref="formRef"
-    :model="modelRef"
-    :rules="rulesRef"
-    label-width="100px"
-    >
+  <el-form ref="formRef" :model="modelRef" :rules="rulesRef" label-width="100px">
     <el-form-item label="划拨模式：" prop="transferMode">
       <el-select
         v-model="modelRef.transferMode"
         placeholder="请选择划拨模式"
         class="w-full"
-        @change="onChange">
+        @change="onChange"
+      >
         <el-option
           v-for="item in transferModel.filter(n => n.value)"
           :key="item.value"
           :label="item.label"
-          :value="item.value"/>
+          :value="item.value"
+        />
       </el-select>
     </el-form-item>
     <el-form-item label="适用校区：" prop="schoolIds">
@@ -27,32 +24,34 @@
         remote
         :reserve-keyword="false"
         :remote-method="(e: any) => getSchoolList(e)"
-        @clear="() => getSchoolList()"
         placeholder="请选择适用校区"
-        class="w-full">
+        class="w-full"
+        @clear="() => getSchoolList()"
+      >
         <el-option
           v-for="item in schoolList"
           :key="item.schoolId"
           :label="item.brandName + ' - ' + item.schoolName"
-          :value="item.schoolId"/>
+          :value="item.schoolId"
+        />
       </el-select>
     </el-form-item>
-    <template v-if="modelRef.transferMode === 'BOND' || modelRef.transferMode === 'BOND_CLASS_CONSUME'">
+    <template
+      v-if="modelRef.transferMode === 'BOND' || modelRef.transferMode === 'BOND_CLASS_CONSUME'"
+    >
       <el-form-item label="保证金：" prop="bondMinAmount">
-        <el-input v-model="modelRef.bondMinAmount" placeholder="请填写保证金余额"/>
+        <el-input v-model="modelRef.bondMinAmount" placeholder="请填写保证金余额" />
       </el-form-item>
     </template>
     <template v-if="modelRef.transferMode === 'SCALE' || modelRef.transferMode === 'APPLY'">
       <el-form-item label="划拨规则：" prop="ruleScaleId">
-        <el-select
-          v-model="modelRef.ruleScaleId"
-          placeholder="请选择划拨规则"
-          class="w-full">
+        <el-select v-model="modelRef.ruleScaleId" placeholder="请选择划拨规则" class="w-full">
           <el-option
             v-for="item in scaleList"
             :key="item.scaleId"
             :label="item.scaleRuleName"
-            :value="item.scaleId"/>
+            :value="item.scaleId"
+          />
         </el-select>
       </el-form-item>
     </template>
@@ -98,15 +97,19 @@ emitter.on('submit', () => {
   })
 })
 
-const { result: schoolList, run: getSchoolList } = useRequest<Recordable[]>(e => reqApi.common.schoolList({
-    schoolName: e ?? '',
-    current: 1,
-    size: 20
-  }), {
-  defaultValue: [],
-  immediate: true,
-  formatResult: res => res.records
-})
+const { result: schoolList, run: getSchoolList } = useRequest<Recordable[]>(
+  e =>
+    reqApi.common.schoolList({
+      schoolName: e ?? '',
+      current: 1,
+      size: 20
+    }),
+  {
+    defaultValue: [],
+    immediate: true,
+    formatResult: res => res.records
+  }
+)
 
 const onChange = () => {
   if (modelRef.transferMode === 'SCALE' || modelRef.transferMode === 'APPLY') {
@@ -114,7 +117,10 @@ const onChange = () => {
     getScaleList(modelRef.transferMode)
   }
 }
-const { result: scaleList, run: getScaleList } = useRequest<Recordable[]>(transferType => reqApi.transfer.scaleList({ transferType }), {
-  defaultValue: []
-})
+const { result: scaleList, run: getScaleList } = useRequest<Recordable[]>(
+  transferType => reqApi.transfer.scaleList({ transferType }),
+  {
+    defaultValue: []
+  }
+)
 </script>

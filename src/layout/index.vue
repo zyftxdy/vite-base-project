@@ -1,11 +1,11 @@
 <template>
   <template v-if="routePath">
-    <head-bar/>
-    <nav-bar/>
-    <main-content/>
+    <head-bar />
+    <nav-bar />
+    <main-content />
   </template>
   <template v-else>
-    <router-view/>
+    <router-view />
   </template>
 </template>
 

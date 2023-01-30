@@ -3,24 +3,23 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
         <el-button link type="primary" @click="goDetail(row.orderId)">查看订单</el-button>
       </template>
     </usual-table>
   </div>
-  <order-detail
-    v-if="operState.showDetail"
-    :order-id="operState.orderId"
-    @back="back"/>
+  <order-detail v-if="operState.showDetail" :order-id="operState.orderId" @back="back" />
 </template>
 
 <script setup lang="ts">

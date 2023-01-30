@@ -1,18 +1,17 @@
 <template>
-  <usual-dialog
-    v-model:show="showDialog"
-    title="上传图片">
+  <usual-dialog v-model:show="showDialog" title="上传图片">
     <usual-upload
+      v-model:file-list="fileList"
       type="list"
       :max-length="999"
-      v-model:file-list="fileList"/>
+      :upload-url="publicUploadFile"
+    />
   </usual-dialog>
 </template>
 
 <script setup lang="ts">
 import { useCommon } from '@/hooks'
-import UsualDialog from '../UsualDialog/index.vue'
-import UsualUpload from '../UsualUpload/index.vue'
+import { publicUploadFile } from '@/utils/constant'
 import type { FileList } from '#/base'
 
 const { emitter } = useCommon()
@@ -20,7 +19,7 @@ const props = defineProps({
   show: Boolean
 })
 
-const emit = defineEmits(['update:show', 'uploadDone'])
+const emit = defineEmits(['update:show', 'upload-done'])
 
 const fileList = ref<FileList[]>()
 const showDialog = computed({
@@ -33,7 +32,7 @@ const showDialog = computed({
 emitter.on('submit', () => {
   if (unref(fileList)) {
     const list = unref(fileList)?.map(item => item.imageUrl)
-    emit('uploadDone', list)
+    emit('upload-done', list)
   }
   emitter.emit('success')
 })

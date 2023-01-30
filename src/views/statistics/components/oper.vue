@@ -2,11 +2,11 @@
 import type { DateType } from '#/base'
 
 interface NormalList {
-  name: string,
+  name: string
   value: DateType
 }
 interface State {
-  typeList: NormalList[],
+  typeList: NormalList[]
   normalList: NormalList[]
 }
 
@@ -65,9 +65,13 @@ export default defineComponent({
           break
       }
     }
-    watch(() => props.type, val => setList(val), {
-      immediate: true
-    })
+    watch(
+      () => props.type,
+      val => setList(val),
+      {
+        immediate: true
+      }
+    )
 
     const handleClick = (val: DateType) => {
       emit('change', val)
@@ -75,16 +79,16 @@ export default defineComponent({
 
     return () => (
       <div class="oper">
-        {
-          state.typeList.length && state.typeList.map(item => (
+        {state.typeList.length &&
+          state.typeList.map(item => (
             <span
               key={item.value}
               onClick={() => handleClick(item.value)}
-              class={props.active === item.value ? 'activeSpan' : ''}>
-              { item.name }
+              class={props.active === item.value ? 'activeSpan' : ''}
+            >
+              {item.name}
             </span>
-          ))
-        }
+          ))}
       </div>
     )
   }
@@ -92,24 +96,23 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.oper{
+.oper {
   text-align: right;
   padding: 10px 10px 5px 10px;
-  color: #6E88A0;
+  color: #6e88a0;
   font-size: 12px;
   margin: 10px 0;
-  span{
+  span {
     cursor: pointer;
     padding: 6px 13px;
     background: #2b5c813b;
     box-shadow: 0px 2px 6px 0px #091824;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-left: 10px;
-    &.activeSpan{
-      color: #B4DBFF;
-      background: #4A87C9;
+    &.activeSpan {
+      color: #b4dbff;
+      background: #4a87c9;
     }
   }
-
 }
 </style>

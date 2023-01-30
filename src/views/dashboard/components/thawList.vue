@@ -1,17 +1,28 @@
 <template>
-  <list-header title="资金划拨统计" desc="仅统计学员已经确认课时或超时自动确认课时后成功划拨的资金" @dateChange="dateChange"/>
+  <list-header
+    title="资金划拨统计"
+    desc="仅统计学员已经确认课时或超时自动确认课时后成功划拨的资金"
+    @dateChange="dateChange"
+  />
   <usual-table
+    v-model:page-num="queryState.current"
+    v-model:page-size="queryState.size"
     :loading="loading"
     :columns="state.columns"
     :list="state.list"
     :total="state.total"
-    v-model:page-num="queryState.current"
-    v-model:page-size="queryState.size"
     :scroll-top="false"
     :page-sizes="[5]"
-    @pagination="getList">
+    @pagination="getList"
+  >
     <template #action="{ row }">
-      <el-button v-auth:disabled="'09444fd98fc1f87518'" link type="primary" @click="goDetail(row.days)">查看详情</el-button>
+      <el-button
+        v-auth:disabled="'09444fd98fc1f87518'"
+        link
+        type="primary"
+        @click="goDetail(row.days)"
+        >查看详情</el-button
+      >
     </template>
   </usual-table>
 </template>
@@ -44,23 +55,31 @@ const state = reactive<ListState>({
   columns: thawColumns
 })
 
-watch(() => props.deptIds, () => {
-  queryState.current = 1
-  getList()
-}, {
-  deep: true
-})
-
-const { loading, run: getList } = useRequest(() => reqApi.dashboard.thawList({
-  ...queryState,
-  deptIds: props.deptIds
-}), {
-  immediate: true,
-  onSuccess: res => {
-    state.list = res?.records ?? []
-    state.total = res?.total ?? 0
+watch(
+  () => props.deptIds,
+  () => {
+    queryState.current = 1
+    getList()
+  },
+  {
+    deep: true
   }
-})
+)
+
+const { loading, run: getList } = useRequest(
+  () =>
+    reqApi.dashboard.thawList({
+      ...queryState,
+      deptIds: props.deptIds
+    }),
+  {
+    immediate: true,
+    onSuccess: res => {
+      state.list = res?.records ?? []
+      state.total = res?.total ?? 0
+    }
+  }
+)
 const goDetail = (day: string) => {
   router.push({
     name: 'thaw',

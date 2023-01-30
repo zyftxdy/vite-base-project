@@ -52,7 +52,9 @@ export const bankSchema: DescItem[] = [
     field: 'bankSuperviseMoney',
     label: '监管账户余额',
     render: (val, _) => (
-      <span><span class='text-2xl text-red-600 pr-1'>{ val ?? '--' }</span>元</span>
+      <span>
+        <span class="text-2xl text-red-600 pr-1">{val ?? '--'}</span>元
+      </span>
     )
   },
   {
@@ -75,7 +77,7 @@ export const mainSchema: DescItem[] = [
   {
     field: 'licenseHasSchoolPermit',
     label: '是否有办学许可证',
-    render: (val, _) => val ? '是' : '否'
+    render: (val, _) => (val ? '是' : '否')
   },
   {
     field: 'registerDate',
@@ -84,7 +86,8 @@ export const mainSchema: DescItem[] = [
   {
     field: 'licenseStartDate',
     label: '经营期限',
-    render: (val, data) =>`${val} - ${data.licenseValidDateType === '1' ? data.licenseEndDate : '长期'}`
+    render: (val, data) =>
+      `${val} - ${data.licenseValidDateType === '1' ? data.licenseEndDate : '长期'}`
   },
   {
     field: 'licenseCreditCode',
@@ -101,7 +104,8 @@ export const mainSchema: DescItem[] = [
   {
     field: 'legalPersonIdcardStartDate',
     label: '法人身份证有效期',
-    render: (val, data) => `${val} - ${data.legalPersonIdcardDateType === '1' ? data.legalPersonIdcardEndDate : '长期'}`
+    render: (val, data) =>
+      `${val} - ${data.legalPersonIdcardDateType === '1' ? data.legalPersonIdcardEndDate : '长期'}`
   },
   {
     field: 'ownerName',

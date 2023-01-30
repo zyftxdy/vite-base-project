@@ -11,7 +11,9 @@ export const useCancelStore = defineStore('cancel', () => {
 
   const removeMap = (url: string) => {
     const cancel = unref(cancelMap)
-    if (!cancel.has(url)) return
+    if (!cancel.has(url)) {
+      return
+    }
     cancel.delete(url)
   }
 

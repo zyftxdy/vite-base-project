@@ -1,6 +1,4 @@
-export default function checkStatus(
-  err: any
-) {
+export default function checkStatus(err: any) {
   if (err.response && err.response.code) {
     switch (err.response.code) {
       case 400:
@@ -40,7 +38,11 @@ export default function checkStatus(
         break
     }
   }
-  if (err.message.includes('timeout')) err.message = '网络请求超时！'
-  if (err.message.includes('Network')) err.message = window.navigator.onLine ? '服务端异常！' : '您断网了！'
+  if (err.message.includes('timeout')) {
+    err.message = '网络请求超时！'
+  }
+  if (err.message.includes('Network')) {
+    err.message = window.navigator.onLine ? '服务端异常！' : '您断网了！'
+  }
   return Promise.reject({ message: err.message })
 }

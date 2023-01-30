@@ -16,7 +16,9 @@ export default function useWindowSizeFn({
   const handleFn = throttle ? useThrottleFn(fn, wait) : useDebounceFn(fn, wait)
 
   const start = () => {
-    if (immediate) fn()
+    if (immediate) {
+      fn()
+    }
     window.addEventListener('resize', handleFn)
   }
 

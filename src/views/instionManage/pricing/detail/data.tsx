@@ -53,7 +53,7 @@ export const schemaInfo: DescItem[] = [
   {
     field: 'courseNum',
     label: '课程安排',
-    render: (val, data) => `共${ val }次课，每次${ data.courseDuration }课时`
+    render: (val, data) => `共${val}次课，每次${data.courseDuration}课时`
   },
   {
     field: 'courseTotalHour',
@@ -76,13 +76,15 @@ export const schemaInfo: DescItem[] = [
     monopolize: true,
     render: (val, _) => (
       <>
-        {
-          val && val.map((item: string) => (
-            <div key={ item } class='inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content'>
-              <el-image src={item} class='w-22 h-22'/>
+        {val &&
+          val.map((item: string) => (
+            <div
+              key={item}
+              class="inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 ml-1 mb-1 box-content"
+            >
+              <el-image src={item} class="w-22 h-22" />
             </div>
-          ))
-        }
+          ))}
       </>
     )
   },
@@ -90,15 +92,25 @@ export const schemaInfo: DescItem[] = [
     field: 'introduce',
     label: '详细介绍',
     monopolize: true,
-    render: (val, _) => (
-      <div v-html={val}></div>
-    )
+    render: (val, _) => <div v-html={val}></div>
   }
 ]
 
 export const columns: TableColumn[] = [
-  { label: '提交时间', prop: 'approveTime', formatter: (row, column, cellValue) => cellValue || row.submitTime },
-  { label: '审核结果', prop: 'approveStatus', formatter: (row, column, cellValue) => approvalOptions[cellValue] },
-  { label: '驳回理由', prop: 'approveComments', formatter: (row, column, cellValue) => row.approveStatus === 'PASS' ? '--' : cellValue ?? '--'},
+  {
+    label: '提交时间',
+    prop: 'approveTime',
+    formatter: (row, column, cellValue) => cellValue || row.submitTime
+  },
+  {
+    label: '审核结果',
+    prop: 'approveStatus',
+    formatter: (row, column, cellValue) => approvalOptions[cellValue]
+  },
+  {
+    label: '驳回理由',
+    prop: 'approveComments',
+    formatter: (row, column, cellValue) => (row.approveStatus === 'PASS' ? '--' : cellValue ?? '--')
+  },
   { label: '审批人', prop: 'approveName' }
 ]

@@ -35,12 +35,16 @@ export function useRequest<T = any>(onRequest: Method, options: Partial<Options<
     params.value = [].concat(...args)
     let requestParams: any[]
     // 表示当前有请求正在处理中
-    if (unref(loading)) return
+    if (unref(loading)) {
+      return
+    }
     loading.value = true
     try {
       // 请求前置回调处理
       const returned = options.onBefore?.(...args)
-      if (isBoolean(returned) && !returned) return
+      if (isBoolean(returned) && !returned) {
+        return
+      }
       requestParams = !isNullOrUnDef(returned) && !isBoolean(returned) ? [returned] : args
 
       // request请求体
@@ -116,14 +120,14 @@ export function useRequest<T = any>(onRequest: Method, options: Partial<Options<
   onUnmounted(() => {
     stopPolling()
     const cancelStore = useCancelStore()
-    if (cancelStore.cancelMap.size) cancelStore.clearMap()
+    if (cancelStore.cancelMap.size) {
+      cancelStore.clearMap()
+    }
   })
 
   return {
     result,
     loading,
-    run: debounce ? debounceRun
-          : throttle ? throttleRun
-            : run
+    run: debounce ? debounceRun : throttle ? throttleRun : run
   }
 }

@@ -23,4 +23,4 @@ const props = defineProps({
 })
 </script>
 
-<style lang="scss" scoped src="@/styles/statistics/areaHeader.scss"/>
+<style lang="scss" scoped src="@/styles/statistics/areaHeader.scss" />

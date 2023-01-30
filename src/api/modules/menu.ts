@@ -1,4 +1,4 @@
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 菜单
 export const menu = () => {

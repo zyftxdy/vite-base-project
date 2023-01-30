@@ -5,11 +5,11 @@ export function is(val: unknown, type: string) {
 }
 
 export function isDef<T = unknown>(val?: T): val is T {
-  return typeof val !== 'undefined';
+  return typeof val !== 'undefined'
 }
 
 export function isUnDef<T = unknown>(val?: T): val is T {
-  return !isDef(val);
+  return !isDef(val)
 }
 
 export function isOfType<T>(val: unknown, type: string): val is T {
@@ -51,5 +51,3 @@ export function isBoolean(val: unknown): val is boolean {
 export function isArray(val: any): val is Array<any> {
   return val && Array.isArray(val)
 }
-
-

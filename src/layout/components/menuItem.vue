@@ -1,5 +1,5 @@
 <template>
-  <svg-icon v-if="icon" :icon-class="icon" class="mt-[-2px]"/>
+  <svg-icon v-if="icon" :icon-class="icon" class="mt-[-2px]" />
   <span class="menu-title-i">{{ title }}</span>
 </template>
 
@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.menu-title-i{
+.menu-title-i {
   padding-left: 5px;
   text-decoration: none;
 }

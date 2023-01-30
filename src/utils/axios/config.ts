@@ -1,4 +1,3 @@
-
 import { baseUrl } from '@/utils/constant'
 
 export default {

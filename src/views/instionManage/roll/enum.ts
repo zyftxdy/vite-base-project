@@ -15,7 +15,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '品牌名称',
@@ -75,15 +75,19 @@ export const searchOptions = (dateChange: Fn, handleChange: Fn): SearchOptions[]
       placeholder: '请选择区县'
     }
   ]
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '品牌名称', prop: 'brandName' },
   { label: '校区名称', prop: 'schoolName' },
-  { label: '所在地区', prop: 'provinceName', formatter: row => row.provinceName + row.cityName + row.districtName },
+  {
+    label: '所在地区',
+    prop: 'provinceName',
+    formatter: row => row.provinceName + row.cityName + row.districtName
+  },
   { label: '详细地址', prop: 'address' },
   { label: '品牌所属人', prop: 'ownerName' },
   { label: '入选时间', prop: 'updateTime' },
   { label: '操作人', prop: 'updateName' },
-  { label: '操作', prop: 'action', overflow: false,  width: 140, fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, width: 140, fixed: 'right' }
 ]

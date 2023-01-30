@@ -1,6 +1,6 @@
 <template>
   <svg :class="svgClass" aria-hidden="true">
-    <use :xlink:href="iconName"/>
+    <use :xlink:href="iconName" />
   </svg>
 </template>
 
@@ -12,9 +12,8 @@ const iconName = computed(() => `#icon-${props.iconClass}`)
 const svgClass = computed(() => {
   if (props.className) {
     return 'svg-icon ' + props.className
-  } else {
-    return 'svg-icon'
   }
+  return 'svg-icon'
 })
 </script>
 

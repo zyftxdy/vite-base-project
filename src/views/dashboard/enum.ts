@@ -1,4 +1,3 @@
-
 import dashboard1 from '@/assets/dashboard/1.png'
 import dashboard2 from '@/assets/dashboard/2.png'
 import dashboard3 from '@/assets/dashboard/3.png'
@@ -18,7 +17,7 @@ export const basicProps = {
   }
 }
 
-export const dataList = (): Recordable[] => ([
+export const dataList = (): Recordable[] => [
   {
     name: '机构总数量',
     bg: '#F7F1FC',
@@ -54,9 +53,9 @@ export const dataList = (): Recordable[] => ([
     num: '0',
     icon: dashboard5
   }
-])
+]
 
-export const todoList = (): Recordable[] => ([
+export const todoList = (): Recordable[] => [
   {
     name: '待处理投诉',
     num: 0,
@@ -79,7 +78,7 @@ export const todoList = (): Recordable[] => ([
   //   num: 0,
   //   icon: dashboard9
   // }
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '下单时间', prop: 'createdAt', width: 180 },
@@ -90,7 +89,7 @@ export const columns: TableColumn[] = [
   { label: '订单金额', prop: 'orderAmount' },
   { label: '报名课时数', prop: 'totalClassNum' },
   { label: '平均课单价', prop: 'classAvgAmount' },
-  { label: '操作', prop: 'action', overflow: false,  fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, fixed: 'right' }
 ]
 
 export const freezeColumns: TableColumn[] = [
@@ -102,7 +101,7 @@ export const freezeColumns: TableColumn[] = [
   { label: '订单金额平均数', prop: 'supeOrderAvgAmount', width: 160 },
   { label: '售出课时总数', prop: 'saleClassHourNum' },
   { label: '课时费平均数', prop: 'classHourAvgAmount' },
-  { label: '操作', prop: 'action', overflow: false,  fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, fixed: 'right' }
 ]
 
 export const thawColumns: TableColumn[] = [
@@ -115,10 +114,15 @@ export const thawColumns: TableColumn[] = [
   { label: '超时自动确认课时费', prop: 'autoConfirmAmount', width: 160 },
   { label: '学杂费金额', prop: 'transSundryAmount' },
   { label: '退费金额', prop: 'transRefundAmount' },
-  { label: '操作', prop: 'action', overflow: false,  fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, fixed: 'right' }
 ]
 
-export const echartOptions = (xData: any[], data: any[], type: string, color: string): ECOption => ({
+export const echartOptions = (
+  xData: any[],
+  data: any[],
+  type: string,
+  color: string
+): ECOption => ({
   tooltip: {
     trigger: 'axis',
     backgroundColor: 'rgba(0, 0, 0, .3)',

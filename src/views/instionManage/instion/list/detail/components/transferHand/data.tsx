@@ -3,7 +3,6 @@ import { transferHandStatus } from '@/utils/constant'
 import type { DescItem } from '@/components/Description/typing'
 import type { SearchOptions, TableColumn } from '#/base'
 
-
 export const listQuery = () => ({
   dates: [] as string[],
   startTime: '',
@@ -13,7 +12,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn): SearchOptions[] => [
   {
     type: 'date',
     label: '划拨时间',
@@ -28,8 +27,8 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
     label: '划拨状态',
     prop: 'kpactStusCd',
     optionsList: transferHandStatus
-  },
-])
+  }
+]
 
 export const columns: TableColumn[] = [
   { label: '划拨时间', prop: 'createTime', width: 160 },
@@ -42,7 +41,7 @@ export const columns: TableColumn[] = [
   { label: '划拨金额', prop: 'trdAmt' },
   { label: '划拨状态', prop: 'kpactStusCd' },
   { label: '操作人', prop: 'operName' },
-  { label: '操作', prop: 'action', overflow: false,  width: 140, fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, width: 140, fixed: 'right' }
 ]
 
 export const schema: DescItem[] = [
@@ -138,13 +137,15 @@ export const schemaDetail: DescItem[] = [
     monopolize: true,
     render: (val, _) => (
       <>
-        {
-          val && val.map((item: string) => (
-            <div key={ item } class='inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 m-1 box-content'>
-              <el-image src={item} preview-src-list={ val } class='w-22 h-22'/>
+        {val &&
+          val.map((item: string) => (
+            <div
+              key={item}
+              class="inline-block rounded-sm border border-slate-300 w-22 h-22 p-2 m-1 box-content"
+            >
+              <el-image src={item} preview-src-list={val} class="w-22 h-22" />
             </div>
-          ))
-        }
+          ))}
       </>
     )
   }

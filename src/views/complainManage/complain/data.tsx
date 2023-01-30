@@ -15,7 +15,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '品牌名称',
@@ -49,7 +49,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
     optionKey: 'categoryId',
     optionLabel: 'categoryName'
   }
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '投诉编号', prop: 'complaintId' },
@@ -59,8 +59,12 @@ export const columns: TableColumn[] = [
   { label: '投诉时间', prop: 'createTime' },
   { label: '投诉类别', prop: 'categoryName' },
   { label: '投诉人', prop: 'username' },
-  { label: '投诉状态', prop: 'status', formatter: (row, column, cellValue) => complainOptions[cellValue] || '--' },
-  { label: '操作', prop: 'action', overflow: false,  fixed: 'right' }
+  {
+    label: '投诉状态',
+    prop: 'status',
+    formatter: (row, column, cellValue) => complainOptions[cellValue] || '--'
+  },
+  { label: '操作', prop: 'action', overflow: false, fixed: 'right' }
 ]
 
 export const schema: DescItem[] = [
@@ -84,7 +88,12 @@ export const schema: DescItem[] = [
       alignItems: 'center'
     },
     render: (val, _) => (
-      <>高新校区<el-button link type="primary" class="btn_open">查看</el-button></>
+      <>
+        高新校区
+        <el-button link type="primary" class="btn_open">
+          查看
+        </el-button>
+      </>
     )
   },
   {
@@ -112,7 +121,9 @@ export const schema: DescItem[] = [
     label: '投诉内容',
     monopolize: true,
     render: (val, _) => (
-      <span>付款前承诺每周给我反馈孩子的学习情况，现在上课一个月了，根本没有反馈过，孩子的学习成绩也没有进步。和老师联系退费，老师根本不回复</span>
+      <span>
+        付款前承诺每周给我反馈孩子的学习情况，现在上课一个月了，根本没有反馈过，孩子的学习成绩也没有进步。和老师联系退费，老师根本不回复
+      </span>
     )
   }
 ]

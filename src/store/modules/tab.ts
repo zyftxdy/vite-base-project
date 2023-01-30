@@ -4,7 +4,7 @@ import type { RouteTab } from '@/router/types'
 import type { RouteRecordName } from 'vue-router'
 
 interface tabState {
-  mainTabs: RouteTab[],
+  mainTabs: RouteTab[]
   mainTabsActiveName: RouteRecordName
 }
 

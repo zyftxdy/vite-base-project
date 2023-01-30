@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 export const statisHead = params => {
   return ZHttp.post({

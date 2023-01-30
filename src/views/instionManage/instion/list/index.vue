@@ -3,23 +3,22 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="schoolId"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
     </usual-table>
 
-    <usual-dialog
-      v-model:show="operState.show"
-      :title="operState.title"
-    >
-      <edit-oper :data="operState.data" @getList="getList"/>
+    <usual-dialog v-model:show="operState.show" :title="operState.title">
+      <edit-oper :data="operState.data" @getList="getList" />
     </usual-dialog>
   </div>
 </template>

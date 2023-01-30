@@ -16,7 +16,7 @@ export const listQuery = () => ({
   size: 20
 })
 
-export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
+export const searchOptions = (dateChange: Fn): SearchOptions[] => [
   {
     type: 'input',
     label: '品牌名称',
@@ -51,7 +51,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => ([
     prop: 'status',
     optionsList: appealStatus
   }
-])
+]
 
 export const columns: TableColumn[] = [
   { label: '申诉编号', prop: 'appealId' },
@@ -61,8 +61,12 @@ export const columns: TableColumn[] = [
   { label: '申诉时间', prop: 'appealTime' },
   { label: '会员姓名', prop: 'memberName' },
   { label: '申诉人', prop: 'appealName' },
-  { label: '申诉状态', prop: 'status', formatter: (row, column, cellValue) => appealOptions[cellValue] ?? '--' },
-  { label: '操作', prop: 'action', overflow: false,  fixed: 'right' }
+  {
+    label: '申诉状态',
+    prop: 'status',
+    formatter: (row, column, cellValue) => appealOptions[cellValue] ?? '--'
+  },
+  { label: '操作', prop: 'action', overflow: false, fixed: 'right' }
 ]
 
 export const schema: DescItem[] = [

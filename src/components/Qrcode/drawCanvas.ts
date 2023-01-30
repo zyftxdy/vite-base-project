@@ -8,13 +8,13 @@ export const drawCanvas = async ({
   options,
   logo
 }: DrawParams): Promise<string> => {
-  const canvasCtx = await toCanvas(canvas, text, {
+  const canvasCtx = (await toCanvas(canvas, text, {
     width,
     ...options
-  }) as unknown as HTMLCanvasElement
+  })) as unknown as HTMLCanvasElement
 
   if (!logo) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       resolve(canvasCtx.toDataURL())
     })
   }
@@ -32,7 +32,7 @@ export const drawCanvas = async ({
     ctx.drawImage(image, x, y, logoWidth, logoWidth)
   }
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     image.onload = () => {
       drawLogo(image)
       resolve(canvasCtx.toDataURL())
@@ -45,8 +45,6 @@ export const getErrorCorrectionLevel = (content: ContentType) => {
     return 'M'
   } else if (content.length > 16) {
     return 'Q'
-  } else {
-    return 'H'
   }
+  return 'H'
 }
-

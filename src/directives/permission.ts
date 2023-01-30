@@ -4,7 +4,9 @@ import type { App, DirectiveBinding } from 'vue'
 const hasAuth = (el: Element, binding: DirectiveBinding) => {
   const value = binding.value
   const type = binding.arg
-  if (!value) return
+  if (!value) {
+    return
+  }
 
   const perm = usePerm(value)
   if (type === 'disabled') {
@@ -12,7 +14,7 @@ const hasAuth = (el: Element, binding: DirectiveBinding) => {
     !unref(perm) && el.classList.add('is-disabled')
   }
   if (type === 'hide') {
-    (el as HTMLElement).style.display = unref(perm) ? 'inline-block' : 'none'
+    ;(el as HTMLElement).style.display = unref(perm) ? 'inline-block' : 'none'
   }
 }
 

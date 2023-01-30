@@ -3,22 +3,28 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect">
+      @select="handleSelect"
+    >
       <template #extraBtn>
-        <el-button class="btn-small btn-usual" @click="operState.showDetail = true">手动划拨</el-button>
+        <el-button class="btn-small btn-usual" @click="operState.showDetail = true"
+          >手动划拨</el-button
+        >
       </template>
     </usual-search>
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="intrSwfno"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
-        <el-button link type="primary" @click="handleDetail(row.intrSwfno, row.schoolId)">详情</el-button>
+        <el-button link type="primary" @click="handleDetail(row.intrSwfno, row.schoolId)"
+          >详情</el-button
+        >
       </template>
     </usual-table>
 
@@ -28,12 +34,12 @@
       title="划拨记录详情"
       width="880px"
     >
-      <description :schema="schemaDialog" :data="result"/>
-      <transfer-info :data="result" :trd-amt="result.trdAmt"/>
-      <description :schema="schemaDetail" :data="result"/>
+      <description :schema="schemaDialog" :data="result" />
+      <transfer-info :data="result" :trd-amt="result.trdAmt" />
+      <description :schema="schemaDetail" :data="result" />
     </usual-dialog>
   </div>
-  <transfer-oper v-else @back="operState.showDetail = false"/>
+  <transfer-oper v-else @back="operState.showDetail = false" />
 </template>
 
 <script setup lang="ts">
@@ -78,13 +84,16 @@ const operState = reactive({
   showDialog: false,
   data: {} as Recordable
 })
-const { result, run: handleDetail } = useRequest<Recordable>((intrSwfno, schoolId) => reqApi.school.transferHandInfo({ intrSwfno, schoolId }), {
-  defaultValue: {},
-  formatResult: res => handleData(res),
-  onSuccess: () => {
-    operState.showDialog = true
+const { result, run: handleDetail } = useRequest<Recordable>(
+  (intrSwfno, schoolId) => reqApi.school.transferHandInfo({ intrSwfno, schoolId }),
+  {
+    defaultValue: {},
+    formatResult: res => handleData(res),
+    onSuccess: () => {
+      operState.showDialog = true
+    }
   }
-})
+)
 const handleData = (data: Recordable): Recordable => {
   data.schoolInfoVo.bankSuperviseAccountName = data.bankManualTransferRecordVo.dfyActnm
   data.schoolInfoVo.bankTransferAccountName = data.bankManualTransferRecordVo.rcvmnActnm

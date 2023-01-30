@@ -1,14 +1,19 @@
 <template>
   <div class="depart content-box">
-    <el-button class="margin-bottom15 btn-big btn-border-color" type="primary" @click="handleEdit()">
-      <template #icon><i-ep-plus/></template>添加部门
+    <el-button
+      class="margin-bottom15 btn-big btn-border-color"
+      type="primary"
+      @click="handleEdit()"
+    >
+      <template #icon><i-ep-plus /></template>添加部门
     </el-button>
     <usual-table
       :loading="loading"
       :columns="columns"
       :list="list"
       row-key="deptId"
-      :tree-props="{children: 'childList', hasChildren: 'hasChildren'}">
+      :tree-props="{ children: 'childList', hasChildren: 'hasChildren' }"
+    >
       <template #action="{ row }">
         <template v-if="row.pid !== 0">
           <el-button link type="primary" @click="handleEdit(row.deptId)">编辑</el-button>
@@ -18,11 +23,8 @@
       </template>
     </usual-table>
 
-    <usual-dialog
-      v-model:show="operState.showEdit"
-      :title="operState.title"
-    >
-      <edit-depart :dept-id="operState.deptId" @getList="getList"/>
+    <usual-dialog v-model:show="operState.showEdit" :title="operState.title">
+      <edit-depart :dept-id="operState.deptId" @getList="getList" />
     </usual-dialog>
   </div>
 </template>
@@ -35,13 +37,19 @@ import editDepart from './components/editDepart.vue'
 const { reqApi, message } = useCommon()
 const { messageConfirm } = useMessage()
 
-const { result: list, loading, run: getList } = useRequest<Recordable[]>(() => reqApi.depart.departList(), {
+const {
+  result: list,
+  loading,
+  run: getList
+} = useRequest<Recordable[]>(() => reqApi.depart.departList(), {
   defaultValue: [],
   immediate: true,
   formatResult: res => dealList(res)
 })
 const dealList = (list: any[]) => {
-  if (!list.length) return []
+  if (!list.length) {
+    return []
+  }
   // @ts-ignore
   list.map(item => {
     item.parentId = item.pid
@@ -61,8 +69,7 @@ const handleEdit = (id?: string) => {
   operState.showEdit = true
 }
 const handleDel = (id: string) => {
-  messageConfirm({message: '确认要删除该部门吗？'})
-  .then(() => {
+  messageConfirm({ message: '确认要删除该部门吗？' }).then(() => {
     delDepart(id)
   })
 }

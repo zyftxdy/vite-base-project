@@ -3,24 +3,22 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList"/>
+      @pagination="getList"
+    />
 
-    <usual-dialog
-      v-model:show="showInfo"
-      :show-footer="false"
-      title="资金汇总明细"
-      width="864px">
+    <usual-dialog v-model:show="showInfo" :show-footer="false" title="资金汇总明细" width="864px">
       <template v-for="item in result" :key="item.id">
         <div class="desc-extra">
-          <description :schema="schema" :data="item"/>
+          <description :schema="schema" :data="item" />
         </div>
       </template>
     </usual-dialog>
@@ -48,21 +46,27 @@ const handleSelect = () => {
   queryState.listQuery.current = 1
   getList()
 }
-const { loading, run: getList } = useRequest(() => reqApi.transfer.summaryPage(queryState.listQuery), {
-  immediate: true,
-  onSuccess: res => {
-    listState.list = res.records
-    listState.total = res.total
+const { loading, run: getList } = useRequest(
+  () => reqApi.transfer.summaryPage(queryState.listQuery),
+  {
+    immediate: true,
+    onSuccess: res => {
+      listState.list = res.records
+      listState.total = res.total
+    }
   }
-})
+)
 
 const showInfo = ref(false)
-const { result, run: handleInfo } = useRequest<Recordable[]>(id => reqApi.transfer.summaryInfo({ transferSummaryId: id }), {
-  defaultValue: [],
-  onSuccess: () => {
-    showInfo.value = true
+const { result, run: handleInfo } = useRequest<Recordable[]>(
+  id => reqApi.transfer.summaryInfo({ transferSummaryId: id }),
+  {
+    defaultValue: [],
+    onSuccess: () => {
+      showInfo.value = true
+    }
   }
-})
+)
 
 const routeParams = useRouteParamsStore()
 const handleTransfer = (data: Recordable) => {
@@ -83,7 +87,7 @@ listState.columns = columns({ handleInfo, handleTransfer })
 </script>
 
 <style lang="scss" scoped>
-.desc-extra{
+.desc-extra {
   @apply border-b border-dashed border-slate-400 last:border-0 py-4 first:pt-0;
 }
 </style>

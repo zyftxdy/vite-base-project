@@ -18,7 +18,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => [
     label: '申请时间',
     prop: 'dates',
     method: dateChange,
-    disabledDate: (time) => {
+    disabledDate: time => {
       return time.getTime() > Date.now()
     }
   },
@@ -42,10 +42,18 @@ export const columns: TableColumn[] = [
   { label: '应划拨金额（元）', prop: 'transferAmount', width: 140 },
   { label: '分摊手续费（元）', prop: 'shareServiceFee', width: 140 },
   { label: '实际划拨金额（元）', prop: 'realTransAmount', width: 160 },
-  { label: '划拨类型', prop: 'transferType', formatter: (row, column, cellValue) => transferTOptions[cellValue] },
+  {
+    label: '划拨类型',
+    prop: 'transferType',
+    formatter: (row, column, cellValue) => transferTOptions[cellValue]
+  },
   { label: '收款账号', prop: 'receiveAccount', width: 200 },
-  { label: '划拨状态', prop: 'transferStatus', formatter: (row, column, cellValue) => transferSOptions[cellValue] },
+  {
+    label: '划拨状态',
+    prop: 'transferStatus',
+    formatter: (row, column, cellValue) => transferSOptions[cellValue]
+  },
   { label: '订单号', prop: 'orderId', width: 200 },
   { label: '备注', prop: 'remark' },
-  { label: '操作', prop: 'action', overflow: false,  width: 240, fixed: 'right' }
+  { label: '操作', prop: 'action', overflow: false, width: 240, fixed: 'right' }
 ]

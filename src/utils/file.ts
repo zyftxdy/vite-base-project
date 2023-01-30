@@ -1,7 +1,7 @@
 /**
  * @description: base64 to blob
  */
- export function dataURLtoBlob(base64Buf: string): Blob {
+export function dataURLtoBlob(base64Buf: string): Blob {
   const arr = base64Buf.split(',')
   const typeItem = arr[0]
   const mime = typeItem.match(/:(.*?);/)![1]
@@ -28,7 +28,7 @@ export function urlToBase64(url: string, mineType?: string): Promise<string> {
     const img = new Image()
     img.crossOrigin = ''
     img.src = url
-    img.onload = function() {
+    img.onload = function () {
       canvas.width = img.width
       canvas.height = img.height
       ctx.drawImage(img, 0, 0)

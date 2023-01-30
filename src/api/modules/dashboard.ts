@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 菜单树
 export const deptTree = () => {

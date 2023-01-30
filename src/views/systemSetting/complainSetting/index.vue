@@ -1,35 +1,36 @@
 <template>
   <div class="complain_setting content-box">
-    <el-button class="btn-bigger btn-border-color margin-bottom15" type="primary" @click="handleEdit()">
-      <template #icon><i-ep-plus/></template>添加投诉类别
+    <el-button
+      class="btn-bigger btn-border-color margin-bottom15"
+      type="primary"
+      @click="handleEdit()"
+    >
+      <template #icon><i-ep-plus /></template>添加投诉类别
     </el-button>
     <usual-table
+      v-model:page-num="query.current"
+      v-model:page-size="query.size"
       :loading="loading"
       :list="state.list"
       :columns="state.columns"
       :total="state.total"
-      v-model:page-num="query.current"
-      v-model:page-size="query.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
         <el-button link type="primary" @click="handleEdit(row)">编辑</el-button>
         <el-button link type="danger" @click="handleDel(row.categoryId)">删除</el-button>
       </template>
     </usual-table>
 
-    <usual-dialog
-      v-model:show="show"
-      :title="title"
-      width="24%"
-    >
-      <el-form
-        ref="formRef"
-        :model="modelRef"
-        :rules="rulesRef"
-        label-width="100px"
-      >
+    <usual-dialog v-model:show="show" :title="title" width="24%">
+      <el-form ref="formRef" :model="modelRef" :rules="rulesRef" label-width="100px">
         <el-form-item label="类别名称：" prop="categoryName">
-          <el-input v-model="modelRef.categoryName" placeholder="请填写类别名称" maxlength="10" show-word-limit/>
+          <el-input
+            v-model="modelRef.categoryName"
+            placeholder="请填写类别名称"
+            maxlength="10"
+            show-word-limit
+          />
         </el-form-item>
         <el-form-item label="类别状态：" class="is-required">
           <el-radio-group v-model="modelRef.status">
@@ -98,13 +99,19 @@ emitter.on('submit', () => {
     }
   })
 })
-const { run: submitFun } = useRequest(() => modelRef.categoryId ? reqApi.sysytem.categoryEdit(modelRef) : reqApi.sysytem.categoryAdd(modelRef), {
-  onSuccess: () => {
-    message.success('操作成功')
-    emitter.emit('success')
-    getList()
+const { run: submitFun } = useRequest(
+  () =>
+    modelRef.categoryId
+      ? reqApi.sysytem.categoryEdit(modelRef)
+      : reqApi.sysytem.categoryAdd(modelRef),
+  {
+    onSuccess: () => {
+      message.success('操作成功')
+      emitter.emit('success')
+      getList()
+    }
   }
-})
+)
 
 const handleDel = (id: string) => {
   messageConfirm({

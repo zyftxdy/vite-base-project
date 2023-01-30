@@ -2,22 +2,31 @@
   <card
     v-model:tab-key="queryState.listQuery.creditLevel"
     :tabs-list="tabsList"
-    @tab-change="tabChange">
+    @tab-change="tabChange"
+  >
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="schoolId"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
-        <el-button v-auth:disabled="'09444fd98fc1f87003'" link type="primary" @click="goDetail(row.schoolId)">查看</el-button>
+        <el-button
+          v-auth:disabled="'09444fd98fc1f87003'"
+          link
+          type="primary"
+          @click="goDetail(row.schoolId)"
+          >查看</el-button
+        >
         <el-button link type="primary" @click="handleMove(row.schoolId)">移出</el-button>
       </template>
     </usual-table>
@@ -40,7 +49,7 @@ const tabsList: Tab[] = [
 ]
 
 const { router, message, reqApi } = useCommon()
-const { messageConfirm }  = useMessage()
+const { messageConfirm } = useMessage()
 
 const queryState = reactive<QueryState>({
   listQuery: listQuery(),
@@ -90,8 +99,7 @@ const goDetail = (id: string) => {
 }
 const handleMove = (id: string) => {
   const message = `确认将该机构移出${cerditLvOptions[queryState.listQuery.creditLevel]}吗？`
-  messageConfirm({ message: message })
-  .then(() => {
+  messageConfirm({ message: message }).then(() => {
     moveCerdit(id)
   })
 }

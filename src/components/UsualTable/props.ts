@@ -45,11 +45,13 @@ const commonProps = {
     type: Boolean,
     default: false
   },
-  list: { // 列表数据
+  list: {
+    // 列表数据
     type: Array as PropType<Recordable[]>,
     default: () => []
   },
-  columns: { // 列数据
+  columns: {
+    // 列数据
     type: Array as PropType<TableColumn[]>,
     default: () => []
   },

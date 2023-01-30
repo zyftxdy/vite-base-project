@@ -8,10 +8,7 @@ type UseProps = {
 } & FnOptions
 
 export default function useProvinces(options: Partial<UseProps> = {}) {
-  const {
-    target = {},
-    immediate = false
-  } = options
+  const { target = {}, immediate = false } = options
   const { reqApi, message } = useCommon()
   const areaType = ref('')
   const areaList = ref<Recordable[]>([])

@@ -58,10 +58,7 @@ class ZAixos {
     const headers = config.headers
     const contentType = headers?.['Content-type'] || headers?.['content-type']
 
-    if (
-      contentType === ContentTypeEnum.FORM_DATA ||
-      config.method === RequestEnum.GET
-    ) {
+    if (contentType === ContentTypeEnum.FORM_DATA || config.method === RequestEnum.GET) {
       return config
     }
 
@@ -103,7 +100,8 @@ class ZAixos {
     config = this.supportFormData(config)
 
     return new Promise((resolve, reject) => {
-      this.instance.request<any, T>(config)
+      this.instance
+        .request<any, T>(config)
         .then(res => {
           resolve(res)
         })

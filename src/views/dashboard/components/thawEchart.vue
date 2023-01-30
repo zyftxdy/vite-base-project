@@ -1,7 +1,7 @@
 <template>
-  <page-title title="资金划拨动态"/>
-  <div v-show="!showEmpty" ref="elRef" style="width:100%; height: 300px"/>
-  <el-empty v-show="showEmpty" description="暂无数据"/>
+  <page-title title="资金划拨动态" />
+  <div v-show="!showEmpty" ref="elRef" style="width: 100%; height: 300px" />
+  <el-empty v-show="showEmpty" description="暂无数据" />
 </template>
 
 <script setup lang="ts">
@@ -19,7 +19,8 @@ const { setOptions } = useEcharts(elRef as Ref<HTMLDivElement>)
 const { run: getData } = useRequest(() => reqApi.dashboard.thawBar({ deptIds: props.deptIds }), {
   onSuccess: res => {
     showEmpty.value = !res
-    const xData: string[] = [], yData: string[] = []
+    const xData: string[] = [],
+      yData: string[] = []
     res.map((item: any) => {
       xData.push(item.days)
       yData.push(item.totalAmount)
@@ -29,6 +30,10 @@ const { run: getData } = useRequest(() => reqApi.dashboard.thawBar({ deptIds: pr
   }
 })
 
-watch(() => props.deptIds, () => getData(), { deep: true })
+watch(
+  () => props.deptIds,
+  () => getData(),
+  { deep: true }
+)
 onMounted(() => getData())
 </script>

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 
 // 部门列表
 export const departList = () => {
@@ -24,7 +24,6 @@ export const deptAdd = params => {
   })
 }
 
-
 // 修改部门
 export const deptUpdate = params => {
   return ZHttp.post({
@@ -32,7 +31,6 @@ export const deptUpdate = params => {
     data: params
   })
 }
-
 
 // 删除部门
 export const deptDel = params => {

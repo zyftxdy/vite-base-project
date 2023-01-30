@@ -3,8 +3,8 @@ import { LabelValueOptions } from '#/base'
 export const baseUrl: string = import.meta.env.VITE_BASE_URL + '/api'
 
 // 上传接口地址
-export const uploadFile: string = '/file/upload'
-export const publicUploadFile: string = '/file/upload/public'
+export const uploadFile = '/file/upload'
+export const publicUploadFile = '/file/upload/public'
 
 // 信用评级状态
 export const cerditLvStatus: LabelValueOptions[] = [
@@ -46,7 +46,7 @@ export const schoolType: LabelValueOptions[] = [
 export const enableStatus: LabelValueOptions[] = [
   { label: '全部状态', value: '' },
   { label: '启用', value: 'NORMAL' },
-  { label: '停用', value: 'DISABLE' },
+  { label: '停用', value: 'DISABLE' }
 ]
 
 // 卡类型

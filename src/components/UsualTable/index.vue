@@ -1,7 +1,7 @@
 <template>
   <component :is="version === 'V1' ? Table : TableV2">
     <template v-for="slotName in slotKeys" :key="slotName" #[slotName]="{ row }">
-      <slot :name="slotName" :row="row"/>
+      <slot :name="slotName" :row="row" />
     </template>
   </component>
 </template>

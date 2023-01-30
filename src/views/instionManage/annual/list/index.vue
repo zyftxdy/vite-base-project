@@ -3,20 +3,20 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
 
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="schoolId"
       :loading="listState.loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
-      <template #action="{ row }">
-
-      </template>
+      @pagination="getList"
+    >
+      <template #action="{ row }"> </template>
     </usual-table>
   </div>
 </template>

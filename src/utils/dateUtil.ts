@@ -8,10 +8,7 @@ const DATE_FORMAT = 'YYYY-MM-DD'
  * @param format
  * @returns
  */
-export const formatDate = (
-  date: dayjs.ConfigType,
-  format = DATE_FORMAT
-) => {
+export const formatDate = (date: dayjs.ConfigType, format = DATE_FORMAT) => {
   return dayjs(date).format(format)
 }
 
@@ -28,27 +25,26 @@ export const formatBeforeTime = (time: dayjs.ConfigType) => {
     return now.diff(dayjs(time), type)
   }
   let diff = num('second')
-  if (diff > 365*24*60*60) {
+  if (diff > 365 * 24 * 60 * 60) {
     diff = num('year')
     return `${diff}年前`
-  } else if (diff > 31*24*60*60) {
+  } else if (diff > 31 * 24 * 60 * 60) {
     diff = num('month')
     return `${diff}月前`
-  } else if (diff > 7*24*60*60) {
+  } else if (diff > 7 * 24 * 60 * 60) {
     diff = num('week')
     return `${diff}周前`
-  } else if (diff > 24*60*60) {
+  } else if (diff > 24 * 60 * 60) {
     diff = num('day')
     return `${diff}天前`
-  } else if (diff > 60*60) {
+  } else if (diff > 60 * 60) {
     diff = num('hour')
     return `${diff}小时前`
   } else if (diff > 60) {
     diff = num('minute')
     return `${diff}分钟前`
-  } else {
-    return `${diff}秒前`
   }
+  return `${diff}秒前`
 }
 
 /**

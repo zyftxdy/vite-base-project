@@ -1,7 +1,6 @@
 import { useCommon } from '../core/useCommon'
 
 export default function useCliboard() {
-
   const { message } = useCommon()
   const clipboard = navigator.clipboard
 
@@ -18,9 +17,7 @@ export default function useCliboard() {
     }
   }
 
-  const writeClipboard = async () => {
-
-  }
+  const writeClipboard = async () => {}
 
   const readClipboardText = async () => {
     try {
@@ -31,9 +28,7 @@ export default function useCliboard() {
     }
   }
 
-  const readClipboard = async () => {
-
-  }
+  const readClipboard = async () => {}
 
   return {
     writeClipboardText,

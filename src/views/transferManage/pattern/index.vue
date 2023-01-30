@@ -3,25 +3,24 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect">
+      @select="handleSelect"
+    >
       <template #extraBtn>
         <el-button class="btn-small btn-usual" @click="toggle()">添加</el-button>
       </template>
     </usual-search>
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList"/>
+      @pagination="getList"
+    />
 
-    <usual-dialog
-      v-model:show="showOper"
-      title="添加划拨规则"
-      width="576px">
-      <add @getList="handleSelect"/>
+    <usual-dialog v-model:show="showOper" title="添加划拨规则" width="576px">
+      <add @getList="handleSelect" />
     </usual-dialog>
   </div>
 </template>
@@ -53,13 +52,16 @@ const handleSelect = () => {
   queryState.listQuery.current = 1
   getList()
 }
-const { loading, run: getList } = useRequest(() => reqApi.transfer.scalePage(queryState.listQuery), {
-  immediate: true,
-  onSuccess: res => {
-    listState.list = res.records
-    listState.total = res.total
+const { loading, run: getList } = useRequest(
+  () => reqApi.transfer.scalePage(queryState.listQuery),
+  {
+    immediate: true,
+    onSuccess: res => {
+      listState.list = res.records
+      listState.total = res.total
+    }
   }
-})
+)
 
 const handleDel = (id: string) => {
   messageConfirm({ message: '确定要删除该规则吗？' })

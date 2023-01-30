@@ -2,15 +2,17 @@
   <usual-search
     v-model:list-query="queryState.listQuery"
     :search-options="queryState.searchOptions"
-    @handleSelect="handleSelect"/>
+    @select="handleSelect"
+  />
   <usual-table
+    v-model:page-num="queryState.listQuery.current"
+    v-model:page-size="queryState.listQuery.size"
     :loading="listState.loading"
     :columns="listState.columns"
     :list="listState.list"
     :total="listState.total"
-    v-model:page-num="queryState.listQuery.current"
-    v-model:page-size="queryState.listQuery.size"
-    @pagination="getList">
+    @pagination="getList"
+  >
     <template #action="{ row }">
       <el-button link type="primary" @click="goDetail(row.historyId)">详情</el-button>
     </template>
@@ -45,7 +47,8 @@ const getList = async () => {
     res.data.records.map((m: any) => {
       m.items.map((n: any) => {
         m.realAmount = parseFloat(m.realAmount ? m.realAmount : 0) + parseFloat(n.realAmount)
-        m.originAmount = parseFloat(m.originAmount ? m.originAmount : 0) + parseFloat(n.originAmount)
+        m.originAmount =
+          parseFloat(m.originAmount ? m.originAmount : 0) + parseFloat(n.originAmount)
       })
     })
     listState.list = res.data.records

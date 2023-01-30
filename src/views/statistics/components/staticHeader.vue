@@ -1,8 +1,8 @@
 <template>
   <div class="static_header margin-bottom30">
     <div class="static_h_in">
-      <div class="s_item" v-for="(item, index) in list" :key="index">
-        <div class="i_icon"><img :src="item.icon"/></div>
+      <div v-for="(item, index) in list" :key="index" class="s_item">
+        <div class="i_icon"><img :src="item.icon" /></div>
         <div class="i_data">
           <span>{{ item.num }}{{ item.unit }}</span>
           <span class="pt-1">{{ item.title }}</span>
@@ -24,14 +24,18 @@ const list = ref<Recordable[]>(headData)
 
 const getTotal = async () => {
   try {
-    const res = await reqApi.statistics.statisHead({deptIds: props.deptIds})
-    list.value.map(item => item.num = formatNum(res.data[item.prop]))
+    const res = await reqApi.statistics.statisHead({ deptIds: props.deptIds })
+    list.value.map(item => (item.num = formatNum(res.data[item.prop])))
   } catch (err: any) {
     message.error(err)
   }
 }
 
-watch(() => props.deptIds, () => getTotal(), { immediate: true })
+watch(
+  () => props.deptIds,
+  () => getTotal(),
+  { immediate: true }
+)
 </script>
 
-<style lang="scss" scoped src="@/styles/statistics/staticHeader.scss"/>
+<style lang="scss" scoped src="@/styles/statistics/staticHeader.scss" />

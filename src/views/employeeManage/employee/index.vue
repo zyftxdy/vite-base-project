@@ -3,21 +3,25 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect">
+      @select="handleSelect"
+    >
       <template #extraBtn>
-        <el-button class="btn-big btn-border" :icon="Plus" @click="handleEdit()">添加员工</el-button>
+        <el-button class="btn-big btn-border" :icon="Plus" @click="handleEdit()"
+          >添加员工</el-button
+        >
       </template>
     </usual-search>
 
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       row-key="userId"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList">
+      @pagination="getList"
+    >
       <template #action="{ row }">
         <span v-if="row.adminFlag">--</span>
         <template v-else>
@@ -27,15 +31,13 @@
       </template>
     </usual-table>
 
-    <usual-dialog
-      v-model:show="operState.showEdit"
-      :title="operState.title"
-    >
+    <usual-dialog v-model:show="operState.showEdit" :title="operState.title">
       <edit-user
         :user-id="operState.userId"
         :role-list="roleList"
         @updateFn="getList"
-        @addFn="handleSelect"/>
+        @addFn="handleSelect"
+      />
     </usual-dialog>
   </div>
 </template>
@@ -55,15 +57,19 @@ const queryState = reactive<QueryState>({
   searchOptions: searchOptions()
 })
 
-const { result: roleList } = useRequest<Recordable[]>(() => reqApi.role.roleList({
-  current: 1,
-  size: 100
-}), {
-  defaultValue: [],
-  immediate: true,
-  formatResult: res => res.records,
-  onSuccess: res => setItemList(queryState.searchOptions, 'roleId', res.records)
-})
+const { result: roleList } = useRequest<Recordable[]>(
+  () =>
+    reqApi.role.roleList({
+      current: 1,
+      size: 100
+    }),
+  {
+    defaultValue: [],
+    immediate: true,
+    formatResult: res => res.records,
+    onSuccess: res => setItemList(queryState.searchOptions, 'roleId', res.records)
+  }
+)
 
 const listState = reactive<ListState>({
   list: [],
@@ -94,8 +100,7 @@ const handleEdit = (id?: string) => {
   operState.showEdit = true
 }
 const handleDel = (id: string) => {
-  messageConfirm({ message: '确认要删除该员工吗？' })
-  .then(() => {
+  messageConfirm({ message: '确认要删除该员工吗？' }).then(() => {
     delUser(id)
   })
 }

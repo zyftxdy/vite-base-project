@@ -3,15 +3,17 @@
     <usual-search
       v-model:list-query="queryState.listQuery"
       :search-options="queryState.searchOptions"
-      @handleSelect="handleSelect"/>
+      @select="handleSelect"
+    />
     <usual-table
+      v-model:page-num="queryState.listQuery.current"
+      v-model:page-size="queryState.listQuery.size"
       :loading="loading"
       :columns="listState.columns"
       :list="listState.list"
       :total="listState.total"
-      v-model:page-num="queryState.listQuery.current"
-      v-model:page-size="queryState.listQuery.size"
-      @pagination="getList"/>
+      @pagination="getList"
+    />
   </div>
 </template>
 
@@ -58,11 +60,14 @@ const handleSelect = () => {
   queryState.listQuery.current = 1
   getList()
 }
-const { loading, run: getList } = useRequest(() => reqApi.money.getFreezeList(queryState.listQuery), {
-  immediate: true,
-  onSuccess: res => {
-    listState.list = res.records
-    listState.total = res.total
+const { loading, run: getList } = useRequest(
+  () => reqApi.money.getFreezeList(queryState.listQuery),
+  {
+    immediate: true,
+    onSuccess: res => {
+      listState.list = res.records
+      listState.total = res.total
+    }
   }
-})
+)
 </script>

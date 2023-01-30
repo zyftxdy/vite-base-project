@@ -7,17 +7,20 @@ type DepartProps = {
   immediate: boolean
 } & FnOptions
 
-export default function useDepart(options: Partial<DepartProps> = {
-  FnType: 'depart',
-  immediate: false
-}) {
-
+export default function useDepart(
+  options: Partial<DepartProps> = {
+    FnType: 'depart',
+    immediate: false
+  }
+) {
   const { reqApi, message } = useCommon()
   const deptList = ref<Recordable[]>([])
   const method = computed(() =>
-    options.FnType === 'depart' ? reqApi.common.deptList :
-      options.FnType === 'departTree' ? reqApi.depart.deptTree :
-        reqApi.dashboard.deptTree
+    options.FnType === 'depart'
+      ? reqApi.common.deptList
+      : options.FnType === 'departTree'
+      ? reqApi.depart.deptTree
+      : reqApi.dashboard.deptTree
   )
 
   const getDepart = async () => {

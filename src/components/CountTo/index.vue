@@ -33,7 +33,7 @@ const output = useTransition(source, {
   duration: props.duration,
   transition: TransitionPresets.easeInOutCubic
 })
-watchEffect(() => source.value = Number(props.value))
+watchEffect(() => (source.value = Number(props.value)))
 
 const value = computed(() => formatNum(unref(output)))
 

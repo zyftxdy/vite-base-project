@@ -1,19 +1,19 @@
 <template>
-  <div class="detail content-box" style="padding-top: 8px;">
+  <div class="detail content-box" style="padding-top: 8px">
     <el-tabs v-model="activeName" @tab-change="handleClick">
-      <el-tab-pane label="机构概况" name="info"/>
-      <el-tab-pane label="订单管理" name="order"/>
-      <el-tab-pane label="一课一销详情" name="transfer"/>
-      <el-tab-pane v-if="siteName === 'sxxh'" label="手动划拨资金" name="transferHand"/>
+      <el-tab-pane label="机构概况" name="info" />
+      <el-tab-pane label="订单管理" name="order" />
+      <el-tab-pane label="一课一销详情" name="transfer" />
+      <el-tab-pane v-if="siteName === 'sxxh'" label="手动划拨资金" name="transferHand" />
       <!-- <el-tab-pane label="实校验证" name="witness"/>
       <el-tab-pane label="已备案课程" name="course"/> -->
     </el-tabs>
-    <general v-if="activeName === 'info'"/>
-    <order ref="orderRef" v-if="activeName === 'order'"/>
-    <transfer v-if="activeName === 'transfer'" @goDetail="goDetail"/>
-    <transfer-hand ref="transferHandRef" v-if="activeName === 'transferHand'"/>
-    <witness v-if="activeName === 'witness'"/>
-    <course v-if="activeName === 'course'"/>
+    <general v-if="activeName === 'info'" />
+    <order v-if="activeName === 'order'" ref="orderRef" />
+    <transfer v-if="activeName === 'transfer'" @goDetail="goDetail" />
+    <transfer-hand v-if="activeName === 'transferHand'" ref="transferHandRef" />
+    <witness v-if="activeName === 'witness'" />
+    <course v-if="activeName === 'course'" />
   </div>
 </template>
 
@@ -35,7 +35,9 @@ const { siteName } = storeToRefs(useAppStore())
 const { router, route } = useCommon()
 const activeName = ref('info')
 
-if (!route.query.id) router.go(-1)
+if (!route.query.id) {
+  router.go(-1)
+}
 
 // 不能在回调函数中使用inject
 // inject() can only be used inside setup() or functional components.
@@ -48,11 +50,15 @@ const handleClick = (e: TabPaneName) => {
   })
 }
 
-watch(() => route.query, val => {
-  activeName.value = val.tab as LocationQueryValue ?? 'info'
-}, {
-  immediate: true
-})
+watch(
+  () => route.query,
+  val => {
+    activeName.value = (val.tab as LocationQueryValue) ?? 'info'
+  },
+  {
+    immediate: true
+  }
+)
 
 const orderRef = ref<InstanceType<typeof order>>()
 const goDetail = (id: string) => {

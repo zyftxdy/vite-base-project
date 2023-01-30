@@ -1,4 +1,4 @@
-import ZHttp from "@/utils/axios"
+import ZHttp from '@/utils/axios'
 import type { LoginRef } from '#/base'
 
 // 登陆
@@ -36,7 +36,6 @@ export const userAdd = (params: any) => {
   })
 }
 
-
 // 修改用户
 export const userUpdate = (params: any) => {
   return ZHttp.post({
@@ -45,7 +44,6 @@ export const userUpdate = (params: any) => {
     data: params
   })
 }
-
 
 // 删除用户
 export const userDel = (params: any) => {

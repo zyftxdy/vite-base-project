@@ -10,11 +10,13 @@
     :before-close="handleClose"
     @vnode-before-unmount="destoryed"
   >
-    <slot/>
+    <slot />
     <template v-if="showFooter" #footer>
       <span class="dialog-footer">
         <el-button class="btn-small btn-border" @click="handleClose">取 消</el-button>
-        <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit">确 定</el-button>
+        <el-button class="btn-small btn-border-color" type="primary" @click="handleSubmit"
+          >确 定</el-button
+        >
       </span>
     </template>
   </el-dialog>

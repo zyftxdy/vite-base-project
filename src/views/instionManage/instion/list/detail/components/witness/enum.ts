@@ -3,28 +3,28 @@ export const ImgModel = () => ({
   licenseCreditPhotoUrl: '', //营业执照照片(民办非企证照片)
   fireCertPhotoUrl: '', //消防资质照片
   sportsCertPhotoUrl: '', //体育经营许可证照片
-  headmasterPhotoUrl: '', //校长照片
+  headmasterPhotoUrl: '' //校长照片
 })
 
 type ModelType = '02' | '03' | '04'
 
 export const Model = () => ({
   type: '02' as ModelType, // 主体类型 03 -- 企业 04 -- 民办非企
-  licenseCreditPhoto: '',//营业执照(民办非企证)
+  licenseCreditPhoto: '', //营业执照(民办非企证)
   licenseSchoolPermitPhoto: '', //办学资质
   fireCertPhoto: '', //消防资质
   sportsCertPhoto: '', //体育经营许可证
-  area: '',//校区面积
-  holdCount: '',//最大容量人数
-  security: '',//安全保障
-  environmentPhotos: [] as string[],// 校区环境
+  area: '', //校区面积
+  holdCount: '', //最大容量人数
+  security: '', //安全保障
+  environmentPhotos: [] as string[], // 校区环境
   insureCompany: '', // 保险公司
   insureGoodName: '', // 保险产品名称
   insureStartTime: '', // 保险开始时间
   insureEndTime: '', // 保险结束时间
   insurePolicyImgs: [] as string[], // 保险照片
-  fullTimeEmployeeCount:'',//全职教师
-  partTimeEmployeeCount: '',//兼职教师
+  fullTimeEmployeeCount: '', //全职教师
+  partTimeEmployeeCount: '', //兼职教师
   hireK12: true, //是否聘用中小学教师
   headmaster: '', //校长
   headmasterBirthday: '', //校长出生日期
@@ -57,19 +57,11 @@ export const infoList = [
 ]
 
 export const rules = {
-  licenseCreditPhoto:[
+  licenseCreditPhoto: [
     { required: true, message: '请上传营业执照(民办非企证)', trigger: 'change' }
   ],
-  businessStartHours:[
-    { required: true, message: '请选择营业开始时间', trigger: 'change' }
-  ],
-  businessEndHours:[
-    { required: true, message: '请选择营业结束时间', trigger: 'change' }
-  ],
-  checkStartTime:[
-    { required: true, message: '请选择校验时间', trigger: 'change' }
-  ],
-  checkEndTime:[
-    { required: true, message: '请选择到期时间', trigger: 'change' }
-  ]
+  businessStartHours: [{ required: true, message: '请选择营业开始时间', trigger: 'change' }],
+  businessEndHours: [{ required: true, message: '请选择营业结束时间', trigger: 'change' }],
+  checkStartTime: [{ required: true, message: '请选择校验时间', trigger: 'change' }],
+  checkEndTime: [{ required: true, message: '请选择到期时间', trigger: 'change' }]
 }

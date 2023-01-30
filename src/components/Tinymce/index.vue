@@ -1,13 +1,13 @@
 <template>
   <div class="tinymce-div" :class="{ fullscreen }">
-    <upload
-      v-model:show="show"
-      @uploadDone="uploadDone"/>
+    <upload v-model:show="show" @upload-done="uploadDone" />
     <el-button
-      :disabled="readonly"
       v-show="showbtn"
+      :disabled="readonly"
       class="btn-big btn-border-color upload_btn"
-      @click="show = true">上传图片</el-button>
+      @click="show = true"
+      >上传图片</el-button
+    >
     <textarea :id="tinymceId"></textarea>
   </div>
 </template>
@@ -106,27 +106,30 @@ const initSetup = (e: any) => {
 }
 
 const setValue = (editor: Editor, val: string, prevVal?: string) => {
-  if (
-    editor &&
-    typeof val === 'string' &&
-    val !== prevVal &&
-    val !== editor.getContent()
-  ) {
+  if (editor && typeof val === 'string' && val !== prevVal && val !== editor.getContent()) {
     editor.setContent(val)
   }
 }
 
 const bindModelHandlers = (editor: Editor) => {
-  watch(() => props.modelValue, (val, preVal) => {
-    setValue(editor, val, preVal)
-  }, {
-    immediate: true
-  })
-  watch(() => props.readonly, val => {
-    editor.mode.set(val ? 'readonly' : 'design')
-  }, {
-    immediate: true
-  })
+  watch(
+    () => props.modelValue,
+    (val, preVal) => {
+      setValue(editor, val, preVal)
+    },
+    {
+      immediate: true
+    }
+  )
+  watch(
+    () => props.readonly,
+    val => {
+      editor.mode.set(val ? 'readonly' : 'design')
+    },
+    {
+      immediate: true
+    }
+  )
   editor.on('change keyup undo redo setContent', () => {
     const content = editor.getContent()
     emit('update:model-value', content)
@@ -162,10 +165,10 @@ onDeactivated(() => {
 const initEditor = () => {
   tinymce
     .init(unref(initOptions))
-    .then((editor) => {
+    .then(editor => {
       emit('inited', editor)
     })
-    .catch((err) => {
+    .catch(err => {
       emit('init-error', err)
     })
 }
@@ -175,17 +178,17 @@ const destoryEditor = () => {
 </script>
 
 <style lang="scss" scoped>
-.tinymce-div{
+.tinymce-div {
   position: relative;
   width: 100%;
-  &.fullscreen{
+  &.fullscreen {
     z-index: 2000;
-    .upload_btn{
+    .upload_btn {
       position: fixed;
       z-index: 2000;
     }
   }
-  .upload_btn{
+  .upload_btn {
     position: absolute;
     top: 4px;
     right: 10px;
