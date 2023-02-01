@@ -16,7 +16,7 @@ export default function useDepart(
 ) {
   const { reqApi, message } = useCommon()
   const deptList = ref<Recordable[]>([])
-  const method = 
+  const method =
     options.FnType === 'depart'
       ? reqApi.common.deptList
       : options.FnType === 'departTree'

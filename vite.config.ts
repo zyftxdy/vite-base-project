@@ -10,6 +10,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { visualizer } from 'rollup-plugin-visualizer'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -58,17 +59,35 @@ export default defineConfig(({ command, mode }) => {
     })
   ]
 
-  if (isBuild) {
-    plugins.push(
-      visualizer({
-        emitFile: true,
-        filename: 'analysis.html',
-        open: true, //在默认用户代理中打开生成的文件
-        gzipSize: true, //从源代码中收集 gzip 大小并将其显示在图表中
-        brotliSize: true //从源代码中收集 brotli 大小并将其显示在图表中
-      })
-    )
-  }
+  isBuild && plugins.push(
+    visualizer({
+      emitFile: true,
+      filename: 'analysis.html',
+      open: true, //在默认用户代理中打开生成的文件
+      gzipSize: true, //从源代码中收集 gzip 大小并将其显示在图表中
+      brotliSize: true //从源代码中收集 brotli 大小并将其显示在图表中
+    })
+  )
+  isBuild && plugins.push(
+    viteCompression({
+      verbose: true, //是否在控制台输出压缩结果
+      disable: false, //是否禁用,相当于开关在这里
+      threshold: 102400,
+      algorithm: 'gzip', //压缩算法,可选 [ 'gzip' , 'brotliCompress' ,'deflate' , 'deflateRaw']
+      ext: '.gz' //文件后缀
+    })
+  )
+
+  // const SPLIT_CHUNK_CONFIG = [
+  //   {
+  //     match: /[\\/]src[\\/]_?utils(.*)/,
+  //     output: 'chunk-utils'
+  //   },
+  //   {
+  //     match: /[\\/]src[\\/]_?components(.*)/,
+  //     output: 'chunk-components'
+  //   }
+  // ]
 
   return {
     build: {
@@ -77,8 +96,22 @@ export default defineConfig(({ command, mode }) => {
       reportCompressedSize: false,
       assetsInlineLimit: 10240,
       rollupOptions: {
-        output: {
-          manualChunks: {}
+        output: { //静态资源分类打包
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          entryFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          manualChunks(id) { //静态资源分拆打包
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+
+            // for (const item of SPLIT_CHUNK_CONFIG) {
+            //   const { match, output } = item
+            //   if (match.test(id)) {
+            //     return output
+            //   }
+            // }
+          }
         }
       }
     },

@@ -87,7 +87,9 @@ emitter.on('submit', () => {
     if (valid) {
       messageConfirm({
         message: '确认要驳回吗？'
-      }).then(() => submit())
+      }).then(() => {
+        submit()
+      })
     } else {
       console.log('error submit!', fields)
     }

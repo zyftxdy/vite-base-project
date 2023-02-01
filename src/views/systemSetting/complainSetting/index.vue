@@ -116,7 +116,9 @@ const { run: submitFun } = useRequest(
 const handleDel = (id: string) => {
   messageConfirm({
     message: '确定要删除吗？'
-  }).then(() => onDel(id))
+  }).then(() => {
+    onDel(id)
+  })
 }
 const { run: onDel } = useRequest(id => reqApi.sysytem.categoryDel({ categoryId: id }), {
   onSuccess: () => {

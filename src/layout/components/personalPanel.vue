@@ -39,7 +39,9 @@ const rulesRef = reactive<FormRules>({
 const onClick = () => {
   unref(formRef)?.validate((valid, fields) => {
     if (valid) {
-      messageConfirm({ message: '确认要修改密码吗？' }).then(() => submit())
+      messageConfirm({ message: '确认要修改密码吗？' }).then(() => {
+        submit()
+      })
     } else {
       console.log('error submit!', fields)
     }
