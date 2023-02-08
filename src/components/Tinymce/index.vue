@@ -46,7 +46,7 @@ import 'tinymce/plugins/wordcount'
 import { toolbar, plugins } from './tinymce'
 import { Editor, RawEditorOptions } from 'tinymce'
 import { buildShortUUID } from '@/utils/uuid'
-import Upload from './upload.vue'
+import Upload from './upload'
 
 const props = defineProps({
   skinName: {

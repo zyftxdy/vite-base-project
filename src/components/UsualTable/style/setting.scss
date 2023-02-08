@@ -1,0 +1,15 @@
+.setting-control {
+  @apply flex items-center border-b border-solid border-slate-300 px-2;
+}
+.columnRef {
+  font-size: 14px;
+  line-height: 14px;
+  :deep(.el-checkbox__input.is-checked + .el-checkbox__label) {
+    color: #606266;
+  }
+}
+.setting {
+  &:focus {
+    outline: none;
+  }
+}

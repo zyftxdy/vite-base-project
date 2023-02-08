@@ -1,7 +1,6 @@
 import { useAppStore } from '@/store'
 import { menu, perms } from '@/api/modules/menu'
 import { ElMessage } from 'element-plus'
-import { defineStore, storeToRefs } from 'pinia'
 import store from '../index'
 import type { RouteMenu } from '#/menu'
 import type { AppRouteRecordRaw } from '@/router/types'
@@ -11,6 +10,8 @@ import type { AppRouteRecordRaw } from '@/router/types'
  * @param {*} menuList 菜单列表
  * @param {*} routes 递归创建的动态(菜单)路由
  */
+// import.meta.glob 动态导入，构建时，会分离为独立的 chunk
+// import.meta.globEager 直接导入
 const modules = import.meta.glob('../../views/**/*.vue')
 function addDynamicRoutes(
   menuList: RouteMenu[] = [],

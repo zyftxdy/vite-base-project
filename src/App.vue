@@ -6,21 +6,18 @@
 
 <script lang="ts" setup>
 import mitt from 'mitt'
+import setting from './settings'
 import { useAppStore } from '@/store'
 import { useCommon, useRequest } from './hooks'
 import { useFavicon, useTitle } from '@vueuse/core'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
 const { reqApi } = useCommon()
-const icon = useFavicon(
-  'https://quanqizhixiao-public-1251355418.file.myqcloud.com/channel/favicon.ico'
-)
-const title = useTitle('校外教培机构综合监管平台')
+const appStore = useAppStore()
+const icon = useFavicon(setting.favIcon)
+const title = useTitle(appStore.appName)
 
 provide('emitter', mitt())
-
-const appStore = useAppStore()
-
 useRequest(() => reqApi.common.channelInfo(), {
   immediate: true,
   onSuccess: data => {

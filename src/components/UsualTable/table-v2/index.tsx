@@ -1,9 +1,9 @@
-<script lang="tsx">
 import { scrollTo } from '@/utils/mUtils'
 import { tableV2Props, tableEmits, pageProps } from '../props'
 import { useRender } from './render-helper'
+import '../style/table-v2.scss'
 import type { ExtractPropTypes, FunctionalComponent } from 'vue'
-import { RowExpandParams, SortBy } from 'element-plus'
+import type { RowExpandParams, SortBy } from 'element-plus'
 
 export default defineComponent({
   props: tableV2Props,
@@ -117,37 +117,3 @@ export default defineComponent({
     }
   }
 })
-</script>
-
-<style lang="scss" scoped>
-.table-v2-custom {
-  @apply border border-solid border-gray-200;
-}
-:deep(.el-table-v2__header-row) {
-  background-color: #f7f8fa;
-}
-:deep(.el-table-v2__header-cell) {
-  background-color: #f7f8fa;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: #373e4f;
-  position: relative;
-  &:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 18px;
-    background: #d1d3d9;
-    right: 0;
-    top: 14px;
-  }
-  .el-table-v2__sort-icon {
-    margin-top: -2px;
-  }
-}
-:deep(.el-table-v2__body) {
-  .el-table-v2__row:last-child {
-    border-bottom: 0;
-  }
-}
-</style>

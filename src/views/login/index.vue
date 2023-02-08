@@ -9,14 +9,14 @@
       <el-form-item prop="mobile">
         <el-input v-model="modelRef.mobile" size="large" placeholder="请填写手机号">
           <template #prepend>
-            <el-icon><i-ep-user /></el-icon>
+            <i-ep-user />
           </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input v-model="modelRef.password" type="password" size="large" placeholder="请填写密码">
           <template #prepend>
-            <el-icon><i-ep-lock /></el-icon>
+            <i-ep-lock />
           </template>
         </el-input>
       </el-form-item>
@@ -43,7 +43,6 @@
 <script setup lang="ts">
 import md5 from 'js-md5'
 import { useAppStore, useUserStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useCommon, useRequest } from '@/hooks'
 import type { FormInstance } from 'element-plus'
 

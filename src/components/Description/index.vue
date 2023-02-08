@@ -1,6 +1,6 @@
 <script lang="tsx">
+import Cell from './cell'
 import { props } from './props'
-import Cell from './cell.vue'
 import { createElementVNode, createVNode, renderList } from 'vue'
 import type { DescItem } from './typing'
 

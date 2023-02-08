@@ -1,3 +1,4 @@
+<script lang="tsx">
 import { getPropsSlot } from '@/utils/props-util'
 import { MetaProps } from './props'
 
@@ -44,3 +45,4 @@ export default defineComponent({
     }
   }
 })
+</script>

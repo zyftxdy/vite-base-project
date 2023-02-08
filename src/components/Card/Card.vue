@@ -1,6 +1,6 @@
+<script lang="tsx">
 import { cardProps } from './props'
 import { getPropsSlot } from '@/utils/props-util'
-import './style/card.scss'
 import type { TabPaneName } from 'element-plus'
 
 export default defineComponent({
@@ -101,3 +101,5 @@ export default defineComponent({
     }
   }
 })
+</script>
+<style lang="scss" scoped src="./style/card.scss"/>

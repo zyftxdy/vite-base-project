@@ -20,7 +20,6 @@
 <script setup lang="ts">
 import { useCommon } from '@/hooks'
 import { useAppStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useRouteQuery } from '@vueuse/router'
 import general from './components/general/index.vue'
 import order from './components/order/index.vue'

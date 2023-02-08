@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import store from '@/store'
 import type { Canceler } from 'axios'
 

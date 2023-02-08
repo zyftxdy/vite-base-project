@@ -1,7 +1,6 @@
 import cookieCache from '@/utils/cache/auth'
 import localCache from '@/utils/cache/storage'
 import { login } from '@/api/modules/user'
-import { defineStore } from 'pinia'
 import store from '../index'
 import type { LoginRef } from '#/base'
 

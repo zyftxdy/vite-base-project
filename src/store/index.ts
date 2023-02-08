@@ -1,4 +1,3 @@
-import { createPinia } from 'pinia'
 export { useAppStore, useAppStoreWithOut } from './modules/app'
 export { useCancelStore, useCancelStoreWithOut } from './modules/cancel'
 export { useMenuStore, useMenuStoreWithOut } from './modules/menu'

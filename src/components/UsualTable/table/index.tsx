@@ -1,7 +1,7 @@
-<script lang="tsx">
 import { scrollTo } from '@/utils/scrollTo'
 import { useColumns, createTableContext } from '../hooks/useTable'
 import { tableProps, tableEmits, pageProps } from '../props'
+import '../style/table.scss'
 import type { TableColumn } from '#/base'
 import type { ExtractPropTypes, FunctionalComponent } from 'vue'
 
@@ -134,36 +134,3 @@ export default defineComponent({
     }
   }
 })
-</script>
-
-<style lang="scss" scoped>
-.el-table-con {
-  .el-table {
-    border: 1px solid #ebeef5;
-    border-bottom: 0;
-  }
-  .el-table--border {
-    border-right: 0 !important;
-  }
-  :deep(.el-table th.el-table__cell) {
-    background-color: #f7f8fa;
-    font-family: PingFangSC-Medium, PingFang SC;
-    font-weight: 500;
-    color: #373e4f;
-    height: 44px;
-    &:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      width: 1px;
-      height: 18px;
-      background: #d1d3d9;
-      right: 0;
-      top: 14px;
-    }
-  }
-  :deep(.el-table .el-table__cell) {
-    padding: 4px 0;
-    height: 40px;
-  }
-}
-</style>

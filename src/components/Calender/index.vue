@@ -1,5 +1,4 @@
-import { defineComponent } from 'vue'
-
+<script lang="tsx">
 export default defineComponent({
   setup() {
     return () => {
@@ -7,3 +6,4 @@ export default defineComponent({
     }
   }
 })
+</script>

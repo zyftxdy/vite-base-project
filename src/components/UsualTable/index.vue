@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
-import Table from './table/index.vue'
-import TableV2 from './table-v2/index.vue'
+import Table from './table'
+import TableV2 from './table-v2'
 
-const props = defineProps({
+defineProps({
   version: {
     type: String as PropType<'V1' | 'V2'>,
     default: 'V1'

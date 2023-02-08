@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import store from '../index'
 import type { RouteTab } from '@/router/types'
 import type { RouteRecordName } from 'vue-router'

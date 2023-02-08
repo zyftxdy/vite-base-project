@@ -96,12 +96,12 @@ svg {
   border-radius: 2px !important;
 }
 .btn-border-color {
-  background: $color-467DD8 !important;
+  background: $theme-color !important;
   border-radius: 2px !important;
   color: $color-fff !important;
   &:hover,
   &:focus {
-    background: $color-467DD8 !important;
+    background: $theme-color !important;
     color: $color-fff !important;
   }
 }
@@ -134,7 +134,7 @@ svg {
   display: flex;
 }
 .span-style {
-  color: $color-467DD8;
+  color: $theme-color;
   cursor: pointer;
 }
 

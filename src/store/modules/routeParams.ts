@@ -1,5 +1,3 @@
-import { defineStore } from 'pinia'
-
 export const useRouteParamsStore = defineStore('routeParams', () => {
   const params = ref<Recordable>({})
 

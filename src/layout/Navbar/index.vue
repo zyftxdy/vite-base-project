@@ -96,7 +96,7 @@ const handleSelect = () => {
   }
   .is-active,
   :deep(.el-menu-item.is-active) {
-    background-color: #467dd8 !important;
+    background-color: $theme-color !important;
     color: #ffffff !important;
   }
 }

@@ -1,4 +1,3 @@
-<script lang="tsx">
 import { get } from 'lodash-es'
 import { CSSProperties } from 'vue'
 import { itemProps } from './props'
@@ -47,7 +46,7 @@ export default defineComponent({
         return (
           <Component
             class={[
-              type === 'label' ? 'description-item-label' : '',
+              type === 'label' ? 'description-item-label text-start' : '',
               type === 'content' ? 'description-item-content' : ''
             ]}
             key={`${type}-${i}`}
@@ -111,9 +110,3 @@ export default defineComponent({
     }
   }
 })
-</script>
-<style lang="scss" scoped>
-.description-item-label {
-  text-align: start;
-}
-</style>

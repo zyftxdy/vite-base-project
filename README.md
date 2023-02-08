@@ -400,3 +400,5 @@ interface FileList {
 **_ mini-css-extract-plugin 插件 打包 📦 报冲突 -- 官方仍未解决 _**
 
 **_ vue-router4.1.4 版本后 如果 router params 未进行路由声明，路由不能使用 params 传参 _**
+
+**_ 打包警告 Generated an empty chunk：打包出vue、@floating-ui/dom、lodash-unified为空js  未解决？？？_**

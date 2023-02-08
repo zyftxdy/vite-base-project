@@ -1,5 +1,4 @@
 import { useMenuStore } from '@/store'
-import { storeToRefs } from 'pinia'
 
 export default function usePerm(args: string) {
   const menuStore = useMenuStore()

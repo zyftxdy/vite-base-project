@@ -54,7 +54,6 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useCommon, useTabs } from '@/hooks'
 import localCache from '@/utils/cache/storage'
 import { ClickOutside as vClickOutside } from 'element-plus'
@@ -154,8 +153,8 @@ const handleClick = () => {
         }
       }
       &.active {
-        border-color: #467dd8;
-        color: #467dd8;
+        border-color: $theme-color;
+        color: $theme-color;
       }
     }
   }

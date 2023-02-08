@@ -5,6 +5,8 @@ declare global {
 
   type Nullable<T> = T | null
 
+  type Arrayable<T> = T | Array<T>
+
   type PropType<T> = VuePropType<T>
 
   type unionType = string | null | undefined
