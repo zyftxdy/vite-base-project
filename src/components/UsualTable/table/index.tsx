@@ -1,3 +1,4 @@
+import ColumnSetting from '../components/ColumnSetting'
 import { scrollTo } from '@/utils/scrollTo'
 import { useColumns, createTableContext } from '../hooks/useTable'
 import { tableProps, tableEmits, pageProps } from '../props'
@@ -40,10 +41,10 @@ export default defineComponent({
           align={column.align ?? 'center'}
           v-slots={{
             default: (scope: any) =>
-              column.render?.(scope.row[column.prop], scope.row) || slots[column.prop]?.(scope),
+              slots[column.prop]?.(scope) ||  column.render?.(scope.row[column.prop], scope.row),
             header: (scope: any) =>
-              column.renderHeader?.(scope.row[column.prop], scope.row) ||
               slots[`${column.prop}-header`]?.(scope) ||
+              column.renderHeader?.(scope.row[column.prop], scope.row) ||
               column.label
           }}
         />
@@ -105,10 +106,12 @@ export default defineComponent({
         pageSizes,
         background,
         layout,
-        showSelect
+        showSelect,
+        showSetting
       } = props
       return (
         <div class="el-table-con">
+          { showSetting && <ColumnSetting/> }
           <el-table
             ref={(e: any) => (wrapRef.value = e)}
             v-loading={loading}

@@ -224,6 +224,8 @@ export default defineComponent({
           return setDateWare(item)
         case 'cascader':
           return setCascaderWare(item)
+        case 'slot':
+        return renderSlot(slots, item.prop)
       }
     }
     const itemGenerator = (item: SearchOptions) => {
@@ -240,12 +242,7 @@ export default defineComponent({
           )
         )
       }
-      switch (item.type) {
-        case 'slot':
-          return renderSlot(slots, item.prop)
-        default:
-          return setItem(item)
-      }
+      return setItem(item)
     }
 
     const setProp = (item: SearchOptions) => {

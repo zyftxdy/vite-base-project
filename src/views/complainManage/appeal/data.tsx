@@ -88,8 +88,7 @@ export const schema: DescItem[] = [
     contentStyle: {
       display: 'flex',
       alignItems: 'center'
-    },
-    slot: true
+    }
   },
   {
     field: 'ownerName',

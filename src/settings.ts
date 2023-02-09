@@ -7,11 +7,14 @@ export default {
   // 登录页标题
   loginText: '欢迎来到全栖智校',
   // icon
-  favIcon: 'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/favicon.ico',
+  favIcon:
+    'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/favicon.ico',
   // 项目logo
   appLogo: 'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/logo.png',
   // 登录页logo
-  loginLogo: 'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/LOGO1.png',
+  loginLogo:
+    'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/LOGO1.png',
   // 登录页背景
-  loginBgImg: 'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/loginBg.png'
+  loginBgImg:
+    'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/loginBg.png'
 }

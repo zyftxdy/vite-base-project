@@ -22,11 +22,11 @@ export default defineComponent({
       )
     }
 
-    const renderContent = ({ render, field, contentMinWidth, contentStyle, slot }: DescItem) => {
+    const renderContent = ({ render, field, contentMinWidth, contentStyle }: DescItem) => {
       const { data } = props
       const getContent = () => {
         const getField = get(data, field)
-        return slot ? slots[field]?.() : render ? render(getField, data) : getField ?? '--'
+        return slots[field]?.() || render?.(getField, data) || (getField ?? '--')
       }
       const contentStyles = {
         ...contentStyle,

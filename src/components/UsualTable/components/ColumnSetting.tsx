@@ -2,7 +2,7 @@ import { useTableContext } from '../hooks/useTable'
 import { isNullAndUnDef } from '@/utils/is'
 import Sortablejs from 'sortablejs'
 import { cloneDeep } from 'lodash-es'
-import './style/setting.scss'
+import '../style/setting.scss'
 import type Sortable from 'sortablejs'
 import type { TableColumn } from '#/base'
 import type { CheckboxValueType } from 'element-plus'
@@ -123,7 +123,7 @@ export default defineComponent({
         placement="bottom"
         onShow={() => showChange()}
         v-slots={{
-          reference: <i-ep-setting class="setting" />
+          reference: () => <i-ep-setting class="setting" />
         }}
       >
         <div class="setting-control">
@@ -131,12 +131,12 @@ export default defineComponent({
             v-model={checkAll.value}
             indeterminate={indeterminate.value}
             class="flex-1"
-            onChange={handleCheckAllChange}
+            onChange={(e: CheckboxValueType) => handleCheckAllChange(e)}
             >列展示</el-checkbox>
           <el-button link type="primary" onClick={() => reset()}>重置</el-button>
         </div>
         <div class="setting-content px-2 py-1">
-          <el-checkbox-group ref="columnRef" v-model={checkList.value} class="columnRef" onChange={onChange}>
+          <el-checkbox-group ref={(el: any) => columnRef.value = el} v-model={checkList.value} class="columnRef" onChange={() => onChange()}>
             {
               sortOptions.value.map(item => (
                 <div class="setting_column_item flex items-center" key={item.prop}>
@@ -158,7 +158,7 @@ export default defineComponent({
                           'cursor-not-allowed': !checkList.value.includes(item.prop)
                         }
                       ]}
-                      onClick={handleColumnFixed(item, 'left')}
+                      onClick={() => handleColumnFixed(item, 'left')}
                     />
                   </el-tooltip>
                   <el-divider direction="vertical" />
@@ -171,7 +171,7 @@ export default defineComponent({
                           'cursor-not-allowed': !checkList.value.includes(item.prop)
                         }
                       ]}
-                      onClick={handleColumnFixed(item, 'right')}
+                      onClick={() => handleColumnFixed(item, 'right')}
                     />
                   </el-tooltip>
                 </div>

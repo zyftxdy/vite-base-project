@@ -10,7 +10,7 @@ export default defineComponent({
 
     return () => {
       const { titleStyle, descStyle } = props
-      const avatar = slots['avatar']
+      const avatar = slots.avatar
       const title = getPropsSlot(slots, props, 'title')
       const description = getPropsSlot(slots, props, 'description')
 

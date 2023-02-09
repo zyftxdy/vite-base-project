@@ -7,7 +7,6 @@ export interface DescItem {
   contentStyle?: CSSProperties
   field: string
   label: string
-  slot?: boolean
   monopolize?: boolean
   render?: (
     val: any,

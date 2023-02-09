@@ -59,8 +59,7 @@ export const bankSchema: DescItem[] = [
   },
   {
     field: 'bankEarnestMoney',
-    label: '风险保证金余额',
-    slot: true
+    label: '风险保证金余额'
   }
 ]
 

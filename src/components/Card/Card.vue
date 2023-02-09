@@ -102,4 +102,4 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped src="./style/card.scss"/>
+<style lang="scss" scoped src="./style/card.scss" />

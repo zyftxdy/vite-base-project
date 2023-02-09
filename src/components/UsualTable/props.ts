@@ -37,6 +37,10 @@ export const pageProps = {
 }
 
 const commonProps = {
+  showSetting: {
+    type: Boolean,
+    default: false
+  },
   showSelect: {
     type: Boolean,
     default: false

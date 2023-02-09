@@ -58,7 +58,8 @@ export function configComponentsPlugin(isBuild: boolean) {
     Components({
       //组件的有效文件扩展名
       // extensions: ['tsx', 'vue'],
-      // include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
+      // 转换目标的过滤器
+      include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
       resolvers: componentsReslovers
     }),
     Icons({

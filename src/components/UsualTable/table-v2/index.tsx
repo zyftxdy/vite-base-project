@@ -1,3 +1,4 @@
+import ColumnSetting from '../components/ColumnSetting'
 import { scrollTo } from '@/utils/mUtils'
 import { tableV2Props, tableEmits, pageProps } from '../props'
 import { useRender } from './render-helper'
@@ -83,9 +84,10 @@ export default defineComponent({
     }
 
     return () => {
-      const { expandColumnKey, total, pageSizes, background, layout } = props
+      const { expandColumnKey, total, pageSizes, background, layout, showSetting } = props
       return (
         <div class="el-table-con-v2">
+          { showSetting && <ColumnSetting/> }
           <div ref={(e: any) => (wrapRef.value = e)} style={{ height: tableHeight.value + 'px' }}>
             <el-auto-resizer
               class="table-v2-custom"

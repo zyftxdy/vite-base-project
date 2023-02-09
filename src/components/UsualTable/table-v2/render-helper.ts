@@ -94,19 +94,19 @@ export function useRender(
     formatter:
       column.formatter ??
       (((row, column, cellValue) => cellValue ?? '--') as TableColumn['formatter']),
-    headerCellRenderer: ({ column: hColumn }) =>
+    headerCellRenderer: ({ column: header_column }) =>
       createElementVNode(
         'div',
         {
           class: 'cell-header'
         },
         [
-          column.renderHeader?.(hColumn.title) ||
-            slots[`${hColumn.key}-header`]?.() ||
-            hColumn.title
+          slots[`${header_column.key}-header`]?.() ||
+            column.renderHeader?.(header_column.title) ||
+            header_column.title
         ]
       ),
-    cellRenderer: ({ rowData, cellData, column: cColumn }) =>
+    cellRenderer: ({ rowData, cellData, column: cell_column }) =>
       createElementVNode(
         'div',
         {
@@ -116,9 +116,9 @@ export function useRender(
           onMouseleave: handleCellMouseLeave
         },
         [
-          column.render?.(cellData, rowData) ||
-            slots[cColumn.key]?.({ row: rowData }) ||
-            cColumn.formatter?.(rowData, cColumn, cellData)
+          slots[cell_column.key]?.({ row: rowData }) ||
+            column.render?.(cellData, rowData) ||
+            cell_column.formatter?.(rowData, cell_column, cellData)
         ],
         2
       )

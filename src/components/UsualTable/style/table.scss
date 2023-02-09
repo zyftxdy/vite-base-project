@@ -6,7 +6,7 @@
   .el-table--border {
     border-right: 0 !important;
   }
-  :deep(.el-table th.el-table__cell) {
+  .el-table th.el-table__cell {
     background-color: #f7f8fa;
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
@@ -22,7 +22,7 @@
       top: 14px;
     }
   }
-  :deep(.el-table .el-table__cell) {
+  .el-table .el-table__cell {
     padding: 4px 0;
     height: 40px;
   }
