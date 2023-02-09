@@ -15,23 +15,6 @@
 svg {
   display: inline-block !important;
 }
-.form-line {
-  display: flex;
-  .item-line {
-    flex: 1;
-    margin-right: 64px;
-  }
-}
-.title_detail {
-  height: 62px;
-  line-height: 62px;
-  padding: 0 24px;
-  font-size: 16px;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: #373e4f;
-  border-bottom: 1px solid #eaecf1;
-}
 .content-box {
   background: $color-fff;
   padding: 24px;

@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import md5 from 'js-md5'
 import { useAppStore, useUserStore } from '@/store'
-import { useCommon, useRequest } from '@/hooks'
+import { useCommon } from '@/hooks'
 import type { FormInstance } from 'element-plus'
 
 const userStore = useUserStore()
@@ -69,16 +69,20 @@ const handleSubmit = () => {
     }
   })
 }
-const { loading, run: loginFun } = useRequest(data => userStore.Login(data), {
-  onBefore: () => ({
+
+const loading = ref(false)
+const loginFun = async () => {
+  loading.value = true
+  const res = await userStore.Login({
     username: modelRef.mobile,
     password: md5(modelRef.password.trim())
-  }),
-  onSuccess: () => {
+  })
+  if (res) {
     message.success('登录成功')
     location.replace(location.href.split('#')[0])
   }
-})
+  loading.value = false
+}
 </script>
 
 <style lang="scss" scoped src="./index.scss" />

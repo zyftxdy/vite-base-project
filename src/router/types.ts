@@ -17,7 +17,6 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   path: string
   component: Component
   meta: RouteMeta
-  redirect: string
-  title: string
+  redirect: string | undefined
   name: string
 }

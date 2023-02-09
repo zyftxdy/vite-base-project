@@ -5,7 +5,6 @@ import { ElMessage } from 'element-plus'
 import cookieCache from '@/utils/cache/auth'
 import { useAppStore, useMenuStore, useUserStore } from '@/store'
 import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
-import type { RouteMenu } from '#/menu'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -53,12 +52,6 @@ async function addDynamicMenuAndRoutes(to: RouteLocationNormalized) {
       ElMessage.error('菜单为空，请联系管理员!')
       return loginOut()
     }
-    // 保存菜单树
-    menuStore.menuData.forEach(d => {
-      deepNavTree(d)
-    })
-    // 保存
-    menuStore.SET_NAVTREE(menuStore.menuData)
     // 保存加载状态
     appStore.setRouteLoaded(true)
     data.forEach(route => {
@@ -69,13 +62,6 @@ async function addDynamicMenuAndRoutes(to: RouteLocationNormalized) {
     return to.path === '/' ? `/${data[0].path}` : { ...to, replace: true }
   } catch (err) {
     return loginOut()
-  }
-}
-
-function deepNavTree(navTree: RouteMenu) {
-  if (navTree) {
-    navTree.children = navTree.children.filter(c => !c.hidden)
-    navTree.children.forEach(c => deepNavTree(c))
   }
 }
 

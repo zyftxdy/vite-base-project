@@ -1,6 +1,5 @@
 import cookieCache from '@/utils/cache/auth'
 import localCache from '@/utils/cache/storage'
-import { login } from '@/api/modules/user'
 import store from '../index'
 import type { LoginRef } from '#/base'
 
@@ -22,24 +21,18 @@ export const useUserStore = defineStore('user', {
       this.name = name
     },
     Login(info: LoginRef) {
-      return new Promise<any>((resolve, reject) => {
-        login(info)
-          .then(res => {
-            const data = res.data // token
-            this.SET_TOKEN(data.token)
-            this.SET_NAME(data.name)
-            const userInfo = {
-              name: data.name,
-              mobile: data.mobile,
-              userId: data.userId
-            }
-            localCache.set('userInfo', userInfo)
-            cookieCache.set(data.token ?? '')
-            resolve(res)
-          })
-          .catch(error => {
-            reject(error)
-          })
+      return new Promise<boolean>((resolve, reject) => {
+        // 此处做登录接口
+        this.SET_TOKEN('123456789')
+        this.SET_NAME('admin')
+        const userInfo = {
+          name: 'admin',
+          mobile: 13333333333,
+          userId: '20211202'
+        }
+        localCache.set('userInfo', userInfo)
+        cookieCache.set('123456789')
+        resolve(true)
       })
     },
     // 前端 登出

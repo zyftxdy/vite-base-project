@@ -1,6 +1,4 @@
-import { useAppStore } from '@/store'
-import { menu, perms } from '@/api/modules/menu'
-import { ElMessage } from 'element-plus'
+import { baseRouters } from '@/router/base'
 import store from '../index'
 import type { RouteMenu } from '#/menu'
 import type { AppRouteRecordRaw } from '@/router/types'
@@ -20,21 +18,20 @@ function addDynamicRoutes(
   let temp: RouteMenu[] = []
   for (let i = 0; i < menuList.length; i++) {
     const menu = menuList[i]
-    if (menu?.children.length >= 1) {
+    if (menu?.children?.length) {
       temp = temp.concat(menu.children)
     }
-    if (menu.type === 'DIR' && menu?.children.length >= 1) {
+    if (menu.type === 'DIR' && menu?.children?.length) {
       menu.redirect = menu.children[0].path
     }
     if (menu.path && /\S/.test(menu.path) && menu.component) {
       // 创建路由配置
-      const url = `../../views/${menu.component}.vue`
+      const url = `../../views/${menu.component.replace(/(^\/)/g, '')}.vue`
       const route: AppRouteRecordRaw = {
         path: menu.path,
         component: modules[url],
         name: menu.name,
         meta: menu.meta,
-        title: menu.title,
         redirect: menu.redirect
       }
       routes.push(route)
@@ -49,54 +46,40 @@ function addDynamicRoutes(
   }
   return routes
 }
+function deepNavTree(navTree: RouteMenu) {
+  if (navTree) {
+    navTree.children = navTree.children?.filter(c => !c.hidden)
+    navTree.children?.forEach(c => deepNavTree(c))
+  }
+}
 
 interface menuState {
   navTree: RouteMenu[]
   routerData: AppRouteRecordRaw[]
-  menuData: RouteMenu[]
   userPerms: string[]
 }
 
 export const useMenuStore = defineStore('menu', {
   state: (): menuState => ({
     navTree: [], // 左侧导航菜单树 -- 渲染用
-    routerData: [], // router数据(处理过的menuData) -- 跳转页面用
-    menuData: [], // 菜单树原始数据
+    routerData: [], // router数据 -- 添加到router对象用
     userPerms: [] // 用户权限
   }),
   actions: {
-    SET_NAVTREE(navTree: RouteMenu[]) {
-      // 设置导航菜单树
-      this.navTree = navTree
-    },
     getMenu() {
       return new Promise<AppRouteRecordRaw[]>((resolve, reject) => {
-        menu()
-          .then(res => {
-            // const { siteName } = storeToRefs(useAppStore())
-            // 后端说让前端进行菜单过滤
-            // res.data = siteName.value !== 'sxxh' ?
-            //   res.data.filter((item: Recordable) => item.resourceId !== '09444fd98fc1f87594') : res.data
-            const data = addDynamicRoutes(res.data)
-            this.menuData = res.data
-            this.routerData = data
-            this.getPerms()
-            resolve(data)
-          })
-          .catch(err => {
-            ElMessage.error(err)
-            reject()
-          })
+        // 此处做菜单接口请求
+        this.routerData = addDynamicRoutes(baseRouters)
+        baseRouters.forEach(d => {
+          deepNavTree(d)
+        })
+        this.navTree = baseRouters
+        this.getPerms()
+        resolve(this.routerData)
       })
     },
     getPerms() {
-      perms()
-        .then(res => {
-          this.userPerms = res.data
-        })
-        .catch(err => {
-          ElMessage.error(err)
-        })
+
     }
   }
 })

@@ -7,8 +7,6 @@ import { useRequest } from './core/useRequest'
 import useClipboard from './event/useClipboard'
 import useWindowSizeFn from './event/useWindowSizeFn'
 
-import useProvinces from './web/useProvinces'
-import useDepart from './web/useDepart'
 import usePerm from './web/usePerm'
 import useTabs from './web/useTabs'
 
@@ -21,7 +19,5 @@ export {
   useRequest,
   useClipboard,
   useWindowSizeFn,
-  useProvinces,
-  useDepart,
   usePerm
 }

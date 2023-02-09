@@ -7,7 +7,7 @@
       class="!absolute top-12 bottom-0 text-left overflow-y-auto w-full !border-r-0"
       :default-active="activeMenu"
       unique-opened
-      :background-color="background"
+      :background-color="appStore.menuBgColor"
       text-color="#FFFFFF"
       @open="handleOpen"
       @close="handleClose"
@@ -28,10 +28,7 @@ const menuStore = useMenuStore()
 const appStore = useAppStore()
 const { route } = useCommon()
 const { mainTabs, mainTabsActiveName } = useTabs()
-
 const activeMenu = ref('')
-const background = ref('#2E3144')
-
 const handleRoute = (route: RouteLocationNormalizedLoaded) => {
   // tab标签页选中, 如果不存在则先添加
   let tab = mainTabs.value.filter(item => item.name === route.name)[0]
@@ -60,7 +57,7 @@ const handleRoute = (route: RouteLocationNormalizedLoaded) => {
 watch(
   () => route,
   val => {
-    activeMenu.value = val.meta.activeMenu ?? val.path
+    activeMenu.value = val.meta.activeMenu || val.path
     handleRoute(val)
   },
   {
@@ -84,7 +81,7 @@ const handleSelect = () => {
 .nav_bar {
   z-index: 1020;
   .logo_bar {
-    background: v-bind('background');
+    background: v-bind('appStore.menuBgColor');
     cursor: pointer;
     padding: 5px 10px;
     box-sizing: border-box;

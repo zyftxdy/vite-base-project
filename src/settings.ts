@@ -1,11 +1,15 @@
 export default {
   // 主题颜色
   themeColor: '#467dd8',
+  // 菜单背景色
+  menuBgColor: '#2E3144',
+  // 子菜单背景色
+  subMenuBgColor: '#212433',
 
   // 项目名称
-  appName: '全栖智校教培商户管理系统',
+  appName: '后台管理系统',
   // 登录页标题
-  loginText: '欢迎来到全栖智校',
+  loginText: '后台管理系统',
   // icon
   favIcon:
     'https://quanqizhixiao-public-1251355418.cos.ap-shanghai.myqcloud.com/channel/favicon.ico',

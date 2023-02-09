@@ -4,8 +4,8 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  icon: String,
+defineProps({
+  icon: String as PropType<unionType>,
   title: String
 })
 </script>
