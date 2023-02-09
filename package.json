@@ -21,7 +21,7 @@
     "cropperjs": "^1.5.13",
     "dayjs": "^1.11.7",
     "echarts": "^5.4.1",
-    "element-plus": "^2.2.27",
+    "element-plus": "^2.2.29",
     "js-cookie": "^3.0.1",
     "js-md5": "^0.7.3",
     "lodash-es": "^4.17.21",

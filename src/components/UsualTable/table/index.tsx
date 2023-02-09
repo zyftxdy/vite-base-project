@@ -31,7 +31,10 @@ export default defineComponent({
           // el-table的源码分析地址入口：table -> table-column -> index -> onMounted -> store -> index -> insertColumn
           // 这种写法会导致渲染负担增加
           // 优化 -> 采用element虚拟列表 -> 查看table-v2目录组件
-          key={column.prop + index}
+
+          // element-plus2.2.29已修复
+          // table-column组件新增onUpdate生命周期，使其能触发后续操作
+          key={column.prop}
           prop={column.prop}
           fixed={column.fixed}
           sortable={column.sortable ?? false}
