@@ -69,7 +69,7 @@ export default defineComponent({
             <el-table-column label="排名" prop="rank" align="center" />
             <el-table-column label="地区" prop="cityName" align="center" />
             <el-table-column label="机构数量" prop="schoolCount" align="center" />
-            <el-table-column label="学员总数" prop="memberCount" align="center" />
+            <el-table-column label="学生总数" prop="memberCount" align="center" />
           </el-table>
           <div class="right">
             <div class="oper_info">

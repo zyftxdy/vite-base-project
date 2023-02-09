@@ -1,7 +1,7 @@
 <template>
   <list-header
     title="资金划拨统计"
-    desc="仅统计学员已经确认课时或超时自动确认课时后成功划拨的资金"
+    desc="仅统计学生已经确认课时或超时自动确认课时后成功划拨的资金"
     @dateChange="dateChange"
   />
   <usual-table

@@ -41,7 +41,7 @@ export const headData: Recordable[] = [
     icon: icon3,
     num: 0,
     unit: '人',
-    title: '学员总数',
+    title: '学生总数',
     prop: 'schoolMemberCount'
   },
   {

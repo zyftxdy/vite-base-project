@@ -90,7 +90,7 @@ export const columns: TableColumn[] = [
   { label: '入驻时间', prop: 'registerTime' },
   { label: '品牌名称', prop: 'brandName', width: 200 },
   { label: '校区名称', prop: 'schoolName', width: 200 },
-  { label: '在读会员人数', prop: 'studentNum' },
+  { label: '在读学生人数', prop: 'studentNum' },
   { label: '售出总课时', prop: 'saleHourNum' },
   { label: '剩余课时', prop: 'surplusHourNum' },
   { label: '监管入账总额（元）', prop: 'superviseTotalAmount', width: 160 },

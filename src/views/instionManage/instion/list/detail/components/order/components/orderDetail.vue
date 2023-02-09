@@ -7,7 +7,7 @@
         <el-button link type="primary" @click="() => $emit('back')">返回订单列表</el-button>
       </div>
       <div class="text-sm mb-4">
-        <page-title :title="`续费会员：${info.memberName}`" />
+        <page-title :title="`续费学生：${info.memberName}`" />
         <div>
           <span class="pr-2">性别：{{ info.genderName || '未知' }}</span>
           <span class="pr-2">出生日期：{{ info.birthday }}</span>

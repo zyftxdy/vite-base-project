@@ -106,11 +106,11 @@ export const schema: DescItem[] = [
   },
   {
     field: 'a',
-    label: '相关会员'
+    label: '相关学生'
   },
   {
     field: 'a',
-    label: '会员主联系人'
+    label: '学生主联系人'
   },
   {
     field: 'a',

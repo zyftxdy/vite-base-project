@@ -59,7 +59,7 @@ export const columns: TableColumn[] = [
   { label: '相关校区', prop: 'schoolName' },
   { label: '申诉数量（课时）', prop: 'consumeNum', width: 160 },
   { label: '申诉时间', prop: 'appealTime' },
-  { label: '会员姓名', prop: 'memberName' },
+  { label: '学生姓名', prop: 'memberName' },
   { label: '申诉人', prop: 'appealName' },
   {
     label: '申诉状态',
@@ -72,7 +72,7 @@ export const columns: TableColumn[] = [
 export const schema: DescItem[] = [
   {
     field: 'memberName',
-    label: '相关会员'
+    label: '相关学生'
   },
   {
     field: 'appealTime',
@@ -111,7 +111,7 @@ export const schema: DescItem[] = [
   },
   {
     field: 'cardName',
-    label: '会员卡名称'
+    label: '学生卡名称'
   },
   {
     field: 'consumeNum',

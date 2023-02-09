@@ -16,9 +16,9 @@ export const listQuery = () => ({
 export const searchOptions = (dateChange: Fn): SearchOptions[] => [
   {
     type: 'input',
-    label: '会员搜索',
+    label: '学生搜索',
     prop: 'keyWord',
-    placeholder: '请输入会员姓名或者手机号'
+    placeholder: '请输入学生姓名或者手机号'
   },
   {
     type: 'date',
@@ -40,7 +40,7 @@ export const searchOptions = (dateChange: Fn): SearchOptions[] => [
 export const columns: TableColumn[] = [
   { label: '下单时间', prop: 'createdAt', width: 140 },
   { label: '订单号', prop: 'orderId', width: 140 },
-  { label: '会员姓名', prop: 'memberName', width: 140 },
+  { label: '学生姓名', prop: 'memberName', width: 140 },
   { label: '联系电话', prop: 'contactMobile', width: 140 },
   { label: '收款金额（元）', prop: 'orderAmount', width: 140 },
   { label: '退款金额（元）', prop: 'refundAmount', width: 140 },

@@ -42,7 +42,7 @@ export const basicSchema: DescItem[] = [
   },
   {
     field: 'memberCount',
-    label: '在读会员人数',
+    label: '在读学生人数',
     render: (val, _) => val + '人'
   }
 ]

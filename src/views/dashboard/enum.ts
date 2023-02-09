@@ -85,7 +85,7 @@ export const columns: TableColumn[] = [
   { label: '主体名称', prop: 'companyName', width: 200 },
   { label: '品牌名称', prop: 'brandName', width: 180 },
   { label: '校区名称', prop: 'schoolAlias', width: 180 },
-  { label: '会员姓名', prop: 'memberName' },
+  { label: '学生姓名', prop: 'memberName' },
   { label: '订单金额', prop: 'orderAmount' },
   { label: '报名课时数', prop: 'totalClassNum' },
   { label: '平均课单价', prop: 'classAvgAmount' },
