@@ -17,8 +17,6 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-# 银行监管系统
-
 ## 项目启动、打包
 
 ```bash
@@ -33,44 +31,6 @@ npm run build:beta
 
 # build for production environment
 npm run build:prod
-```
-
-# 项目目录简介
-
-```bash
-├── views
-├── moneyManage -- 资金管理
-│   ├── freeze -- 资金冻结统计
-│   ├── thaw -- 解冻划拨统计
-│   └── supervise -- 机构监管统计
-├── engineManage -- 风控引擎
-├── instionManage -- 机构管理
-│   ├── annual -- 年检
-│   ├── instion -- 机构
-│   ├── pricing -- 课程定价
-│   └── roll -- 黑白灰名单
-├── employeeManage -- 员工管理
-│   ├── depart -- 部门
-│   ├── employee -- 员工
-│   └── position -- 职位
-├── systemSetting -- 其他
-│   ├── contract -- 合同管理
-│   └── policy -- 政策管理
-├── moneyManage -- 资金监管
-│   ├── freeze -- 冻结统计
-│   ├── supervise -- 监管统计
-│   └── thaw -- 划拨统计
-├── transferManage -- 划拨管理
-│   ├── money -- 按比例划拨
-│   ├── moneyManual -- 按申请划拨
-│   ├── pattern -- 划拨规则设置
-│   └── rule -- 划拨模式设置
-├── systemSetting -- 系统设置
-│   ├── complainSetting -- 投诉设置
-│   └── interfaceSetting -- 界面设置
-├── statistics -- 数据大盘
-├── complain -- 投诉反馈
-└── dashboard -- 首页
 ```
 
 # usual-search 组件
