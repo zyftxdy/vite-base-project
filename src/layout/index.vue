@@ -16,5 +16,6 @@ import MainContent from './MainContent/index.vue'
 import { useCommon } from '@/hooks'
 
 const { route } = useCommon()
+// 页面大屏展示
 const routePath = computed(() => route.path !== '/statistics')
 </script>

@@ -7,13 +7,12 @@
     .card-head-wrapper {
       display: flex;
       align-items: center;
+      height: 46px;
       .card-head-title {
-        display: inline-block;
         flex: 1;
         color: #000000d9;
         font-weight: 500;
         font-size: 16px;
-        padding: 16px 0 0;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -22,15 +21,16 @@
     .card-head-tab {
       display: flex;
       align-items: center;
+      min-height: 46px;
       .el-tabs {
-        margin-bottom: -16px;
+        margin-bottom: -22px;
         flex: 1;
       }
       .el-tabs__item {
         height: 48px;
         line-height: 48px;
       }
-      .el-tabs__nav-wrap::after {
+      :deep(.el-tabs__nav-wrap::after) {
         background-color: transparent !important;
       }
     }

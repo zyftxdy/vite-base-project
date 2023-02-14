@@ -47,6 +47,12 @@ function addDynamicRoutes(
   return routes
 }
 
+/**
+ *
+ * @param childrens 子路由数组
+ * @param preFix path需添加的前缀
+ * @returns
+ */
 function deepChildren(childrens: RouteMenu[], preFix: string) {
   const newChilds: RouteMenu[] = []
   childrens.map(item => {
