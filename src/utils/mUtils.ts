@@ -56,25 +56,6 @@ export const calcNum = (num: string | number) => {
 }
 
 /**
- *
- * @param target
- * @param prop
- * @param list
- */
-export const setItemList = (target: SearchOptions[], prop: string, list: any[]) => {
-  target.map(item => {
-    if (isArray(item)) {
-      const i = item.findIndex(n => n.prop === prop)
-      if (i !== -1) {
-        item[i].optionsList = list
-      }
-    } else if (item.prop === prop) {
-      item.optionsList = list
-    }
-  })
-}
-
-/**
  * 扁平object
  * @param source
  * @returns

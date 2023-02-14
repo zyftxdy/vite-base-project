@@ -18,7 +18,7 @@ import { useEventListener } from '@vueuse/core'
 
 let cloneEl: HTMLElement
 
-defineProps(baseProps)
+const props = defineProps(baseProps)
 const originEl = ref<HTMLElement>()
 const maskEl = ref<HTMLElement>()
 const showMask = ref(false)
@@ -54,6 +54,9 @@ const initEl = () => {
 }
 
 const openMask = () => {
+  if (!props.preview) {
+    return
+  }
   showMask.value = true
   cloneEl = unref(originEl)?.cloneNode(true)! as HTMLElement
   initEl()

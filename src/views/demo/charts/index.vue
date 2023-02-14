@@ -1,13 +1,7 @@
 <template>
-  <div class="content-box">
-    1234
-  </div>
+  <div class="content-box"> 1234 </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

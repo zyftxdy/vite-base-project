@@ -16,7 +16,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'table',
         path: 'demo/table',
         meta: {
-          title: '列表展示'
+          title: '列表组件'
         }
       },
       {
@@ -24,7 +24,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'desc',
         path: 'demo/desc',
         meta: {
-          title: '详情展示'
+          title: '详情组件'
         }
       },
       {
@@ -32,7 +32,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'card',
         path: 'demo/card',
         meta: {
-          title: '卡片展示'
+          title: '卡片组件'
         }
       },
       {
@@ -48,15 +48,15 @@ export const baseRouters: RouteMenu[] = [
         name: 'image',
         path: 'demo/image',
         meta: {
-          title: '图片展示'
+          title: '图片组件'
         }
       },
       {
-        component: 'demo/text/index',
+        component: 'demo/animationText/index',
         name: 'text',
         path: 'demo/text',
         meta: {
-          title: '动画展示'
+          title: '动画组件'
         }
       },
       {
@@ -64,7 +64,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'charts',
         path: 'demo/charts',
         meta: {
-          title: '图标展示'
+          title: '图表组件'
         }
       },
       {
@@ -72,7 +72,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'upload',
         path: 'demo/upload',
         meta: {
-          title: '上传展示'
+          title: '上传组件'
         }
       },
       {
@@ -80,7 +80,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'editor',
         path: 'demo/editor',
         meta: {
-          title: '富文本展示'
+          title: '富文本组件'
         }
       },
       {
@@ -88,7 +88,7 @@ export const baseRouters: RouteMenu[] = [
         name: 'qrcode',
         path: 'demo/qrcode',
         meta: {
-          title: '二维码展示'
+          title: '二维码组件'
         }
       }
     ]

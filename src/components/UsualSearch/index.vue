@@ -1,7 +1,6 @@
 <script lang="tsx">
-import { searchProps, State } from './props'
-import { cloneDeep } from 'lodash-es'
-import { isArray } from '@/utils/is'
+import { searchProps, pageProps } from './props'
+import { useValues } from './hooks/useValues'
 import {
   defineComponent,
   createVNode,
@@ -15,72 +14,40 @@ import type { SearchOptions, SearchOption } from '#/base'
 
 export default defineComponent({
   props: searchProps,
-  emits: ['select', 'export', 'update:list-query'],
-  setup(props, _ctx) {
-    const emit = _ctx.emit,
-      slots = _ctx.slots
-
+  emits: ['select', 'export', 'register'],
+  setup(props, { emit, slots }) {
     const itemVw = ref<HTMLElement>()
-    const state = reactive<State>({
-      query: {},
-      options: [],
-      showUp: false,
-      overHeight: 0
+    const overHeight = ref(0)
+    const showUp = ref(false)
+    const searchForm = reactive<Recordable>(pageProps)
+    const schemaRef = ref<SearchOptions[]>([])
+
+    const showArrowUp = computed(() => !showUp.value && props.showArrow)
+    const { updateSchema, getFieldsValue } = useValues({
+      searchForm,
+      schemaRef,
+      getProps: props
     })
 
-    const showArrowUp = computed(() => !state.showUp && props.showArrow)
-    // const query = computed({ // 计算属性的数组属性值绑定el-date-picker组件修改失败，其他值都正常 原因？？？
-    //   get: () => cloneDeep(props.listQuery),
-    //   set: val => {
-    //     console.log(val);
-    //     emit('update:list-query', val)
-    //   }
-    // })
     onMounted(() => {
       const ele = unref(itemVw)!
-      state.overHeight =
+      overHeight.value =
         ele.clientHeight + Number(getComputedStyle(ele).marginBottom.replace(/[a-zA-z]/g, ''))
+      emit('register', {
+        updateSchema,
+        getFieldsValue
+      })
     })
-    const dealOptions = (target: SearchOptions) => {
-      if (isArray(target)) {
-        target.map(m => dealOptions(m))
-      } else {
-        target.optionsList &&
-          target.optionsList.map(n => {
-            n.optionKey = target.optionKey ? n[target.optionKey] : n.value
-            n.optionLabel = target.optionLabel ? n[target.optionLabel] : n.label
-          })
-      }
-      return target
-    }
-    watch(
-      () => props.searchOptions,
-      options => {
-        state.options = cloneDeep(options).map(option => {
-          return dealOptions(option)
-        })
-      },
-      {
-        deep: true,
-        immediate: true
-      }
-    )
-    watch(
-      () => props.listQuery,
-      query => {
-        state.query = cloneDeep(query)
-      },
-      {
-        deep: true,
-        immediate: true
-      }
-    )
 
-    const handleChange = () => {
-      emit('update:list-query', state.query)
-    }
+    const handleChange = () => {}
     const onkeydown = (e: KeyboardEvent) => {
-      e.code === 'Enter' && emit('select')
+      e.code === 'Enter' && onSelect()
+    }
+    const onSelect = () => {
+      emit('select', searchForm)
+    }
+    const onExport = () => {
+      emit('export', searchForm)
     }
 
     // 生成input
@@ -92,7 +59,7 @@ export default defineComponent({
         onInput: handleChange,
         onkeydown: onkeydown
       }
-      return createVNode(<el-input v-model={state.query[item.prop]} />, attributes)
+      return createVNode(<el-input v-model={searchForm[item.field]} />, attributes)
     }
 
     // 生成select
@@ -113,7 +80,7 @@ export default defineComponent({
         }
       }
       return createVNode(
-        <el-select v-model={state.query[item.prop]} />,
+        <el-select v-model={searchForm[item.field]} />,
         attributes,
         item.optionsList && item.optionsList.length
           ? {
@@ -134,18 +101,19 @@ export default defineComponent({
     const setDateWare = (item: SearchOption) => {
       const attributes: Recordable = {
         style: { width: `${item.width || props.width}px` },
-        type: 'daterange',
-        valueFormat: 'YYYY-MM-DD',
-        format: 'YYYY-MM-DD',
-        startPlaceholder: '开始时间',
-        endPlaceholder: '结束时间',
+        type: item.dateType || 'date',
+        valueFormat: item.valueFormat || 'YYYY-MM-DD',
+        format: item.format || 'YYYY-MM-DD',
+        placeholder: item.placeholder || item.label || '选择时间',
+        startPlaceholder: item.startPlaceholder || '开始时间',
+        endPlaceholder: item.endPlaceholder || '结束时间',
         disabledDate: item.disabledDate,
         onChange: (e: any) => {
           handleChange()
           item.method && item.method(e)
         }
       }
-      return createVNode(<el-date-picker v-model={state.query[item.prop]} />, attributes)
+      return createVNode(<el-date-picker v-model={searchForm[item.field]} />, attributes)
     }
 
     // 生成级联选择器
@@ -167,7 +135,7 @@ export default defineComponent({
       if (item.props) {
         attributes.props = item.props
       }
-      return createVNode(<el-cascader v-model={state.query[item.prop]} />, attributes)
+      return createVNode(<el-cascader v-model={searchForm[item.field]} />, attributes)
     }
 
     // 生成btn按钮
@@ -178,7 +146,7 @@ export default defineComponent({
             <el-button />,
             {
               class: 'btn-small btn-border-color',
-              onClick: () => emit('select')
+              onClick: () => onSelect()
             },
             { default: () => createTextVNode('筛选') }
           )
@@ -189,7 +157,7 @@ export default defineComponent({
               <el-button />,
               {
                 class: 'btn-small btn-usual',
-                onClick: () => emit('export')
+                onClick: () => onExport()
               },
               { default: () => createTextVNode('导出') }
             )
@@ -215,47 +183,43 @@ export default defineComponent({
     }
 
     const setItem = (item: SearchOption) => {
-      switch (item.type) {
-        case 'input':
+      switch (item.component) {
+        case 'INPUT':
           return setInputWare(item)
-        case 'select':
+        case 'SELECT':
           return setSelectWare(item)
-        case 'date':
+        case 'DATE':
           return setDateWare(item)
-        case 'cascader':
+        case 'CASCADER':
           return setCascaderWare(item)
-        case 'slot':
-        return renderSlot(slots, item.prop)
+        case 'SLOT':
+          return renderSlot(slots, item.field, {
+            model: searchForm,
+            field: item.field
+          })
       }
     }
     const itemGenerator = (item: SearchOptions) => {
-      if (isArray(item)) {
-        return renderList(item, n =>
+      if (item.component === 'GROUP') {
+        return renderList(item.subOptions, (n, i) => [
           createElementVNode(
             'span',
             {
-              class: 'item-vw-v',
-              key: n.prop
+              class: `item-vw-v ${!item.infix ? 'item-vw-v-noInfix' : ''}`,
+              key: n.field
             },
             [setItem(n)],
             16
-          )
-        )
+          ),
+          i < item.subOptions.length - 1 &&
+            createElementVNode('span', { class: 'item-vw-v-infix' }, item.infix, 1)
+        ])
       }
       return setItem(item)
     }
 
-    const setProp = (item: SearchOptions) => {
-      return isArray(item) ? item[0].prop : item.prop
-    }
-
-    const setLabel = (item: SearchOptions) => {
-      return `${isArray(item) ? item[0].label : item.label}：`
-    }
-
     return () => {
       const { showExport, showArrow, labelWidth } = props
-      const showUp = toRef(state, 'showUp')
       const arrowUp = unref(showArrowUp)
       return createVNode(
         <el-row />,
@@ -275,15 +239,15 @@ export default defineComponent({
                     'div',
                     {
                       class: 'search-vw',
-                      style: arrowUp ? `height: ${state.overHeight}px;overflow: hidden` : ''
+                      style: arrowUp ? `height: ${overHeight.value}px;overflow: hidden` : ''
                     },
-                    renderList(state.options, item =>
+                    renderList(schemaRef.value, item =>
                       createElementVNode(
                         'div',
                         {
                           ref: itemVw,
                           class: 'item-vw',
-                          key: setProp(item)
+                          key: item.field
                         },
                         [
                           createElementVNode(
@@ -292,7 +256,7 @@ export default defineComponent({
                               class: 'leading-8 font-14px text-right',
                               style: { minWidth: `${labelWidth}px` }
                             },
-                            setLabel(item),
+                            `${item.label}：`,
                             4
                           ),
                           itemGenerator(item)
@@ -325,10 +289,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.item-vw-v {
+.item-vw-v.item-vw-v-noInfix {
   .el-select,
+  .el-date-picker,
   .el-input {
     margin-right: 8px;
   }
+}
+.item-vw-v-infix{
+  padding: 0 8px;
+  line-height: 32px;
+  font-size: 18px;
 }
 </style>

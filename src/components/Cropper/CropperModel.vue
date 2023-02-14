@@ -29,7 +29,7 @@
 import Cropper from './index.vue'
 import { useCommon } from '@/hooks'
 import type { UploadFile, UploadRawFile } from 'element-plus'
-import type { CropperResult } from '#/base'
+import type { CropperResult } from './type'
 
 const props = defineProps({
   height: { type: String, default: '300px' },

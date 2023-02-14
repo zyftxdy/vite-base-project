@@ -1,13 +1,14 @@
 import type { SearchOptions } from '#/base'
 
+export const pageProps = {
+  pageNum: 1,
+  pageSize: 10
+}
+
 export const searchProps = {
-  searchOptions: {
+  schema: {
     type: Array as PropType<SearchOptions[]>,
     default: () => []
-  },
-  listQuery: {
-    type: Object as PropType<Recordable>,
-    default: () => {}
   },
   showExport: {
     type: Boolean,
@@ -25,11 +26,4 @@ export const searchProps = {
     type: Number,
     default: 220
   }
-}
-
-export interface State {
-  query: Recordable
-  options: SearchOptions[]
-  showUp: boolean
-  overHeight: number
 }

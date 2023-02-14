@@ -78,9 +78,7 @@ export const useMenuStore = defineStore('menu', {
         resolve(this.routerData)
       })
     },
-    getPerms() {
-
-    }
+    getPerms() {}
   }
 })
 

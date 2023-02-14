@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
       assetsDir: 'static',
       reportCompressedSize: false,
       assetsInlineLimit: 10240,
-      rollupOptions: { 
+      rollupOptions: {
         output: { //静态资源分类打包
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',

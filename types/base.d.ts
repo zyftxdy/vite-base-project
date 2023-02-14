@@ -8,8 +8,6 @@ export type ImgLimit = 'jpg' | 'png' | 'jpeg'
 
 export type DateType = 'DAY' | 'MONTH' | 'YEAR' | 'YESTERDAY'
 
-export type SearchType = 'input' | 'select' | 'date' | 'cascader' | 'slot'
-
 export type Method = (...args: any[]) => Promise<ResponseType>
 
 export type LabelValueOptions = {
@@ -22,40 +20,68 @@ export interface LoginRef {
   password: string
 }
 
-export interface PageParam {
-  current: number
-  size: number
+/** search组件类型声明 **/
+export type SearchType = 'INPUT' | 'SELECT' | 'DATE' | 'CASCADER' | 'SLOT'
+export declare type IDatePickerType =
+  | 'year'
+  | 'month'
+  | 'date'
+  | 'dates'
+  | 'week'
+  | 'datetime'
+  | 'datetimerange'
+  | 'daterange'
+  | 'monthrange'
+export interface SearchDateOption {
+  dateType: IDatePickerType
+  format: string
+  valueFormat: string
+  unlinkPanels: boolean
+  startPlaceholder: string
+  endPlaceholder: string
+  disabledDate: (val: Date) => boolean
 }
-
-export interface SearchOption {
+export interface SearchSelectOption {
+  optionsList: Recordable[]
+  optionKey: string
+  optionLabel: string
+  multiple: boolean
+  filterable: boolean
+  remote: boolean
+  clearable: boolean
+  selectType: string
+  remoteMethod: Fn
+  clearMethod: Fn
+}
+export interface SearchCascaderOption {
+  props: CascaderProps
+  options: CascaderOption[]
+  showAllLevels: boolean
+}
+export interface SearchInputOption {
+  icon: boolean
+}
+export interface SearchBaseOption {
   width?: number
-  type: SearchType
+  component: SearchType
   label: string
-  prop: string
+  field: string
+  defaultValue?: any
   placeholder?: string
   method?: Fn
-  icon?: boolean
-  // select
-  optionsList?: Recordable[]
-  optionKey?: string
-  optionLabel?: string
-  multiple?: boolean
-  filterable?: boolean
-  remote?: boolean
-  clearable?: boolean
-  selectType?: string
-  remoteMethod?: Fn
-  clearMethod?: Fn
-  // cascader
-  props?: CascaderProps
-  options?: CascaderOption[]
-  showAllLevels?: boolean
-  // date
-  disabledDate?: (val: Date) => boolean
 }
+export type SearchOption = SearchBaseOption & Partial<SearchInputOption> & Partial<SearchDateOption> & Partial<SearchSelectOption> & Partial<SearchCascaderOption>
+export type SubSearchOption = PickToRequired<SearchOption, 'field' | 'component'>
+export interface SearchGroup extends Pick<SearchBaseOption, 'label' | 'field'> {
+  component: 'GROUP'
+  infix?: string
+  subOptions: SearchOption[]
+}
+export type SearchOptions = SearchOption | SearchGroup
+/** search组件类型声明 **/
 
-export type SearchOptions = SearchOption | SearchOption[]
 
+/** table组件类型声明 **/
 export interface TableColumn {
   label: string
   prop: string
@@ -75,19 +101,15 @@ export interface TableColumn {
     data?: any
   ) => VNode | undefined | JSX.Element | Element | string | number
 }
+/** table组件类型声明 **/
 
 export interface FileList {
   imageNo: string
   imageUrl: string
 }
 
-export interface CropperResult {
-  url: string
-  blob: Blob
-}
 
 export interface QueryState {
-  listQuery: Recordable
   searchOptions: SearchOptions[]
   [x: string]: any
 }
