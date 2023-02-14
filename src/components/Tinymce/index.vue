@@ -87,6 +87,7 @@ const initOptions = computed<RawEditorOptions>(() => {
     plugins: plugins,
     toolbar: toolbar,
     auto_focus: true,
+    promotion: false, // 关闭高级功能升级
     branding: false, // 隐藏右下角技术支持
     skin: skinName, // 设置皮肤
     skin_url: `/static/tinymce/skins/ui/${skinName}`,
