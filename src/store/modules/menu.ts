@@ -19,12 +19,12 @@ function addDynamicRoutes(
   for (let i = 0; i < menuList.length; i++) {
     const menu = menuList[i]
     if (menu?.children?.length) {
-      temp = temp.concat(menu.children)
+      temp = temp.concat(deepChildren(menu.children, menu.path))
     }
     if (menu.type === 'DIR' && menu?.children?.length) {
       menu.redirect = menu.children[0].path
     }
-    if (menu.path && /\S/.test(menu.path) && menu.component) {
+    if (menu.path && /\S/.test(menu.path) && menu.component && menu.component !== 'Layout') {
       // 创建路由配置
       const url = `../../views/${menu.component.replace(/(^\/)/g, '')}.vue`
       const route: AppRouteRecordRaw = {
@@ -45,6 +45,20 @@ function addDynamicRoutes(
     console.log('动态路由加载完成.')
   }
   return routes
+}
+
+function deepChildren(childrens: RouteMenu[], preFix: string) {
+  const newChilds: RouteMenu[] = []
+  childrens.map(item => {
+    item.path = preFix + (/^\//.test(item.path) ? item.path : '/' + item.path)
+    if (item.component && item.component !== 'Layout') {
+      newChilds.push(item)
+    }
+    if (item.children?.length) {
+      newChilds.push(...deepChildren(item.children, item.path))
+    }
+  })
+  return newChilds
 }
 function deepNavTree(navTree: RouteMenu) {
   if (navTree) {

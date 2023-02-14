@@ -1,8 +1,10 @@
 import type { RouteMenu } from '#/menu'
-
+/**
+ * 路由菜单格式
+ */
 export const baseRouters: RouteMenu[] = [
   {
-    component: '',
+    component: 'Layout',
     name: 'demo',
     path: 'demo',
     meta: {
@@ -12,17 +14,35 @@ export const baseRouters: RouteMenu[] = [
     },
     children: [
       {
-        component: 'demo/table/index',
+        component: 'Layout',
         name: 'table',
-        path: 'demo/table',
+        path: 'table',
         meta: {
           title: '列表组件'
-        }
+        },
+        children: [
+          {
+            component: 'demo/table/baseTable',
+            name: 'baseTable',
+            path: 'base',
+            meta: {
+              title: '基础列表'
+            }
+          },
+          {
+            component: 'demo/table/virtualTable',
+            name: 'virtualTable',
+            path: 'virtual',
+            meta: {
+              title: '虚拟列表'
+            }
+          }
+        ]
       },
       {
         component: 'demo/desc/index',
         name: 'desc',
-        path: 'demo/desc',
+        path: 'desc',
         meta: {
           title: '详情组件'
         }
@@ -30,7 +50,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/card/index',
         name: 'card',
-        path: 'demo/card',
+        path: 'card',
         meta: {
           title: '卡片组件'
         }
@@ -38,7 +58,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/cropper/index',
         name: 'cropper',
-        path: 'demo/cropper',
+        path: 'cropper',
         meta: {
           title: '图片裁剪'
         }
@@ -46,7 +66,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/image/index',
         name: 'image',
-        path: 'demo/image',
+        path: 'image',
         meta: {
           title: '图片组件'
         }
@@ -54,7 +74,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/animationText/index',
         name: 'text',
-        path: 'demo/text',
+        path: 'text',
         meta: {
           title: '动画组件'
         }
@@ -62,7 +82,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/charts/index',
         name: 'charts',
-        path: 'demo/charts',
+        path: 'charts',
         meta: {
           title: '图表组件'
         }
@@ -70,7 +90,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/upload/index',
         name: 'upload',
-        path: 'demo/upload',
+        path: 'upload',
         meta: {
           title: '上传组件'
         }
@@ -78,7 +98,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/editor/index',
         name: 'editor',
-        path: 'demo/editor',
+        path: 'editor',
         meta: {
           title: '富文本组件'
         }
@@ -86,7 +106,7 @@ export const baseRouters: RouteMenu[] = [
       {
         component: 'demo/qrcode/index',
         name: 'qrcode',
-        path: 'demo/qrcode',
+        path: 'qrcode',
         meta: {
           title: '二维码组件'
         }

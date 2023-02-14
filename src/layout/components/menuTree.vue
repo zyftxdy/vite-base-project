@@ -29,7 +29,7 @@ defineProps({
 })
 const appStore = useAppStore()
 const resolvePath = (routePath: string) => {
-  return '/' + routePath
+  return /^\//.test(routePath) ? routePath : '/' + routePath
 }
 </script>
 
