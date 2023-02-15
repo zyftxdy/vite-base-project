@@ -86,7 +86,7 @@ const initOptions = computed<RawEditorOptions>(() => {
     language_url: `/static/tinymce/langs/${langName}.js`,
     plugins: plugins,
     toolbar: toolbar,
-    auto_focus: true,
+    auto_focus: 'none',
     promotion: false, // 关闭高级功能升级
     branding: false, // 隐藏右下角技术支持
     skin: skinName, // 设置皮肤

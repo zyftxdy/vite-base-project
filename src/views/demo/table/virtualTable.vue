@@ -1,6 +1,11 @@
 <template>
   <card title="table-v2示例" class="mb-2">
-    <usual-search :schema="searchSchema" @register="register" @select="handleSelect">
+    <usual-search
+      :schema="searchSchema"
+      :show-export="true"
+      :show-arrow="true"
+      @register="register"
+      @select="handleSelect">
       <template #mobile="{ model, field }">
         <el-input v-model="model[field]" placeholder="请输入电话号码" class="w-[220px]" />
       </template>

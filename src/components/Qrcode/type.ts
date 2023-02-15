@@ -9,3 +9,12 @@ export interface DrawParams {
   options?: QRCodeRenderersOptions
   logo?: string
 }
+
+export interface QrCodeActionType {
+  downLoad: (fileName?: string) => void
+}
+
+export interface CallbackParam {
+  url: string
+  ctx: CanvasRenderingContext2D
+}

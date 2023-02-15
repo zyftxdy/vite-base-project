@@ -1,6 +1,7 @@
 import type { RouteMenu } from '#/menu'
 /**
  * 路由菜单格式
+ * path尽量不要添加'/' 确保能添加到layout子路由下
  */
 export const baseRouters: RouteMenu[] = [
   {

@@ -48,7 +48,7 @@ function addDynamicRoutes(
 }
 
 /**
- *
+ * 扁平化子路由数组
  * @param childrens 子路由数组
  * @param preFix path需添加的前缀
  * @returns
