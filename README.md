@@ -350,7 +350,7 @@ interface FileList {
 |  column   | 每行展示的列数 |   Number   |      --      |     3      |
 |   data    |  待展示的数据  |   Object   |      --      |     --     |
 |  schema   | 渲染展示的描述 | DescItem[] |      --      |     --     |
-| direction |    排列方式    |   string   | 'horizontal' | 'vertical' | horizontal |
+| direction |    排列方式    |   string   | 'horizontal'、'vertical' | 'horizontal' |
 |  border   |      边框      |  boolean   |      --      |   false    |
 
 **_ enum 里的 listQuery 写成函数模式，防止页面修改导致数据污染 _**
