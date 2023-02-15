@@ -11,6 +11,11 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 // no redirect whitelist
 const whiteList = ['/login']
 
+/**
+ * vue-router v4.x 可以不用再使用第三个参数 next()
+ * 返回结果可以为 undefined/true/false/path/name(路由name)/路由对象
+ * https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
+ */
 router.beforeEach(to => {
   const token = cookieCache.get()
   NProgress.start()
