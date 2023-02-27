@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { useCommon } from '@/hooks'
-import { downloadUrl } from '@/utils/download'
+import { downloadByUrl } from '@/utils/download'
 import { qrcodeProps, defaultOptions } from './props'
 import { type QRCodeRenderersOptions, toDataURL } from 'qrcode'
 import { drawCanvas, getErrorCorrectionLevel } from './drawCanvas'
@@ -66,7 +66,7 @@ const downLoad = (fileName?: string) => {
   if (!url) {
     return
   }
-  downloadUrl({
+  downloadByUrl({
     url,
     fileName
   })

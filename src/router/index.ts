@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/layout',
     name: 'layout',
     // route level code-splitting
     // this generates a separate chunk (layout.[hash].js) for this route

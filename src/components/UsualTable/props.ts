@@ -70,14 +70,6 @@ const commonProps = {
 }
 
 export const tableProps = {
-  border: {
-    type: Boolean,
-    default: false
-  },
-  spanModel: {
-    type: String as PropType<SpanModel>,
-    default: ''
-  },
   treeProps: {
     type: Object,
     default: () => {}

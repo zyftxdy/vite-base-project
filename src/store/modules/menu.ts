@@ -11,91 +11,56 @@ import type { AppRouteRecordRaw } from '@/router/types'
 // import.meta.glob 动态导入，构建时，会分离为独立的 chunk
 // import.meta.globEager 直接导入
 const modules = import.meta.glob('../../views/**/*.vue')
+const Layout = import.meta.glob('../../layout/components/page.vue')
 function addDynamicRoutes(
-  menuList: RouteMenu[] = [],
-  routes: AppRouteRecordRaw[] = []
+  menuList: RouteMenu[] = []
 ): AppRouteRecordRaw[] {
-  let temp: RouteMenu[] = []
+  let routes: AppRouteRecordRaw[] = []
   for (let i = 0; i < menuList.length; i++) {
     const menu = menuList[i]
-    if (menu?.children?.length) {
-      temp = temp.concat(deepChildren(menu.children, menu.path))
-    }
-    if (menu.type === 'DIR' && menu?.children?.length) {
-      menu.redirect = menu.children[0].path
-    }
-    if (menu.path && /\S/.test(menu.path) && menu.component && menu.component !== 'Layout') {
-      // 创建路由配置
+    if (menu.path && /\S/.test(menu.path) && menu.component) {
       const url = `../../views/${menu.component.replace(/(^\/)/g, '')}.vue`
+      const layoutUrl = '../../layout/components/page.vue'
+      let component
+      if (menu.component === 'Layout' || menu.component === 'subLayout' || menu.type === 'DIR') {
+        component = Layout[layoutUrl]
+      } else {
+        component = modules[url]
+      }
+      if (menu.children?.length) {
+        menu.children = addDynamicRoutes(menu.children)
+      }
       const route: AppRouteRecordRaw = {
         path: menu.path,
-        component: modules[url],
+        component: component,
         name: menu.name,
         meta: menu.meta,
-        redirect: menu.redirect
+        redirect: menu.redirect,
+        children: menu.children
       }
       routes.push(route)
     }
   }
-  if (temp.length >= 1) {
-    addDynamicRoutes(temp, routes)
-  } else {
-    console.log('动态路由加载...')
-    console.log(routes)
-    console.log('动态路由加载完成.')
-  }
   return routes
 }
 
-/**
- * 扁平化子路由数组
- * @param childrens 子路由数组
- * @param preFix path需添加的前缀
- * @returns
- */
-function deepChildren(childrens: RouteMenu[], preFix: string) {
-  const newChilds: RouteMenu[] = []
-  childrens.map(item => {
-    item.path = preFix + (/^\//.test(item.path) ? item.path : '/' + item.path)
-    if (item.component && item.component !== 'Layout') {
-      newChilds.push(item)
-    }
-    if (item.children?.length) {
-      newChilds.push(...deepChildren(item.children, item.path))
-    }
-  })
-  return newChilds
-}
-function deepNavTree(navTree: RouteMenu) {
-  if (navTree) {
-    navTree.children = navTree.children?.filter(c => !c.hidden)
-    navTree.children?.forEach(c => deepNavTree(c))
-  }
-}
-
 interface menuState {
-  navTree: RouteMenu[]
-  routerData: AppRouteRecordRaw[]
+  menuData: AppRouteRecordRaw[]
   userPerms: string[]
 }
 
 export const useMenuStore = defineStore('menu', {
   state: (): menuState => ({
-    navTree: [], // 左侧导航菜单树 -- 渲染用
-    routerData: [], // router数据 -- 添加到router对象用
-    userPerms: [] // 用户权限
+    menuData: [],
+    userPerms: []
   }),
   actions: {
-    getMenu() {
+    getRoutes() {
       return new Promise<AppRouteRecordRaw[]>((resolve, reject) => {
         // 此处做菜单接口请求
-        this.routerData = addDynamicRoutes(baseRouters)
-        baseRouters.forEach(d => {
-          deepNavTree(d)
-        })
-        this.navTree = baseRouters
+        this.menuData = addDynamicRoutes(baseRouters)
         this.getPerms()
-        resolve(this.routerData)
+        resolve(this.menuData)
       })
     },
     getPerms() {}

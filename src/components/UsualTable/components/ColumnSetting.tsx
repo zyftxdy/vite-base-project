@@ -123,7 +123,7 @@ export default defineComponent({
         placement="bottom"
         onShow={() => showChange()}
         v-slots={{
-          reference: () => <i-ep-setting class="setting" />
+          reference: () => <i-ep-setting class="setting m-2" />
         }}
       >
         <div class="setting-control">
@@ -180,6 +180,6 @@ export default defineComponent({
           </el-checkbox-group>
         </div>
       </el-popover>
-    )   
+    )
   }
 })

@@ -50,7 +50,7 @@ export function downloadByData(data: BlobPart, filename: string, mime?: string, 
   window.URL.revokeObjectURL(blobURL)
 }
 
-export function downloadUrl({
+export function downloadByUrl({
   url,
   fileName,
   target = '_blank'

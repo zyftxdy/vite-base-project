@@ -101,7 +101,6 @@ export default defineComponent({
       const {
         loading,
         list,
-        border,
         rowKey,
         treeProps,
         text,
@@ -114,12 +113,16 @@ export default defineComponent({
       } = props
       return (
         <div class="el-table-con">
-          { showSetting && <ColumnSetting/> }
+          {
+            showSetting &&
+              <div class='setting-box flex justify-end'>
+                <ColumnSetting/>
+              </div>
+          }
           <el-table
             ref={(e: any) => (wrapRef.value = e)}
             v-loading={loading}
             data={list}
-            border={border}
             row-key={rowKey}
             tree-props={treeProps}
             fit

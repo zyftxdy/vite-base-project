@@ -1,26 +1,28 @@
 import type { RouteMenu } from '#/menu'
 /**
- * 路由菜单格式
+ * 路由菜单基本格式
  * path尽量不要添加'/' 确保能添加到layout子路由下
  */
 export const baseRouters: RouteMenu[] = [
   {
     component: 'Layout',
     name: 'demo',
-    path: 'demo',
+    path: '/demo',
     meta: {
       activeMenu: '',
       icon: 'component',
       title: '组件展示'
     },
+    redirect: '/demo/table',
     children: [
       {
-        component: 'Layout',
+        component: 'subLayout',
         name: 'table',
         path: 'table',
         meta: {
           title: '列表组件'
         },
+        redirect: '/demo/table/base',
         children: [
           {
             component: 'demo/table/baseTable',
@@ -36,6 +38,14 @@ export const baseRouters: RouteMenu[] = [
             path: 'virtual',
             meta: {
               title: '虚拟列表'
+            }
+          },
+          {
+            component: 'demo/table/treeTable',
+            name: 'treeTable',
+            path: 'treeTable',
+            meta: {
+              title: '树状列表'
             }
           }
         ]
@@ -110,6 +120,51 @@ export const baseRouters: RouteMenu[] = [
         path: 'qrcode',
         meta: {
           title: '二维码组件'
+        }
+      }
+    ]
+  },
+  {
+    component: 'Layout',
+    name: 'echarts',
+    path: '/echarts',
+    meta: {
+      activeMenu: '',
+      icon: 'charts',
+      title: 'echarts'
+    },
+    redirect: '/echarts/map',
+    children: [
+      {
+        component: 'echarts/map',
+        name: 'map',
+        path: 'map',
+        meta: {
+          title: '地图'
+        }
+      },
+      {
+        component: 'echarts/line',
+        name: 'line',
+        path: 'line',
+        meta: {
+          title: '折线图'
+        }
+      },
+      {
+        component: 'echarts/pie',
+        name: 'pie',
+        path: 'pie',
+        meta: {
+          title: '饼图'
+        }
+      },
+      {
+        component: 'echarts/bar',
+        name: 'bar',
+        path: 'bar',
+        meta: {
+          title: '柱状图'
         }
       }
     ]

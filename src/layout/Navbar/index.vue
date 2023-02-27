@@ -13,7 +13,7 @@
       @close="handleClose"
       @select="handleSelect"
     >
-      <menu-tree v-for="item in menuStore.navTree" :key="item.resourceId" :menu="item" />
+      <menu-tree v-for="item in menuStore.menuData" :key="item.path" :menu="item" />
     </el-menu>
   </div>
 </template>

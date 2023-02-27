@@ -4,7 +4,7 @@
       <div class="site-content">
         <h2 class="not-found-title">404</h2>
         <p class="not-found-desc">抱歉！您访问的页面<em>失联</em>啦 ...</p>
-        <el-button @click="back">返回上一页</el-button>
+        <el-button @click="back">返回</el-button>
       </div>
     </div>
   </div>
@@ -13,13 +13,14 @@
 <script setup lang="ts">
 import { useCommon } from '@/hooks'
 import { useMenuStore } from '@/store'
+import path from 'path-browserify'
 
 const { router } = useCommon()
 const menuStore = useMenuStore()
 
 const back = () => {
-  const routers = menuStore.routerData
-  router.push(`/${routers[0].path}`)
+  const routers = menuStore.menuData
+  router.push(path.resolve(routers[0].path))
 }
 </script>
 

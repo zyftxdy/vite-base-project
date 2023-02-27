@@ -13,10 +13,11 @@ export interface RouteTab {
   query: LocationQuery
 }
 
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
+export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children'> {
   path: string
   component: Component
   meta: RouteMeta
-  redirect: string | undefined
+  redirect?: string
   name: string
+  children?: AppRouteRecordRaw[]
 }

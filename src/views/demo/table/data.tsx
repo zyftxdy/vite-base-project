@@ -86,4 +86,28 @@ export function getBasicData() {
   return data
 }
 
+export function getTreeData() {
+  const data: any = []
+  for (let index = 0; index < 10; index++) {
+    data.push({
+      id: `${index}`,
+      name: 'John Brown',
+      mobile: `12345678901`,
+      address: 'New York No. 1 Lake ParkNew York No. 1 Lake Park',
+      createTime: new Date().toLocaleString(),
+      children: [
+        {
+          id: `${index}-${index}`,
+          name: 'John Brown',
+          mobile: `12345678901`,
+          address: 'New York No. 1 Lake ParkNew York No. 1 Lake Park',
+          createTime: new Date().toLocaleString()
+        }
+      ]
+    })
+  }
+  return data
+}
+
+
 

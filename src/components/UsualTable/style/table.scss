@@ -25,5 +25,8 @@
   .el-table .el-table__cell {
     padding: 4px 0;
     height: 40px;
+    .cell{
+      padding: 0 12px;
+    }
   }
 }

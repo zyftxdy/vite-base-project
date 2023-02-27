@@ -18,7 +18,10 @@
       :list="listState.list"
       :columns="columns"
       :total="listState.total"
+      :show-select="true"
+      :show-setting="true"
       @pagination="pagination"
+      @select="onSelect"
     ></usual-table>
   </card>
 </template>
@@ -37,4 +40,7 @@ const handleSelect = () => {
   console.log(searchFrom.value)
 }
 const pagination = () => {}
+const onSelect = (e: any) => {
+  console.log(e)
+}
 </script>

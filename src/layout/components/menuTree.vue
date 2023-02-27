@@ -4,7 +4,7 @@
       <template #title>
         <menu-item :icon="menu.meta.icon" :title="menu.meta.title" />
       </template>
-      <menu-tree v-for="item in menu.children" :key="item.path" :menu="item" />
+      <menu-tree v-for="item in menu.children" :key="item.path" :menu="item" :parent-path="resolvePath(menu.path)"/>
     </el-sub-menu>
   </template>
   <template v-else>
@@ -17,19 +17,24 @@
 </template>
 
 <script setup lang="ts">
+import path from 'path-browserify'
 import menuItem from './menuItem.vue'
 import { useAppStore } from '@/store'
 import { RouteMenu } from '#/menu'
 
-defineProps({
+const props = defineProps({
   menu: {
     type: Object as PropType<RouteMenu>,
     default: () => {}
-  }
+  },
+  parentPath: {
+    type: String,
+    default: ''
+  },
 })
 const appStore = useAppStore()
 const resolvePath = (routePath: string) => {
-  return /^\//.test(routePath) ? routePath : '/' + routePath
+  return path.resolve(props.parentPath, routePath)
 }
 </script>
 

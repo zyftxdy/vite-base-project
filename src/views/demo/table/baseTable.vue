@@ -12,7 +12,10 @@
       :list="listState.list"
       :columns="columns"
       :total="listState.total"
+      :show-select="true"
+      :show-setting="true"
       @pagination="pagination"
+      @select="onSelect"
     ></usual-table>
   </card>
 </template>
@@ -27,8 +30,11 @@ const listState = reactive({
   loading: false
 })
 const { register, searchFrom } = useSearch()
-const handleSelect = () => {
-  console.log(searchFrom.value)
+const handleSelect = (e: any) => {
+  console.log(searchFrom.value, e)
 }
 const pagination = () => {}
+const onSelect = (e: any) => {
+  console.log(e)
+}
 </script>

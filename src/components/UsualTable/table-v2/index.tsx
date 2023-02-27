@@ -87,7 +87,12 @@ export default defineComponent({
       const { expandColumnKey, total, pageSizes, background, layout, showSetting } = props
       return (
         <div class="el-table-con-v2">
-          { showSetting && <ColumnSetting/> }
+          {
+            showSetting &&
+              <div class='setting-box flex justify-end'>
+                <ColumnSetting/>
+              </div>
+          }
           <div ref={(e: any) => (wrapRef.value = e)} style={{ height: tableHeight.value + 'px' }}>
             <el-auto-resizer
               class="table-v2-custom"
